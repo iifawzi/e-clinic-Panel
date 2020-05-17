@@ -1,6 +1,6 @@
 <template>
 <div>
-  Welcome to e-clinic
+ <p> Welcome to e-clinic</p>
 </div>
 </template>
 
