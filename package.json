@@ -1,0 +1,20 @@
+{
+  "name": "Panel",
+  "version": "1.0.0",
+  "description": "e-clinicPanel",
+  "author": "Fawzi E. Abdulfattah",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "sass": "sass --watch assets/scss/main.scss:assets/css/main.css"
+  },
+  "dependencies": {
+    "node-sass": "^4.14.1",
+    "nuxt": "^2.0.0",
+    "sass-loader": "^8.0.2"
+  },
+  "devDependencies": {}
+}
