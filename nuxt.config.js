@@ -29,16 +29,19 @@ export default {
   ** Global CSS
   */
  css: [
-  '~/assets/css/main.css',
+  '~/assets/scss/main.scss',
   '~/assets/css/all.css',
 ],
+styleResources: {
+  scss: ['./assets/scss/*.scss']
+},
   /*
   ** Plugins to load before mounting the App
   */
- plugins: ['~/plugins/i18n.js'],
  router: {
   middleware: ['language'],
 },
+ plugins: ['~/plugins/i18n.js'],
   /*
   ** Nuxt.js dev-modules
   */
@@ -48,6 +51,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/style-resources'
   ],
   /*
   ** Build configuration

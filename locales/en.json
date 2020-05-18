@@ -1,3 +1,15 @@
 {
-    "title": "English"
+  "home": {
+    "title": "Home Page | e-clinic"
+  },
+  "panel":{
+    "title":"Login | Control Panel",
+    "loginForm":{
+      "username": "Username",
+      "password":"Password",
+      "submit":"login"
+    }
+  }
+
+    
 }
