@@ -41,7 +41,10 @@ styleResources: {
  router: {
   middleware: ['language'],
 },
- plugins: ['~/plugins/i18n.js'],
+ plugins: [
+   '~/plugins/i18n.js',
+   '~/plugins/vuelidate'
+  ],
   /*
   ** Nuxt.js dev-modules
   */

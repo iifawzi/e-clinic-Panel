@@ -9,7 +9,10 @@
       "password":"Password",
       "submit":"login"
     }
-  }
-
+  },
+  "errors":{
+    "password": "Password is required",
+    "username": "Username is required"
+}
     
 }

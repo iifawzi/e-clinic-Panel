@@ -50,8 +50,11 @@ export default {
           }
     }
     .error-div{
-        margin-top: 5px;
         align-self: flex-start;
+        color: $red;
+        font-size: 12px;
+        margin: 2px 10px 0px 10px ;
+        
     }
 }
 }
