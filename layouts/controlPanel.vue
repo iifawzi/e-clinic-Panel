@@ -11,11 +11,14 @@ export default {
       lang: this.language,
     },
     bodyAttrs:{
-        dir: this.language == 'ar' ? 'rtl' : 'ltr',
-    }
+               dir: this.language == 'ar' ? 'rtl' : 'ltr',
+    },
+    meta: [
+ {name: 'robots', content: 'noindex,nofollow' },
+    ]
   }
   },
-      computed:{
+    computed:{
     language(){
       return this.$store.getters.getLocale;
     }

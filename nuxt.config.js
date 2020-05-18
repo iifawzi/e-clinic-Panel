@@ -4,8 +4,9 @@ export default {
   /*
   ** Headers of the page
   */
-  head: {
-    title: process.env.npm_package_name || '',
+  head() {
+    return {
+    title: process.env.npm_package_name || 'Control Panel',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -14,6 +15,7 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
+  }
   },
   server:{
     port: 3000, // default: 3000
@@ -33,8 +35,10 @@ export default {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
+ plugins: ['~/plugins/i18n.js'],
+ router: {
+  middleware: ['language'],
+},
   /*
   ** Nuxt.js dev-modules
   */
