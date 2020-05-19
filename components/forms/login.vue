@@ -1,7 +1,7 @@
 <template>
   <section class="loginForm-component">
-    <div class="loginError" v-if="handle">
-      <notfication color="red" :label="handle"/>
+    <div class="loginError" v-if="error">
+      <notfication color="red" :label="error"/>
     </div>
     <div class="loginForm-content">
       <div class="input-div">
@@ -69,7 +69,6 @@ export default {
     },
     // Submmition Method: 
     submitLogin(){
-        this.$store.commit('controlPanel/setStatus','');
         this.$v.$touch();
         if (this.$v.$invalid){
         }else {
@@ -78,22 +77,8 @@ export default {
     }
   },
   computed: {
-  handle(){
-    const status = this.$store.getters['controlPanel/getStatus'];
-    if(status != ''){
- switch (status) {
-   case 200:
-     this.$router.push('/controlPanel/dashboard');
-  case 401:
-    return this.$t('errors.401')
-    break;
-  case 400:
-    return this.$t('errors.400')
-    break;
-  default:
-   return this.$t('errors.500')
-}
-    }
+  error(){
+   return this.$store.getters['controlPanel/getError'];
   }
 },
 };
