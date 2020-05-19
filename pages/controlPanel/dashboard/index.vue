@@ -8,5 +8,6 @@
 <script>
 export default {
     middleware: 'admin-auth',
+    layout: "dashboard"
 }
 </script>

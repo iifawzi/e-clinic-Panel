@@ -59,7 +59,7 @@ styleResources: {
   ],
   // * Axios
   axios: {
-    baseURL: 'http://localhost:5000/api/'
+    baseURL: 'http://192.168.1.5:5000/api/'
   },
   // *
   /*

@@ -10,6 +10,13 @@
       "submit":"دخول"
           }
       },
+      "dashboard":{
+        "navbar":{
+          "title":"لوحة التحكم",
+          "logout":"تسجيل خروج",
+          "username":"فوزي عصام"
+        }
+      },
       "errors":{
         "password": "يجب ادخال كلمة السر",
         "username": "يجب ادخال اسم المستخدم",

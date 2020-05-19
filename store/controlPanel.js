@@ -86,6 +86,7 @@ export const actions = {
   logout({commit}){
     commit('login_admin','');
     Cookie.remove('token');
+    this.$router.push("/controlPanel");
   }
 };
 
