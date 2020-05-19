@@ -65,7 +65,12 @@ export const actions = {
         commit('login_admin','');
         return false;
       }
-      const token = req.headers.cookie.split(";").find(c => c.trim().startsWith("token")).split("=")[1];
+      const tokenCookie = req.headers.cookie.split(";").find(c => c.trim().startsWith("token"));
+      if (!tokenCookie){
+        commit('login_admin','');
+        return false;
+      }
+      const token = tokenCookie.split("=")[1];
       const isValid = await checkifvalid(token);
       return isValid
     }else {
