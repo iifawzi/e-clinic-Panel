@@ -54,8 +54,14 @@ styleResources: {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    '@nuxtjs/axios'
   ],
+  // * Axios
+  axios: {
+    baseURL: 'http://localhost:5000/api/'
+  },
+  // *
   /*
   ** Build configuration
   */

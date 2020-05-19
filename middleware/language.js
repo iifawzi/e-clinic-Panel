@@ -12,5 +12,15 @@ if (context.req){
   }else {
     return;
   }
+}else {
+  console.log("hala");
+  const language = Cookie.get('lang');
+  if (!language){
+    context.store.dispatch('changeLang','ar');
+    context.app.i18n.locale = 'ar';
+  }else {
+    context.store.dispatch('changeLang',language);
+    context.app.i18n.locale = language;
+  }
 }
   }

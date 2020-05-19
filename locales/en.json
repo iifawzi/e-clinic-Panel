@@ -12,7 +12,10 @@
   },
   "errors":{
     "password": "Password is required",
-    "username": "Username is required"
+    "username": "Username is required",
+    "401":"Username or Password is incorrect",
+    "400":"Please check the inserted data",
+    "500":"Sorry,something wrond happened"
 }
     
 }

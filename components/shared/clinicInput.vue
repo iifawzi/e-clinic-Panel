@@ -40,12 +40,14 @@ export default {
               border: 0px;
               height: 100%;
                 background: transparent;
+                       font-size: 15px;
               &:focus{
                   outline: 0px;
+                   font-size: 15px;
               }
               &::placeholder{
                   margin-right: 30px;
-                  font-size: 12px;
+                  font-size: 15px;
               }
           }
     }

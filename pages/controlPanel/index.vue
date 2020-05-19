@@ -44,7 +44,8 @@ export default {
 
 <style lang="scss" scoped>
 .controlLogin-page {
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   .ar-language_div {
     margin-right: 10px;
     margin-top: 10px;
@@ -60,19 +61,19 @@ export default {
     justify-content: center;
     align-items: center;
     .login-statment {
-      font-size: 20px;
+      font-size: 25px;
       color: $main-color;
       display: flex;
       flex-flow: column;
       align-items: center;
       .logo-img {
         margin-top: 40px;
-        height: 80px;
+        height: 100px;
       }
     }
     .login-form {
       margin-top: 30px;
-      width: 200px;
+      width: 300px;
     }
   }
 }

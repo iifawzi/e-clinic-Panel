@@ -19,10 +19,8 @@ export default {
       methods: {
     changeLanguage(lang) {
       this.$i18n.locale = lang;
-      if (Cookie.get("lang") != lang) {
         Cookie.set("lang", lang);
         this.$store.dispatch('changeLang',lang);
-      }
     }
   },
     computed:{

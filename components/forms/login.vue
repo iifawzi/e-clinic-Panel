@@ -1,5 +1,8 @@
 <template>
   <section class="loginForm-component">
+    <div class="loginError" v-if="handle">
+      <notfication color="red" :label="handle"/>
+    </div>
     <div class="loginForm-content">
       <div class="input-div">
         <clinicInput :placeholder="$t('panel.loginForm.username')" @input="setUsername" v-model="loginData.username"
@@ -25,12 +28,14 @@
 <script>
 import clinicInput from "~/components/shared/clinicInput";
 import clinicSubmit from "~/components/shared/clinicSubmit";
+import notfication from "~/components/shared/notfication";
 const { required} = require('vuelidate/lib/validators')
 export default {
   //
   components: {
     clinicInput,
-    clinicSubmit
+    clinicSubmit,
+    notfication
   },
   //
   data() {
@@ -64,14 +69,33 @@ export default {
     },
     // Submmition Method: 
     submitLogin(){
+        this.$store.commit('controlPanel/setStatus','');
         this.$v.$touch();
         if (this.$v.$invalid){
-            // Handle Invalid
         }else {
-            // Call Server
+             this.$store.dispatch('controlPanel/login_user',this.loginData);
         }
     }
+  },
+  computed: {
+  handle(){
+    const status = this.$store.getters['controlPanel/getStatus'];
+    if(status != ''){
+ switch (status) {
+   case 200:
+     this.$router.push('/controlPanel/dashboard');
+  case 401:
+    return this.$t('errors.401')
+    break;
+  case 400:
+    return this.$t('errors.400')
+    break;
+  default:
+   return this.$t('errors.500')
+}
+    }
   }
+},
 };
 </script>
 
@@ -93,6 +117,10 @@ export default {
     .input-div:not(:first-child) {
       margin-top: 5px;
     }
+  }
+  .loginError{
+    width: 100%;
+    margin-bottom: 15px;
   }
 }
 </style>
