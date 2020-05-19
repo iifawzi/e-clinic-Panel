@@ -13,7 +13,6 @@ if (context.req){
     return;
   }
 }else {
-  console.log("hala");
   const language = Cookie.get('lang');
   if (!language){
     context.store.dispatch('changeLang','ar');
