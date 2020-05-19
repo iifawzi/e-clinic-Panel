@@ -73,7 +73,7 @@ export default {
         this.$v.$touch();
         if (this.$v.$invalid){
         }else {
-             this.$store.dispatch('controlPanel/login_user',this.loginData);
+             this.$store.dispatch('controlPanel/login_admin',this.loginData);
         }
     }
   },
