@@ -20,6 +20,7 @@ import languages from "~/components/shared/languages";
 import loginForm from "~/components/forms/login";
 
 export default {
+    middleware: 'allow-login',
   head() {
     return {
       title:

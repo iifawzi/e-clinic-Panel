@@ -1,3 +1,4 @@
+import Cookie from "js-cookie";
 export const state = () => ({
   LoginedAdmin: "",
   error: {
@@ -6,12 +7,12 @@ export const state = () => ({
 });
 
 export const mutations = {
-  login_admin(state, user) {
-    state.LoginedUser = user;
+  login_admin(state, admin) {
+    state.LoginedAdmin = admin;
   },
   setError(state, message) {
     state.error.message = message;
-  }
+  },
 };
 
 export const actions = {
@@ -20,12 +21,13 @@ export const actions = {
     const postSign = this.$axios
       .post("controlPanel/signAdmin", { ...adminData })
       .then(response => {
-        commit("login_admin", response.data.data);
-        this.$router.push("controlPanel/dashboard");
+        const responseData = response.data.data;
+        Cookie.set('token',responseData.token);
+        this.$router.push("/controlPanel/dashboard");
       })
       .catch(err => {
         if (!err.response) {
-          commit('setError',$t("errors.500"));
+          commit('setError',this.app.i18n.t("errors.500"));
         }
         const status = err.response.status;
         switch (status) {
@@ -33,25 +35,56 @@ export const actions = {
             commit('setError',this.app.i18n.t("errors.401"));
             break;
           case 400:
-            commit('setError',this.app.i18n.t("errors.401"));
-
+            commit('setError',this.app.i18n.t("errors.400"));
             break;
           default:
-            commit('setError',this.app.i18n.t("errors.401"));
+            commit('setError',this.app.i18n.t("errors.500"));
         }
       });
   },
-  authAdmin({ commit }, req) {
-    if (!req.headers.cookie) {
-      return;
+   async authAdmin({ commit }, req) {
+    // check token validation from the server : 
+    const checkifvalid = async (token)=>{
+      const postCheck = await this.$axios
+      .post("controlPanel/checkAdminByToken",{token})
+      .then(response=>{
+        commit('login_admin',response.data.data);
+        return true;
+      }).catch(err=>{
+        commit('login_admin','');
+        return false;
+      });
+      const status = postCheck;
+      return status;
+    };
+
+
+
+    if (req){
+      if (!req.headers.cookie) {
+        commit('login_admin','');
+        return false;
+      }
+      const token = req.headers.cookie.split(";").find(c => c.trim().startsWith("token")).split("=")[1];
+      const isValid = await checkifvalid(token);
+      return isValid
+    }else {
+      const token = Cookie.get('token');
+      if (!token){
+        commit('login_admin','');
+        return false;
+      };
+      const isValid = await checkifvalid(token);
+      return isValid
     }
+  },
+  logout({commit}){
+    commit('login_admin','');
+    Cookie.remove('token');
   }
 };
 
 export const getters = {
-  isAuthenticated(state) {
-    return state.LoginedAdmin.token != null;
-  },
   getAdmin(state) {
     return state.LoginedAdmin;
   },
