@@ -1,14 +1,17 @@
 <template>
   <div>
+    <adminSidenav/>
       <adminNavbar/>
     <nuxt />
   </div>
 </template>
 <script>
 import adminNavbar from "~/components/shared/adminNavbar";
+import adminSidenav from "~/components/shared/adminSidenav";
 export default {
     components:{
 adminNavbar,
+adminSidenav
     },
       head() {
     return {
@@ -32,7 +35,4 @@ adminNavbar,
 </script>
 
 <style lang="scss" scoped>
-body{
-    background-color:red;
-}
 </style>

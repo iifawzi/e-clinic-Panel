@@ -1,11 +1,6 @@
 <template>
     <div class="adminNavbar-component" :class="language+'-paddingForSideNav'">
         <div class="adminNavbar-content fluid-container">
-            <div class="adminNavbar-logo">
-                <div class="logo-img"></div>
-                 <img src="~/assets/images/logo-colored.png" class="logo-img" />
-                 <h3 :class="language+'-marginStatement'" class="logo-statement">{{$t("dashboard.navbar.title")}}</h3>
-            </div>
             <div class="adminNavbar-items">
                 <div class="items-content">
                     <div :class="language+'-items-item'" class="items-languages">
@@ -49,22 +44,14 @@ languages,
 <style lang="scss" scoped>
 .adminNavbar-component{
     background-color: #FFFFFF;
-    box-shadow: 5px 7px 26px -5px #cdd4e7;
+    box-shadow: 5px 7px 26px -5px $three-white;
     height: 50px;
     .adminNavbar-content{
         display: flex;
         flex-flow: row;
         height: 100%;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
-        .adminNavbar-logo{
-            display: flex;
-            flex-flow: row;
-            align-items: center;
-        .logo-img{
-            height: 30px;
-        }
-        }
         .items-content{
             display: flex;
             flex-flow: row;
@@ -90,11 +77,5 @@ languages,
 }
 .ar-paddingForSideNav {
     padding-right: 80px;
-}
-.en-marginStatement{
- margin-left: 5px ;
-}
-.ar-marginStatement{
-     margin-right: 5px ;
 }
 </style>
