@@ -19,8 +19,15 @@
     },
     "sidenav":{
       "home": "Home",
-      "people":"People"
-
+      "manage":"Management",
+      "doctors": "Doctors",
+      "regDoctors": "Registered Doctors",
+      "addDoctor":"Add new Doctor",
+      "editDoctor":"Edit Specific Doctor",
+      "users": "Users",
+      "regUsers": "Registered Users",
+      "addUser":"Add new User",
+      "editUser":"Edit Specific User"
     }
   },
   "errors":{
