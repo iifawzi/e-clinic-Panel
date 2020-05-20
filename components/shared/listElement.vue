@@ -3,7 +3,7 @@
     <nuxt-link
       class="listElement-statement"
       :class="[(isRouteActive && !hideActiveBorder) ?  language+'-activeBorder' : '',language+'-padding']"
-      exact
+      :exact=exact
       :to="linkTo"
     >
       <div class="elementItem">
@@ -36,6 +36,10 @@ export default {
     ulItem: {
       type: Boolean,
       default: false
+    },
+    exact:{
+      type:Boolean,
+      default:false,
     }
   },
   computed: {

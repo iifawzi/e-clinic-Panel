@@ -4,6 +4,7 @@
       iconClass="fas fa-home"
       :label="$t('dashboard.sidenav.home')"
       linkTo="/controlPanel/dashboard"
+      exact= true
     ></listElement>
     <li
       v-if="hover"
