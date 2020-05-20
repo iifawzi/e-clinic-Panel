@@ -16,6 +16,11 @@
       "title":"Control Panel",
       "logout":"Logout",
       "username":"Fawzi Essam"
+    },
+    "sidenav":{
+      "home": "Home",
+      "people":"People"
+
     }
   },
   "errors":{
@@ -23,6 +28,6 @@
     "username": "Username is required",
     "401":"Username or Password is incorrect",
     "400":"Please check the inserted data",
-    "500":"Sorry,something wrond happened"
+    "500":"Sorry,something wrong happened"
 }   
 }

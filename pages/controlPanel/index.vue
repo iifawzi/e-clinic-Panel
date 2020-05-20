@@ -46,7 +46,7 @@ export default {
 <style lang="scss" scoped>
 .controlLogin-page {
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   .ar-language_div {
     margin-right: 10px;
     margin-top: 10px;
@@ -75,6 +75,7 @@ export default {
     .login-form {
       margin-top: 30px;
       width: 300px;
+    
     }
   }
 }
