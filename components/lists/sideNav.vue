@@ -23,20 +23,20 @@
            :hideActiveBorder=true
       :iconClass="language == 'en' ? 'fas fa-caret-right' : 'fas fa-caret-left'"
       :label="$t('dashboard.sidenav.regDoctors')"
-      linkTo="/controlPanel/dashboard/doctors/registered"
+      linkTo="/controlPanel/dashboard/doctors/register"
     ></listElement>
                <listElement
            :hideActiveBorder=true
       :iconClass="language == 'en' ? 'fas fa-caret-right' : 'fas fa-caret-left'"
       :label="$t('dashboard.sidenav.addDoctor')"
-      linkTo="/controlPanel/dashboard/doctors/registered"
+      linkTo="/controlPanel/dashboard/doctors/add"
     ></listElement>
 
                <listElement
            :hideActiveBorder=true
       :iconClass="language == 'en' ? 'fas fa-caret-right' : 'fas fa-caret-left'"
       :label="$t('dashboard.sidenav.editDoctor')"
-      linkTo="/controlPanel/dashboard/doctors/registered"
+      linkTo="/controlPanel/dashboard/doctors/edit"
     ></listElement>
    </adminSideList>
     </listElement>
@@ -59,20 +59,20 @@
            :hideActiveBorder=true
       :iconClass="language == 'en' ? 'fas fa-caret-right' : 'fas fa-caret-left'"
       :label="$t('dashboard.sidenav.regUsers')"
-      linkTo="/controlPanel/dashboard/users/registered"
+      linkTo="/controlPanel/dashboard/users/register"
     ></listElement>
                <listElement
            :hideActiveBorder=true
       :iconClass="language == 'en' ? 'fas fa-caret-right' : 'fas fa-caret-left'"
       :label="$t('dashboard.sidenav.addUser')"
-      linkTo="/controlPanel/dashboard/users/registered"
+      linkTo="/controlPanel/dashboard/users/add"
     ></listElement>
 
                <listElement
            :hideActiveBorder=true
       :iconClass="language == 'en' ? 'fas fa-caret-right' : 'fas fa-caret-left'"
       :label="$t('dashboard.sidenav.editUser')"
-      linkTo="/controlPanel/dashboard/users/registered"
+      linkTo="/controlPanel/dashboard/users/edit"
     ></listElement>
    </adminSideList>
     </listElement>
