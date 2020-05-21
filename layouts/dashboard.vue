@@ -34,12 +34,12 @@ adminSidenav
     language() {
       return this.$store.getters.getLocale;
     },
-    methods: {
+  },
+      methods: {
        updateHover(value){
       this.$store.commit('dashboard/setSideHover',value);
-    }
     },
-  }
+    },
 }
 </script>
 
@@ -48,7 +48,7 @@ adminSidenav
   position: absolute;
   width: 100%;
   height: 100vh;
-  background-color: $hoverColor;
+  background-color: transparent;
   z-index: 800;
 }
 </style>

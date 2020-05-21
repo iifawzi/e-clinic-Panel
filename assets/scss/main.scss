@@ -25,3 +25,17 @@ html {
     text-decoration: none;
     color: inherit;
   }
+
+  .en-controlPanel-padding{
+    padding-left: 200px;
+    padding-top: 30px;
+
+  }
+  .ar-controlPanel-padding{
+    padding-right: 200px;
+    padding-top: 30px;
+  }
+  .controlPanel-PageTitle{
+    font-size: 30px;
+    color: $main-color;
+  }

@@ -98,6 +98,8 @@ export default {
     .submit-div {
       width: 100%;
       margin-top: 10px;
+  height: 40px;
+
     }
     .input-div:not(:first-child) {
       margin-top: 5px;

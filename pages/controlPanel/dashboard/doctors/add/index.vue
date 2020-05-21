@@ -1,10 +1,16 @@
 <template>
-    <div class="doctors-add">
-        
+    <div class="addDoctor-page">
+        <div class="addDoctor-content" :class="language+'-controlPanel-padding'">
+<span class="controlPanel-PageTitle">{{$t('dashboard.sidenav.addDoctor')}}</span>
+<div class="addDocForm">
+<addNewDoctor/>
+</div>
+        </div>
     </div>
 </template>
 
 <script>
+import addNewDoctor from "~/components/forms/addNewDoctor"
 export default {
   middleware: "admin-auth",
   layout: "dashboard",
@@ -12,9 +18,12 @@ export default {
     return {
       title:
         this.language == "ar"
-          ? "لوحة التحكم | الدكاترة"
+          ? "إضافة دكتور جديد"
           : "Control Panel | Doctors"
     };
+  },
+  components:{
+      addNewDoctor,
   },
   computed: {
     language() {
@@ -23,3 +32,15 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.addDoctor-content{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+.addDocForm {
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+</style>

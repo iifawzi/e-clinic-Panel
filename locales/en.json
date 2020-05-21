@@ -28,13 +28,48 @@
       "regUsers": "Registered Users",
       "addUser":"Add new User",
       "editUser":"Edit Specific User"
+
+
+    },
+    "forms":{
+      "addDoctor":{
+        "phone":"Phone Number",
+        "password": "Password",
+        "firstname":"First Name",
+        "lastname":"Last Name",
+        "country":"Country",
+        "category": "Category",
+        "3yoon": "3yoon",
+        "asnan": "Asnan",
+        "subCategory": "Sub Category",
+        "egypt": "Egypt",
+        "saudiarabia": "Saudi arabia",
+        "upload": "Add Personal Picture",
+        "edit": "Change the photo",
+        "submit":"Add The Doctor"
+      }
     }
   },
   "errors":{
     "password": "Password is required",
     "username": "Username is required",
+    "phone":"Phone Number is required",
+    "firstname": "First name is required",
+    "lastname": "Last name is required",
+    "country":"Country is required",
+    "category":"Category is required",
+    "picture":"Personal Photo is required",
     "401":"Username or Password is incorrect",
     "400":"Please check the inserted data",
     "500":"Sorry,something wrong happened"
-}   
+},
+"muted":{
+  "password": "Password must be 3-30 digit [a-z,A-Z,0-9]",
+  "firstname":"This name will be shown to users",
+  "lastname":"This name will be shown to users",
+  "subCategory": "this's not required",
+  "phone":"This number will be used for login",
+  "picture":"This photo will be shown to users"
+
+}
 }

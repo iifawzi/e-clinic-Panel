@@ -1,9 +1,11 @@
 <template>
-  <li :class="hideActiveBorder ? 'smallFont' : ''" class="listElement">
-    <nuxt-link
+  <li @click="this.dropElements" :class="dropItems ? 'smallFont' : ''" class="listElement">
+
+
+    <nuxt-link v-if="isExact"
       class="listElement-statement"
-      :class="[(isRouteActive && !hideActiveBorder) ?  language+'-activeBorder' : '',language+'-padding']"
-      :exact=exact
+      :class="[language+'-padding']"
+      :exact=isExact
       :to="linkTo"
     >
       <div class="elementItem">
@@ -19,7 +21,33 @@
         </span>
       </div>
     </nuxt-link>
-    <div v-if="hover && InsideUl" class="droppedItems" :class="language+'-dropedItems-margin'">
+
+    <!-- if the ul have another ul and we don't want to change page when clicking on the parent, so we can see the listed li, event='' make it. -->
+    <nuxt-link v-if="!isExact"
+      class="listElement-statement"
+      :class="[language+'-padding']"
+      :exact=isExact
+      :to="linkTo"
+      event=''
+    >
+      <div class="elementItem">
+        <span>
+          <i :class="iconClass"></i>
+        </span>
+        <span v-if="hover" :class="language+'-listElement-margin'">{{label}}</span>
+      </div>
+
+      <div v-if="hover && InsideUl" class="dropDown" :class="language+'-dropIcon-margin'">
+        <span>
+          <i class="drop-icon fas fa-sort-down"></i>
+        </span>
+      </div>
+    </nuxt-link>
+
+
+
+
+    <div v-if="(hover && InsideUl) && dropItems" class="droppedItems" :class="language+'-dropedItems-margin'">
       <slot />
     </div>
   </li>
@@ -27,20 +55,24 @@
 
 <script>
 export default {
+  data(){
+    return {
+      dropItems: false,
+    }
+  },
   props: {
     linkTo: String,
     label: String,
     iconClass: String,
     InsideUl: String,
-    hideActiveBorder : Boolean,
+   isExact: {
+     type: Boolean,
+     default:false,
+   },
     ulItem: {
       type: Boolean,
       default: false
     },
-    exact:{
-      type:Boolean,
-      default:false,
-    }
   },
   computed: {
     language() {
@@ -49,14 +81,14 @@ export default {
     hover() {
       return this.$store.getters["dashboard/getSideHover"];
     },
-    isRouteActive: function() {
-      const getRoute = this.$nuxt.$route.path;
-      if (getRoute == this.linkTo) {
-        return true;
-      } else {
-        return false;
-      }
+    closeOtherDropped(){
+      return this.$store.getters['dashboard/getCloseOtherDropped'];
     }
+  },
+  methods:{
+    dropElements(){
+      this.dropItems = !this.dropItems;
+    },
   }
 };
 </script>
@@ -113,16 +145,6 @@ export default {
 }
 .nuxt-link-active {
   color: $light-color;
-}
-.en-activeBorder {
-  border-left: 4px solid $main-color;
-}
-.ar-activeBorder {
-  border-right: 4px solid $main-color;
-}
-.hideActiveBorder{
-    border-left: 0px;
-     border-right: 0px;
 }
 .smallFont{
   font-size: 15px;

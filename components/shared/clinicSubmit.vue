@@ -1,7 +1,7 @@
 <template>
   <section class="clinicSubmit-component">
     <div :class="'clinicSubmit-content ' + color ">
-      <button type="submit" class="btn-box" @click="$emit('click')">{{statement}}</button>
+      <button type="submit" class="btn-box" @click="$emit('click',$event)">{{statement}}</button>
     </div>
   </section>
 </template>
@@ -18,11 +18,12 @@ export default {
 <style lang="scss" scoped>
 .clinicSubmit-component {
   width: 100%;
+     height: 100%;
   .clinicSubmit-content {
     width: 100%;
     height: 100%;
     border: 1px solid transparent;
-    border-radius: 20px;
+    border-radius: 10px;
 
     .btn-box {
       width: 100%;
@@ -30,7 +31,7 @@ export default {
       background-color: transparent;
       border: 0px;
       color: white;
-      font-size: 15px;
+      font-size: 18px;
       outline: 0px;
       cursor: pointer;
     }
@@ -42,6 +43,15 @@ export default {
     }
     &:hover {
       background-color: $light-color;
+    }
+  }
+   .green {
+    background-color: $green-color;
+    &:active {
+      outline: 0px;
+    }
+    &:hover {
+      background-color: $green-hover;
     }
   }
 }
