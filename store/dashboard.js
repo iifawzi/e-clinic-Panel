@@ -1,4 +1,3 @@
-import Cookie from "js-cookie";
 export const state = () => ({
  sideHover: false,
 });

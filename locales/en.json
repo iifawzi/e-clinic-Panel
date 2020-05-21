@@ -60,8 +60,11 @@
     "category":"Category is required",
     "picture":"Personal Photo is required",
     "401":"Username or Password is incorrect",
+    "403":"Phone number is already associated with an account",
     "400":"Please check the inserted data",
-    "500":"Sorry,something wrong happened"
+    "500":"Sorry,something wrong happened",
+    "image403": "Sorry, Only (JPEG, PNG, JPG) are allowed",
+    "image500": "Sorry, Maximum size is 24 MB"
 },
 "muted":{
   "password": "Password must be 3-30 digit [a-z,A-Z,0-9]",

@@ -1,5 +1,8 @@
 <template>
   <section class="addNewDoctor-form">
+        <div class="doctorError" v-if="error">
+      <notfication color="red" :label="error"/>
+    </div>
     <div class="addNewDoctorForm-content">
 
 <div class="input-div">
@@ -39,11 +42,11 @@
         <clinicInput
           :placeholder="$t('dashboard.forms.addDoctor.firstname')"
           @input="setFirstname"
-          v-model="doctorData.firstname"
+          v-model="doctorData.first_name"
             :mutedText="$t('muted.firstname')"
         >
-          <div v-if="$v.doctorData.firstname.$dirty">
-            <div v-if="!$v.doctorData.firstname.required">{{$t('errors.firstname')}}</div>
+          <div v-if="$v.doctorData.first_name.$dirty">
+            <div v-if="!$v.doctorData.first_name.required">{{$t('errors.firstname')}}</div>
           </div>
         </clinicInput>
       </div>
@@ -51,11 +54,11 @@
         <clinicInput
           :placeholder="$t('dashboard.forms.addDoctor.lastname')"
           @input="setLastname"
-          v-model="doctorData.lastname"
+          v-model="doctorData.last_name"
             :mutedText="$t('muted.lastname')"
         >
-          <div v-if="$v.doctorData.lastname.$dirty">
-            <div v-if="!$v.doctorData.lastname.required">{{$t('errors.lastname')}}</div>
+          <div v-if="$v.doctorData.last_name.$dirty">
+            <div v-if="!$v.doctorData.last_name.required">{{$t('errors.lastname')}}</div>
           </div>
         </clinicInput>
         <div class="input-div">
@@ -84,7 +87,7 @@
 
 
                 <div class="input-div">
-        <clinicSelect @change="setSubCategory" v-model="doctorData.subCategory"  :mutedText="$t('muted.subCategory')">
+        <clinicSelect @change="setSubCategory" v-model="doctorData.sub_category"  :mutedText="$t('muted.subCategory')">
                <option value disabled selected>{{$t('dashboard.forms.addDoctor.subCategory')}}</option>
                 <option class="en-selectInput-content-option" value="3yon">{{$t('dashboard.forms.addDoctor.3yoon')}}</option>
                 <option class="en-selectInput-content-option" value="asnan">{{$t('dashboard.forms.addDoctor.asnan')}}</option>
@@ -113,12 +116,12 @@ export default {
     return {
       doctorData: {
         phone_number: "",
-        passsord:"",
-        firstname:"",
-        lastname:"",
+        password:"",
+        first_name:"",
+        last_name:"",
         country: "",
         category: "",
-        subCategory: "",
+        sub_category: "",
         picture:"",
       }
     };
@@ -138,10 +141,10 @@ export default {
        password: {
         required
       },
-      firstname:{
+      first_name:{
           required,
       },
-       lastname:{
+       last_name:{
           required,
       },
       country: {
@@ -166,12 +169,12 @@ export default {
       this.$v.doctorData.password.$touch();
     },
      setFirstname(value) {
-      this.doctorData.firstname = value;
-      this.$v.doctorData.firstname.$touch();
+      this.doctorData.first_name = value;
+      this.$v.doctorData.first_name.$touch();
     },
       setLastname(value) {
-      this.doctorData.lastname = value;
-      this.$v.doctorData.lastname.$touch();
+      this.doctorData.last_name = value;
+      this.$v.doctorData.last_name.$touch();
     },
       setCountry(value) {
       this.doctorData.country = value;
@@ -182,16 +185,25 @@ export default {
       this.$v.doctorData.category.$touch();
     },
       setSubCategory(value) {
-      this.doctorData.subCategory = value;
+      this.doctorData.sub_category = value;
     },
       setPicture(value) {
       this.doctorData.picture = value;
       this.$v.doctorData.picture.$touch();
     },
     addDoctor(){
-      this.$v.$touch();
+    this.$v.$touch();
+        if (this.$v.$invalid){
+        }else {
+             this.$store.dispatch('doctors/add_doctor',this.doctorData);
+        }
     }
+  },
+    computed: {
+  error(){
+   return this.$store.getters['doctors/getError'];
   }
+},
 };
 </script>
 <style lang="scss" scoped>
@@ -204,5 +216,8 @@ export default {
 .submit-div{
   margin-top: 20px;
   height: 40px;
+}
+.doctorError {
+  margin-bottom:10px ;
 }
 </style>
