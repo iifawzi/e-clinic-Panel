@@ -66,6 +66,9 @@
     "image403": "Sorry, Only (JPEG, PNG, JPG) are allowed",
     "image500": "Sorry, Maximum size is 24 MB"
 },
+"success":{
+"add":"Added Succssefully"
+},
 "muted":{
   "password": "Password must be 3-30 digit [a-z,A-Z,0-9]",
   "firstname":"This name will be shown to users",

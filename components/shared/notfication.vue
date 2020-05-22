@@ -32,12 +32,19 @@ return {
     width: 100%;
     height: 100%;
     border: 1px solid transparent;
-    border-radius: 20px;
+    border-radius: 15px;
     color: white;
     padding: 5px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
 .red{
         background-color: $red;
+}
+.green{
+        background-color: $green-color;
 }
 </style>

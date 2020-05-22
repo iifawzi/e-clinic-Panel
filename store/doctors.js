@@ -1,12 +1,18 @@
 export const state = () => ({
   error: {
     message: ""
+  },
+  success: {
+    message: ""
   }
 });
 
 export const mutations = {
   setError(state, message) {
     state.error.message = message;
+  },
+  setSuccess(state, message) {
+    state.success.message = message;
   }
 };
 
@@ -42,6 +48,7 @@ export const actions = {
   },
   async add_doctor({ commit, dispatch }, doctorData) {
     commit("setError", "");
+    commit("setSuccess", "");
     const imagename = await dispatch("uploadImage", doctorData.picture);
     const doctorDataWithPicture = {...doctorData};
     delete doctorDataWithPicture.picture;
@@ -50,9 +57,11 @@ export const actions = {
       .post("/controlPanel/addDoctor", { ...doctorDataWithPicture })
       .then(response => {
         const responseData = response.data.data;
-        this.$router.push("/controlPanel/dashboard/doctors/"+responseData.phone_number);
+        commit('setSuccess',this.app.i18n.t("success.add"));
+
       })
       .catch(err => {
+        console.log(err);
         if (!err.response) {
           commit('setError',this.app.i18n.t("errors.500"));
         }
@@ -74,5 +83,8 @@ export const actions = {
 export const getters = {
   getError(state) {
     return state.error.message;
+  },
+  getSuccess(state) {
+    return state.success.message;
   }
 };
