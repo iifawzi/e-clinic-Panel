@@ -240,7 +240,7 @@ export default {
       this.doctorData.country = "";
       this.doctorData.category = "";
       this.doctorData.sub_category = "";
-      this.doctorData.picture = "dd";
+      this.doctorData.picture = "";
       return this.$store.getters["doctors/getSuccess"];
     }
   }

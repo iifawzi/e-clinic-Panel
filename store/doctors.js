@@ -18,7 +18,6 @@ export const mutations = {
 
 export const actions = {
   async uploadImage({ commit }, picture) {
-    console.log(picture);
     const formData = new FormData();
     formData.append("file", picture);
     let uploadImage = await this.$axios
