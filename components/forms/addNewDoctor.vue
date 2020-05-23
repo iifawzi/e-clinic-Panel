@@ -36,6 +36,9 @@
         >
           <div v-if="$v.doctorData.password.$dirty">
             <div v-if="!$v.doctorData.password.required">{{$t('errors.password')}}</div>
+            <div v-if="!$v.doctorData.password.minLength">{{$t('errors.minLength')}}</div>
+            <div v-if="!$v.doctorData.password.maxLength">{{$t('errors.maxLength')}}</div>
+            <div v-if="!$v.doctorData.password.alphaNum">{{$t('errors.alphaNum')}}</div>
           </div>
         </clinicInput>
       </div>
@@ -96,25 +99,18 @@
             </template>
           </clinicSelect>
         </div>
-
-        <div class="input-div">
-          <clinicSelect
-            @change="setSubCategory"
-            v-model="doctorData.sub_category"
-            :mutedText="$t('muted.subCategory')"
-          >
-            <option value disabled selected>{{$t('dashboard.forms.addDoctor.subCategory')}}</option>
-            <option
-              class="en-selectInput-content-option"
-              value="3yon"
-            >{{$t('dashboard.forms.addDoctor.3yoon')}}</option>
-            <option
-              class="en-selectInput-content-option"
-              value="asnan"
-            >{{$t('dashboard.forms.addDoctor.asnan')}}</option>
-          </clinicSelect>
-        </div>
-
+     <div class="input-div">
+        <clinicInput
+          :placeholder="$t('dashboard.forms.addDoctor.price')"
+          @input="setPrice"
+          v-model="doctorData.price"
+          :mutedText="$t('muted.price')"
+        >
+          <div v-if="$v.doctorData.price.$dirty">
+            <div v-if="!$v.doctorData.price.required">{{$t('errors.price')}}</div>
+          </div>
+        </clinicInput>
+      </div>
         <div class="submit-div">
           <clinicSubmit
             color="blue"
@@ -134,7 +130,7 @@ import clinicSelect from "~/components/shared/clinicSelect";
 import clinicSubmit from "~/components/shared/clinicSubmit";
 import notfication from "~/components/shared/notfication";
 import uploadImage from "~/components/shared/uploadImage";
-const { required } = require("vuelidate/lib/validators");
+const { required,integer,between,minLength,maxLength,alphaNum } = require("vuelidate/lib/validators");
 export default {
   data() {
     return {
@@ -146,8 +142,8 @@ export default {
         last_name: "",
         country: "",
         category: "",
-        sub_category: "",
-        picture: ""
+        picture: "",
+        price:"",
       }
     };
   },
@@ -164,7 +160,10 @@ export default {
         required
       },
       password: {
-        required
+        required,
+        alphaNum,
+         minLength: minLength(3),
+      maxLength: maxLength(30)
       },
       first_name: {
         required
@@ -180,6 +179,11 @@ export default {
       },
       picture: {
         required
+      },
+      price:{
+        required,
+        integer,
+        
       }
     }
   },
@@ -211,12 +215,13 @@ export default {
       this.doctorData.category = value;
       this.$v.doctorData.category.$touch();
     },
-    setSubCategory(value) {
-      this.doctorData.sub_category = value;
-    },
     setPicture(value) {
       this.doctorData.picture = value;
       this.$v.doctorData.picture.$touch();
+    },
+     setPrice(value) {
+      this.doctorData.price = value;
+      this.$v.doctorData.price.$touch();
     },
     addDoctor() {
       this.$v.$touch();
@@ -239,10 +244,14 @@ export default {
       this.doctorData.last_name = "";
       this.doctorData.country = "";
       this.doctorData.category = "";
-      this.doctorData.sub_category = "";
+      this.doctorData.price = "";
       this.doctorData.picture = "";
       return this.$store.getters["doctors/getSuccess"];
     }
+  }, 
+  mounted(){
+     this.$store.commit("doctors/setError","");
+     this.$store.commit("doctors/setSuccess","");
   }
 };
 </script>

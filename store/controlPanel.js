@@ -44,9 +44,9 @@ export const actions = {
   },
    async authAdmin({ commit }, req) {
     // check token validation from the server : 
-    const checkifvalid = async (token)=>{
+    const checkifvalid = async (config)=>{
       const postCheck = await this.$axios
-      .post("controlPanel/checkAdminByToken",{token})
+      .post("controlPanel/checkAdminByToken",{},config)
       .then(response=>{
         commit('login_admin',response.data.data);
         return true;
@@ -70,8 +70,13 @@ export const actions = {
         commit('login_admin','');
         return false;
       }
-      const token = tokenCookie.split("=")[1];
-      const isValid = await checkifvalid(token);
+      const tokenn = tokenCookie.split("=")[1];
+      const config = {
+        headers: { 
+          'Authorization': "Bearer "+tokenn, 
+          }
+        }
+      const isValid = await checkifvalid(config);
       return isValid
     }else {
       const token = Cookie.get('token');
@@ -79,7 +84,12 @@ export const actions = {
         commit('login_admin','');
         return false;
       };
-      const isValid = await checkifvalid(token);
+      const config = {
+        headers: { 
+          'Authorization': "Bearer "+token, 
+          }
+        }
+      const isValid = await checkifvalid(config);
       return isValid
     }
   },

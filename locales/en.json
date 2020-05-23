@@ -5,7 +5,7 @@
   "panel":{
     "title":"Login | Control Panel",
     "loginForm":{
-      "username": "Username",
+      "phone_number": "Phone Number",
       "password":"Password",
       "submit":"login"
     }
@@ -46,7 +46,8 @@
         "saudiarabia": "Saudi arabia",
         "upload": "Add Personal Picture",
         "edit": "Change the photo",
-        "submit":"Add The Doctor"
+        "submit":"Add The Doctor",
+        "price":"The Price"
       }
     }
   },
@@ -64,7 +65,11 @@
     "400":"Please check the inserted data",
     "500":"Sorry,something wrong happened",
     "image403": "Sorry, Only (JPEG, PNG, JPG) are allowed",
-    "image500": "Sorry, Maximum size is 24 MB"
+    "image500": "Sorry, Maximum size is 24 MB",
+    "price":"Price is required",
+    "minLength":"The Password must be at least 3 digits",
+    "maxLength":"The Password must be at most 30 digits",
+    "alphaNum":"Password must contain letters and numbers only"
 },
 "success":{
 "add":"Added Succssefully"
@@ -75,7 +80,8 @@
   "lastname":"This name will be shown to users",
   "subCategory": "this's not required",
   "phone":"This number will be used for login",
-  "picture":"This photo will be shown to users"
+  "picture":"This photo will be shown to users",
+  "price":"The price of one sesstion"
 
 }
 }

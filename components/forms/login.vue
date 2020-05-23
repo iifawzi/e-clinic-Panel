@@ -5,10 +5,10 @@
     </div>
     <div class="loginForm-content">
       <div class="input-div">
-        <clinicInput :placeholder="$t('panel.loginForm.username')" @input="setUsername" v-model="loginData.username"
+        <clinicInput :placeholder="$t('panel.loginForm.phone_number')" @input="setPhone_number" v-model="loginData.phone_number"
         >
-            <div v-if="$v.loginData.username.$dirty">
-              <div v-if="!$v.loginData.username.required">{{$t('errors.username')}}</div>
+            <div v-if="$v.loginData.phone_number.$dirty">
+              <div v-if="!$v.loginData.phone_number.required">{{$t('errors.phone')}}</div>
             </div>
         </clinicInput>
       </div>
@@ -41,7 +41,7 @@ export default {
   data() {
     return {
       loginData: {
-        username: "",
+        phone_number: "",
         password: ""
       }
     };
@@ -49,7 +49,7 @@ export default {
   //   Validations Rules:
   validations: {
       loginData:{
-    username: {
+    phone_number: {
       required
     },
     password: {
@@ -59,9 +59,9 @@ export default {
   },
   methods:{
     //   Validations Rules 
-    setUsername(value){
-        this.loginData.username = value;
-        this.$v.loginData.username.$touch();
+    setPhone_number(value){
+        this.loginData.phone_number = value;
+        this.$v.loginData.phone_number.$touch();
     },
     setPassword(value){
         this.loginData.password = value;
