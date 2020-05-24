@@ -31,6 +31,7 @@ export default {
  css: [
   '~/assets/scss/fonts.scss',
   '~/assets/scss/main.scss',
+  '~/assets/scss/spinners.scss',
   '~/assets/css/all.css',
 ],
 styleResources: {

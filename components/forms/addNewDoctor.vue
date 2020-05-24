@@ -1,12 +1,24 @@
 <template>
-  <section class="addNewDoctor-form" :key="componentKey">
+  <section class="addNewDoctor-form" :key="componentKey"> 
     <div class="doctorError" v-if="error">
       <notfication color="red" :label="error" />
     </div>
     <div class v-if="getSuccess">
       <notfication class="doctorSuccess" color="green" :label="getSuccess" />
     </div>
-    <div class="addNewDoctorForm-content">
+<div class="sk-cube-grid" v-if="categories == ''">
+  <div class="sk-cube sk-cube1"></div>
+  <div class="sk-cube sk-cube2"></div>
+  <div class="sk-cube sk-cube3"></div>
+  <div class="sk-cube sk-cube4"></div>
+  <div class="sk-cube sk-cube5"></div>
+  <div class="sk-cube sk-cube6"></div>
+  <div class="sk-cube sk-cube7"></div>
+  <div class="sk-cube sk-cube8"></div>
+  <div class="sk-cube sk-cube9"></div>
+</div>
+
+    <div class="addNewDoctorForm-content" v-if="categories != ''">
       <div class="input-div">
         <uploadImage :mutedText="$t('muted.picture')" @input="setPicture">
           <div v-if="$v.doctorData.picture.$dirty">
@@ -86,14 +98,11 @@
         <div class="input-div">
           <clinicSelect @change="setCategory" v-model="doctorData.category_id">
             <option value disabled selected>{{$t('dashboard.forms.addDoctor.category')}}</option>
-            <option
+            
+            <option v-for="category in categories" :key="category.category_id"
               class="en-selectInput-content-option"
-              value=1
-            >{{$t('dashboard.forms.addDoctor.3yoon')}}</option>
-            <option
-              class="en-selectInput-content-option"
-              value=2
-            >{{$t('dashboard.forms.addDoctor.asnan')}}</option>
+              :value=category.category_id
+            >{{category[language]}}</option>
             <template v-if="$v.doctorData.category_id.$dirty" v-slot:errorSlot>
               <div v-if="!$v.doctorData.category_id.required">{{$t('errors.category')}}</div>
             </template>
@@ -232,6 +241,9 @@ export default {
     }
   },
   computed: {
+       language(){
+      return this.$store.getters.getLocale;
+    },
     error() {
       return this.$store.getters["controlPanel/doctors/getError"];
     },
@@ -247,9 +259,15 @@ export default {
       this.doctorData.price = "";
       this.doctorData.picture = "";
       return this.$store.getters["controlPanel/doctors/getSuccess"];
-    }
+    },
+      categories() {
+      return this.$store.getters['controlPanel/categories/get_categories'];
+      console.log(this.$store.getters['controlPanel/categories/get_categories'])
+      console.log("?");
+    },
   }, 
   mounted(){
+    this.$store.dispatch('controlPanel/categories/getCategories');
      this.$store.commit("controlPanel/doctors/setError","");
      this.$store.commit("controlPanel/doctors/setSuccess","");
   }
