@@ -49,21 +49,25 @@ export default {
 .green {
 border: 2px solid rgb(193, 197, 236);
   color: rgb(15, 201, 86);
+  &:hover{
+    color: white;
+    background-color: rgb(15, 201, 86);
+  }
 }
 .blue {
 border: 2px solid rgb(193, 197, 236);
-
-
-
   color: rgb(28, 60, 241);
-
+ &:hover{
+    color: white;
+    background-color: rgb(28, 60, 241);
+  }
 }
 .red {
 border: 2px solid rgb(193, 197, 236);
-
-
-
-
   color: rgb(223, 58, 58);
+ &:hover{
+    color: white;
+    background-color: rgb(223, 58, 58);
+  }
 }
 </style>
