@@ -18,6 +18,8 @@ export const mutations = {
 };
 
 export const actions = {
+
+  
   async uploadImage({ commit }, {picture,config}) {
     const formData = new FormData();
     formData.append("file", picture);
@@ -45,6 +47,9 @@ export const actions = {
       });
       return uploadImage
   },
+
+
+
   async add_doctor({ commit, dispatch }, doctorData) {
     const token = Cookie.get('token');
     const config = {

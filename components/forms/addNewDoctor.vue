@@ -1,8 +1,5 @@
 <template>
   <section class="addNewDoctor-form" :key="componentKey"> 
-    <div class="doctorError" v-if="error">
-      <notfication color="red" :label="error" />
-    </div>
     <div class v-if="getSuccess">
       <notfication class="doctorSuccess" color="green" :label="getSuccess" />
     </div>
@@ -268,7 +265,6 @@ export default {
   }, 
   mounted(){
     this.$store.dispatch('controlPanel/categories/getCategories');
-     this.$store.commit("controlPanel/doctors/setError","");
      this.$store.commit("controlPanel/doctors/setSuccess","");
   }
 };
