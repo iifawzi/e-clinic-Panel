@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="dashboard">
     <adminSidenav/>
       <adminNavbar/>
        <div v-if="hover" @click="this.updateHover(false)" class="backdrop"></div>
@@ -44,6 +44,11 @@ adminSidenav
 </script>
 
 <style lang="scss" scoped>
+.dashboard {
+      background-color: $greywhite;
+      min-height: 100vh;
+      max-height: auto;
+}
 .backdrop{
   position: absolute;
   width: 100%;

@@ -41,7 +41,7 @@ export default {
       width: 100%;
       border: 1px solid $main-color;
       border-radius: 20px;
-      padding: 0px 5px;
+      padding: 0px 10px;
       height: 30px;
       display: flex;
       flex-flow: column;

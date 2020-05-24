@@ -124,10 +124,10 @@ export default {
   margin-left: 10px;
 }
 .en-dropIcon-margin {
-  margin-right: 10px;
+  margin-right: 30px;
 }
 .ar-dropIcon-margin {
-  margin-left: 10px;
+  margin-left: 30px;
 }
 .en-padding {
   padding-left: 30px;

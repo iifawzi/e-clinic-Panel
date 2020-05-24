@@ -56,6 +56,7 @@ languages,
             display: flex;
             flex-flow: row;
             justify-content: space-between;
+            align-items: center;
             .items-user{
                 font-weight: 500;
                 color: $main-color;

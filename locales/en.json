@@ -11,7 +11,10 @@
     }
   },
   "dashboard":{
-    "welcome":"Hey, Welcome Back!",
+    "welcome":"Hey, Welcome to Control Panel!",
+    "user":"User",
+    "doctor":"Doctor",
+    "appointment":"Appointment",
     "navbar":{
       "title":"Control Panel",
       "logout":"Logout",
@@ -60,7 +63,7 @@
     "country":"Country is required",
     "category":"Category is required",
     "picture":"Personal Photo is required",
-    "401":"Username or Password is incorrect",
+    "401":"Not authorized, please check the inserted fields",
     "403":"Phone number is already associated with an account",
     "400":"Please check the inserted data",
     "500":"Sorry,something wrong happened",

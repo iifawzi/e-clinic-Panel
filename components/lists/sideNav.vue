@@ -7,15 +7,6 @@
       isExact
     ></listElement>
     
-    
-    
-    <li
-      v-if="hover"
-      :class="language+'-category-padding'"
-      class="bold-category"
-    >{{$t('dashboard.sidenav.manage')}}</li>
-
-
 
     <listElement
       InsideUl="true"
@@ -39,23 +30,12 @@
       linkTo="/controlPanel/dashboard/doctors/add"
     ></listElement>
 
-               <listElement
-                    isExact
-      :iconClass="language == 'en' ? 'fas fa-caret-right' : 'fas fa-caret-left'"
-      :label="$t('dashboard.sidenav.editDoctor')"
-      linkTo="/controlPanel/dashboard/doctors/edit"
-    ></listElement>
    </adminSidelist>
 
 
 
 
     </listElement>
-     <li
-      v-if="hover"
-      :class="language+'-category-padding'"
-      class="bold-category"
-    >{{$t('dashboard.sidenav.users')}}</li>
 
   <listElement
       InsideUl="true"
@@ -67,23 +47,14 @@
     
    <adminSidelist>
            <listElement
-           :hideActiveBorder=true
       :iconClass="language == 'en' ? 'fas fa-caret-right' : 'fas fa-caret-left'"
       :label="$t('dashboard.sidenav.regUsers')"
       linkTo="/controlPanel/dashboard/users/register"
     ></listElement>
                <listElement
-           :hideActiveBorder=true
       :iconClass="language == 'en' ? 'fas fa-caret-right' : 'fas fa-caret-left'"
       :label="$t('dashboard.sidenav.addUser')"
       linkTo="/controlPanel/dashboard/users/add"
-    ></listElement>
-
-               <listElement
-           :hideActiveBorder=true
-      :iconClass="language == 'en' ? 'fas fa-caret-right' : 'fas fa-caret-left'"
-      :label="$t('dashboard.sidenav.editUser')"
-      linkTo="/controlPanel/dashboard/users/edit"
     ></listElement>
    </adminSidelist>
     </listElement>
@@ -113,10 +84,6 @@ export default {
 
 <style lang="scss" scoped>
 .margin-top-element {
-  margin-top: 20px;
-}
-.bold-category {
-  font-weight: 400;
   margin-top: 20px;
 }
 .en-category-padding {

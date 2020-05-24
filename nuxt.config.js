@@ -29,6 +29,7 @@ export default {
   ** Global CSS
   */
  css: [
+  '~/assets/scss/fonts.scss',
   '~/assets/scss/main.scss',
   '~/assets/css/all.css',
 ],
@@ -59,7 +60,7 @@ styleResources: {
   ],
   // * Axios
   axios: {
-    baseURL: 'http://192.168.1.3:5000/api/'
+    baseURL: 'http://192.168.1.4:5000/api/'
   },
   // *
   /*
