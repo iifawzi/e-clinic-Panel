@@ -7,7 +7,7 @@
                         <languages/>
                     </div>
                     <div :class="language+'-items-item'" class="items-user">
-                        <!-- {{this.$store.getters['controlPanel/getAdmin'].name}} -->
+                        <!-- {{this.$store.getters['controlPanel/auth/getAdmin'].name}} -->
                             {{$t('dashboard.navbar.username')}}
                     </div>
                     <div @click="logout" :class="language+'-items-item'" class="items-logout">
@@ -32,7 +32,7 @@ languages,
   },
   methods:{
       logout(){
-          this.$store.dispatch('controlPanel/logout');
+          this.$store.dispatch('controlPanel/auth/logout');
       }
   }
 }

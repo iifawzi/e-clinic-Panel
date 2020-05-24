@@ -35,12 +35,12 @@ export default {
       return this.$store.getters.getLocale;
     },
     hover(){
-      return this.$store.getters['dashboard/getSideHover'];
+      return this.$store.getters['controlPanel/dashboard/getSideHover'];
     }
   },
   methods:{
     updateHover(value){
-      this.$store.commit('dashboard/setSideHover',value);
+      this.$store.commit('controlPanel/dashboard/setSideHover',value);
     }
   }
 };

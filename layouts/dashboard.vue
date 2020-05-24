@@ -29,7 +29,7 @@ adminSidenav
   },
     computed:{
        hover(){
-      return this.$store.getters['dashboard/getSideHover'];
+      return this.$store.getters['controlPanel/dashboard/getSideHover'];
     },
     language() {
       return this.$store.getters.getLocale;
@@ -37,7 +37,7 @@ adminSidenav
   },
       methods: {
        updateHover(value){
-      this.$store.commit('dashboard/setSideHover',value);
+      this.$store.commit('controlPanel/dashboard/setSideHover',value);
     },
     },
 }

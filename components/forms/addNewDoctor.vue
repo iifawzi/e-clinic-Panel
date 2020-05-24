@@ -84,18 +84,18 @@
         </div>
 
         <div class="input-div">
-          <clinicSelect @change="setCategory" v-model="doctorData.category">
+          <clinicSelect @change="setCategory" v-model="doctorData.category_id">
             <option value disabled selected>{{$t('dashboard.forms.addDoctor.category')}}</option>
             <option
               class="en-selectInput-content-option"
-              value="3yon"
+              value=1
             >{{$t('dashboard.forms.addDoctor.3yoon')}}</option>
             <option
               class="en-selectInput-content-option"
-              value="asnan"
+              value=2
             >{{$t('dashboard.forms.addDoctor.asnan')}}</option>
-            <template v-if="$v.doctorData.category.$dirty" v-slot:errorSlot>
-              <div v-if="!$v.doctorData.category.required">{{$t('errors.category')}}</div>
+            <template v-if="$v.doctorData.category_id.$dirty" v-slot:errorSlot>
+              <div v-if="!$v.doctorData.category_id.required">{{$t('errors.category')}}</div>
             </template>
           </clinicSelect>
         </div>
@@ -141,7 +141,7 @@ export default {
         first_name: "",
         last_name: "",
         country: "",
-        category: "",
+        category_id: "",
         picture: "",
         price:"",
       }
@@ -174,7 +174,7 @@ export default {
       country: {
         required
       },
-      category: {
+      category_id: {
         required
       },
       picture: {
@@ -212,8 +212,8 @@ export default {
       this.$v.doctorData.country.$touch();
     },
     setCategory(value) {
-      this.doctorData.category = value;
-      this.$v.doctorData.category.$touch();
+      this.doctorData.category_id = value;
+      this.$v.doctorData.category_id.$touch();
     },
     setPicture(value) {
       this.doctorData.picture = value;
@@ -227,13 +227,13 @@ export default {
       this.$v.$touch();
       if (this.$v.$invalid) {
       } else {
-        this.$store.dispatch("doctors/add_doctor", this.doctorData);
+        this.$store.dispatch("controlPanel/doctors/add_doctor", this.doctorData);
       }
     }
   },
   computed: {
     error() {
-      return this.$store.getters["doctors/getError"];
+      return this.$store.getters["controlPanel/doctors/getError"];
     },
     getSuccess() {
       this.$v.$reset()
@@ -243,15 +243,15 @@ export default {
       this.doctorData.first_name = "";
       this.doctorData.last_name = "";
       this.doctorData.country = "";
-      this.doctorData.category = "";
+      this.doctorData.category_id = "";
       this.doctorData.price = "";
       this.doctorData.picture = "";
-      return this.$store.getters["doctors/getSuccess"];
+      return this.$store.getters["controlPanel/doctors/getSuccess"];
     }
   }, 
   mounted(){
-     this.$store.commit("doctors/setError","");
-     this.$store.commit("doctors/setSuccess","");
+     this.$store.commit("controlPanel/doctors/setError","");
+     this.$store.commit("controlPanel/doctors/setSuccess","");
   }
 };
 </script>

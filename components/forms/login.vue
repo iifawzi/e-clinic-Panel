@@ -72,13 +72,13 @@ export default {
         this.$v.$touch();
         if (this.$v.$invalid){
         }else {
-             this.$store.dispatch('controlPanel/login_admin',this.loginData);
+             this.$store.dispatch('controlPanel/auth/login_admin',this.loginData);
         }
     }
   },
   computed: {
   error(){
-   return this.$store.getters['controlPanel/getError'];
+   return this.$store.getters['controlPanel/auth/getError'];
   }
 },
 };

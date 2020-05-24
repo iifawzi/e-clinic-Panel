@@ -79,10 +79,10 @@ export default {
       return this.$store.getters.getLocale;
     },
     hover() {
-      return this.$store.getters["dashboard/getSideHover"];
+      return this.$store.getters["controlPanel/dashboard/getSideHover"];
     },
     closeOtherDropped(){
-      return this.$store.getters['dashboard/getCloseOtherDropped'];
+      return this.$store.getters['controlPanel/dashboard/getCloseOtherDropped'];
     }
   },
   methods:{
