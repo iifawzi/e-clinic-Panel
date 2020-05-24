@@ -21,7 +21,7 @@
                 isExact
       :iconClass="language == 'en' ? 'fas fa-caret-right' : 'fas fa-caret-left'"
       :label="$t('dashboard.sidenav.regDoctors')"
-      linkTo="/controlPanel/dashboard/doctors/register"
+      linkTo="/controlPanel/dashboard/doctors/all"
     ></listElement>
                <listElement
                     isExact

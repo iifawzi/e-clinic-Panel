@@ -17,7 +17,6 @@
 <script>
 export default {
   props: {
-    value: String,
     mutedText: {
       type: String,
       default: ""

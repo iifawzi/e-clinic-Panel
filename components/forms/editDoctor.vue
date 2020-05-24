@@ -1,23 +1,16 @@
 <template>
-  <section class="addNewDoctor-form" :key="componentKey"> 
+  <section class="editDoctor-form" :key="componentKey"> 
     <div class v-if="getSuccess">
       <notfication class="doctorSuccess" color="green" :label="getSuccess" />
     </div>
-<div class="sk-cube-grid" v-if="categories == ''">
-  <div class="sk-cube sk-cube1"></div>
-  <div class="sk-cube sk-cube2"></div>
-  <div class="sk-cube sk-cube3"></div>
-  <div class="sk-cube sk-cube4"></div>
-  <div class="sk-cube sk-cube5"></div>
-  <div class="sk-cube sk-cube6"></div>
-  <div class="sk-cube sk-cube7"></div>
-  <div class="sk-cube sk-cube8"></div>
-  <div class="sk-cube sk-cube9"></div>
-</div>
+  <div class="spinner-1" v-if="getDoctor == ''">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
 
-    <div class="addNewDoctorForm-content" v-if="categories != ''">
+    <div class="editDoctorForm-content" v-if="getDoctor != ''">
       <div class="input-div">
-        <uploadImage :mutedText="$t('muted.picture')" @input="setPicture">
+        <uploadImage :mutedText="$t('muted.picture')" :imageFromComponent="this.doctorData.picture" @input="setPicture">
           <div v-if="$v.doctorData.picture.$dirty">
             <div v-if="!$v.doctorData.picture.required">{{$t('errors.picture')}}</div>
           </div>
@@ -26,7 +19,7 @@
 
       <div class="input-div">
         <clinicInput
-          :placeholder="$t('dashboard.forms.addDoctor.phone')"
+          :placeholder="$t('dashboard.forms.editDoctor.phone')"
           @input="setPhone"
           v-model="doctorData.phone_number"
           :mutedText="$t('muted.phone')"
@@ -38,7 +31,7 @@
       </div>
       <div class="input-div">
         <clinicInput
-          :placeholder="$t('dashboard.forms.addDoctor.password')"
+          :placeholder="$t('dashboard.forms.editDoctor.password')"
           @input="setPassword"
           v-model="doctorData.password"
           :mutedText="$t('muted.password')"
@@ -53,7 +46,7 @@
       </div>
       <div class="input-div">
         <clinicInput
-          :placeholder="$t('dashboard.forms.addDoctor.firstname')"
+          :placeholder="$t('dashboard.forms.editDoctor.firstname')"
           @input="setFirstname"
           v-model="doctorData.first_name"
           :mutedText="$t('muted.firstname')"
@@ -65,7 +58,7 @@
       </div>
       <div class="input-div">
         <clinicInput
-          :placeholder="$t('dashboard.forms.addDoctor.lastname')"
+          :placeholder="$t('dashboard.forms.editDoctor.lastname')"
           @input="setLastname"
           v-model="doctorData.last_name"
           :mutedText="$t('muted.lastname')"
@@ -74,17 +67,17 @@
             <div v-if="!$v.doctorData.last_name.required">{{$t('errors.lastname')}}</div>
           </div>
         </clinicInput>
-       <div class="input-div">
+        <div class="input-div">
           <clinicSelect @change="setCountry" v-model="doctorData.country">
-            <option value disabled selected>{{$t('dashboard.forms.addDoctor.country')}}</option>
+            <option value disabled selected>{{$t('dashboard.forms.editDoctor.country')}}</option>
             <option
               class="en-selectInput-content-option"
-              value="Egypt"
-            >{{$t('dashboard.forms.addDoctor.egypt')}}</option>
+              value="egypt"
+            >{{$t('dashboard.forms.editDoctor.egypt')}}</option>
             <option
               class="en-selectInput-content-option"
-              value="Saudiarabia"
-            >{{$t('dashboard.forms.addDoctor.saudiarabia')}}</option>
+              value="saudiarabia"
+            >{{$t('dashboard.forms.editDoctor.saudiarabia')}}</option>
 
             <template v-if="$v.doctorData.country.$dirty" v-slot:errorSlot>
               <div v-if="!$v.doctorData.country.required">{{$t('errors.country')}}</div>
@@ -94,8 +87,7 @@
 
         <div class="input-div">
           <clinicSelect @change="setCategory" v-model="doctorData.category_id">
-            <option value disabled selected>{{$t('dashboard.forms.addDoctor.category')}}</option>
-            
+            <option disabled selected>{{$t('dashboard.forms.editDoctor.category')}}</option>
             <option v-for="category in categories" :key="category.category_id"
               class="en-selectInput-content-option"
               :value=category.category_id
@@ -107,7 +99,7 @@
         </div>
      <div class="input-div">
         <clinicInput
-          :placeholder="$t('dashboard.forms.addDoctor.price')"
+          :placeholder="$t('dashboard.forms.editDoctor.price')"
           @input="setPrice"
           v-model="doctorData.price"
           :mutedText="$t('muted.price')"
@@ -120,7 +112,21 @@
         <div class="submit-div">
           <clinicSubmit
             color="blue"
-            :statement="$t('dashboard.forms.addDoctor.submit')"
+            :statement="$t('dashboard.forms.editDoctor.editDoctor')"
+            @click="addDoctor"
+          />
+        </div>
+           <div class="submit-div">
+          <clinicSubmit
+          v-if="getDoctor.avaliable == 0"
+            color="green"
+            :statement="$t('dashboard.forms.editDoctor.activeDoctor')"
+            @click="addDoctor"
+          />
+          <clinicSubmit
+          v-else
+            color="red"
+            :statement="$t('dashboard.forms.editDoctor.deactiveDoctor')"
             @click="addDoctor"
           />
         </div>
@@ -141,7 +147,7 @@ export default {
   data() {
     return {
         componentKey: 0,
-      doctorData: {
+        doctorData: {
         phone_number: "",
         password: "",
         first_name: "",
@@ -150,6 +156,7 @@ export default {
         category_id: "",
         picture: "",
         price:"",
+        avaliable: '',
       }
     };
   },
@@ -245,27 +252,30 @@ export default {
       return this.$store.getters["controlPanel/doctors/getError"];
     },
     getSuccess() {
-      this.$v.$reset()
-      this.forceRerender();
-      this.doctorData.phone_number = "";
-      this.doctorData.password = "";
-      this.doctorData.first_name = "";
-      this.doctorData.last_name = "";
-      this.doctorData.country = "";
-      this.doctorData.category_id = "";
-      this.doctorData.price = "";
-      this.doctorData.picture = "";
       return this.$store.getters["controlPanel/doctors/getSuccess"];
     },
       categories() {
       return this.$store.getters['controlPanel/categories/get_categories'];
-      console.log(this.$store.getters['controlPanel/categories/get_categories'])
-      console.log("?");
+    },
+        getDoctor() {
+      const doctorData  = this.$store.getters["controlPanel/doctors/getDoctor"];
+      this.doctorData.phone_number = doctorData.phone_number;
+      this.doctorData.password = doctorData.password;
+      this.doctorData.first_name = doctorData.first_name;
+      this.doctorData.last_name = doctorData.last_name;
+      this.doctorData.country = doctorData.country;
+      this.doctorData.category_id = doctorData.category_id;
+      this.doctorData.price = doctorData.price;
+      this.doctorData.picture = doctorData.picture;
+      this.doctorData.avaliable = doctorData.avaliable;
+      return doctorData;
     },
   }, 
   mounted(){
+    const number = this.$route.params.phone_number;
     this.$store.dispatch('controlPanel/categories/getCategories');
      this.$store.commit("controlPanel/doctors/setSuccess","");
+    this.$store.dispatch("controlPanel/doctors/get_doctor", number);
   }
 };
 </script>

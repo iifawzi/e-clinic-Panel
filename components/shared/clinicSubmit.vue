@@ -54,5 +54,14 @@ export default {
       background-color: $green-hover;
     }
   }
+    .red {
+    background-color: $red;
+    &:active {
+      outline: 0px;
+    }
+    &:hover {
+      background-color: $hover-red;
+    }
+  }
 }
 </style>

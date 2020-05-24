@@ -5,7 +5,8 @@ export const state = () => ({
   },
   success: {
     message: ""
-  }
+  },
+  doctor: "",
 });
 
 export const mutations = {
@@ -14,6 +15,9 @@ export const mutations = {
   },
   setSuccess(state, message) {
     state.success.message = message;
+  },
+  setDoctor(state,docData){
+    state.doctor = docData;
   }
 };
 
@@ -88,7 +92,31 @@ export const actions = {
           }
         });
     }
+  },
+
+
+// get specific doctor /controlPanel/dashboard/doctors/PHONE_NUMBER
+
+  async get_doctor({ commit }, phone_number) {
+    commit("setError", "");
+    commit("setSuccess", "");
+    commit("setDoctor", "");
+    const token = Cookie.get('token');
+    const config = {
+      headers: { 
+        'Authorization': "Bearer "+token, 
+        }
+      }
+      const doctorData = this.$axios.post("/doctors/getDoctor",{phone_number},config).then(response=>{
+        commit("setDoctor", response.data.data);
+      }).catch(err=>{
+        this.$router.push("/controlPanel/dashboard/doctors/all");
+      })
   }
+
+
+
+
 };
 
 export const getters = {
@@ -97,5 +125,8 @@ export const getters = {
   },
   getSuccess(state) {
     return state.success.message;
+  },
+  getDoctor(state){
+    return state.doctor;
   }
 };

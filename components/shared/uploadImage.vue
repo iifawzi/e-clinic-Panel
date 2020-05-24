@@ -2,20 +2,28 @@
   <section class="uploadImage-component">
     <div class="uploadImage-content">
       <div class="image-container">
+        <div class="image-container" v-if="imageFromComponent && !imageToShow">
+          <!-- This where we want to show an photo when component created -->
+          <img
+            v-if="imageFromComponent != ''"
+            class="profile-Image"
+            :src="'http://localhost:5000/images/'+imageFromComponent"
+          />
+        </div>
         <img v-if="imageToShow != ''" class="profile-Image" :src="imageToShow" />
       </div>
       <div class="buttons-container">
         <div class="buttons-noImage">
           <label class="file-select">
-            <div v-if="imageToShow == ''" class="select-button">
+            <div v-if="imageToShow == '' && !imageFromComponent" class="select-button">
               <span>{{$t('dashboard.forms.addDoctor.upload')}}</span>
             </div>
             <input type="file" @change="handleFileChange" />
           </label>
         </div>
-        <div v-if="imageToShow" class="buttons-image">
+        <div v-if="imageToShow || imageFromComponent" class="buttons-image">
           <label class="file-select">
-            <div v-if="imageToShow != ''" class="select-button">
+            <div v-if="imageToShow != '' || imageFromComponent" class="select-button">
               <span>{{$t('dashboard.forms.addDoctor.edit')}}</span>
             </div>
             <input type="file" @change="handleFileChange" />
@@ -37,11 +45,11 @@ export default {
     };
   },
   props: {
-    value: {
+    mutedText: {
       type: String,
       default: ""
     },
-    mutedText: {
+    imageFromComponent: {
       type: String,
       default: ""
     }

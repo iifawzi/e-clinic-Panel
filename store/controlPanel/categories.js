@@ -21,8 +21,6 @@ export const actions = {
         const getCategories = this.$axios
         .get("/controlPanel/getCategories",config)
         .then(response=>{
-        console.log("done");
-
             commit("set_categories",response.data.data);
         }).catch(err=>{
             console.log(err);
