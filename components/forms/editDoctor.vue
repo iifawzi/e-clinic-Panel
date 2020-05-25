@@ -9,6 +9,10 @@
           <div class v-if="getSuccess">
       <notfication class="doctorSuccess" color="green" :label="getSuccess" />
     </div>
+
+    <div class="doctorError" v-if="error">
+      <notfication color="red" :label="error" />
+    </div>
       <div class="input-div">
         <uploadImage :mutedText="$t('muted.picture')" :imageFromComponent="this.doctorData.picture" @input="setPicture">
           <div v-if="$v.doctorData.picture.$dirty">
@@ -88,7 +92,7 @@
         <div class="input-div">
           <clinicSelect @change="setCategory" v-model="doctorData.category_id">
             <option disabled selected>{{$t('dashboard.forms.editDoctor.category')}}</option>
-            <option v-for="category in categories" :key="category.category_id"
+            <option v-for="category in categories" :key="category.category_id" :selected="category.category_id === doctorData.category_id"
               class="en-selectInput-content-option"
               :value=category.category_id
             >{{category[language]}}</option>

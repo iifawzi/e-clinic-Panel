@@ -125,8 +125,7 @@ export const actions = {
   },
 
   // update data of specific doctor:
-
-  async update_doctor({commit},{doctor_id,Newdata}) {
+  async update_doctor({commit,dispatch},{doctor_id,Newdata}) {
     commit("setError", "");
     commit("setSuccess", "");
     const token = Cookie.get("token");
@@ -135,6 +134,38 @@ export const actions = {
         Authorization: "Bearer " + token
       }
     };
+    if (Newdata.picture != undefined){
+      // if we will upload a picture: 
+      const imagename = await dispatch("uploadImage", {
+        picture: Newdata.picture,
+        config: config
+      });
+      if (imagename){
+        delete Newdata.picture;
+        const updatedDoctor = this.$axios.patch("/doctors/updateDoctor",{doctor_id,...Newdata,picture: imagename},config).then(response=>{
+          commit("accountStatus");
+          commit("setSuccess", this.app.i18n.t("success.edit"));
+  
+        })
+        .catch(err => {
+          if (!err.response) {
+            commit("setError", this.app.i18n.t("errors.500"));
+          }
+          const status = err.response.status;
+          switch (status) {
+            case 403:
+              commit("setError", this.app.i18n.t("errors.403"));
+              break;
+            case 400:
+              commit("setError", this.app.i18n.t("errors.400"));
+              break;
+            default:
+              commit("setError", this.app.i18n.t("errors.500"));
+          }
+        });
+      }
+    }else {
+      // if we will not upload a picture: 
       const updatedDoctor = this.$axios.patch("/doctors/updateDoctor",{doctor_id,...Newdata},config).then(response=>{
         commit("accountStatus");
         commit("setSuccess", this.app.i18n.t("success.edit"));
@@ -156,6 +187,7 @@ export const actions = {
             commit("setError", this.app.i18n.t("errors.500"));
         }
       });
+    }
   }
 };
 
