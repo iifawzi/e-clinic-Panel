@@ -4,7 +4,7 @@
       <div class="edit-title">{{$t("dashboard.forms.editDoctor.title")}}</div>
       <div class="editPage-content">
         <div class="editForm">
-<editDoctor/>
+<editDoctor :key="getAccountStatus"/>
 
         </div>
       </div>
@@ -24,6 +24,10 @@ editDoctor,
   computed: {
     language() {
       return this.$store.getters.getLocale;
+    },
+         getAccountStatus() {
+      return this.$store.getters["controlPanel/doctors/accountStatus"];
+      this.doctorData.avaliable = !this.doctorData.avaliable;
     },
   },
 };

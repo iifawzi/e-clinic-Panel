@@ -7,6 +7,7 @@ export const state = () => ({
     message: ""
   },
   doctor: "",
+  accountStatus: 1,
 });
 
 export const mutations = {
@@ -16,107 +17,146 @@ export const mutations = {
   setSuccess(state, message) {
     state.success.message = message;
   },
-  setDoctor(state,docData){
+  setDoctor(state, docData) {
     state.doctor = docData;
+  },
+  accountStatus(state) {
+    state.accountStatus = state.accountStatus+1;
+
   }
 };
 
 export const actions = {
+  // Upload Image:
 
-  
-  async uploadImage({ commit }, {picture,config}) {
+  async uploadImage({ commit }, { picture, config }) {
     const formData = new FormData();
     formData.append("file", picture);
     let uploadImage = await this.$axios
-      .post("/controlPanel/addImage", formData,config)
+      .post("/controlPanel/addImage", formData, config)
       .then(response => {
         const responseData = response.data.data;
         return responseData.filename;
       })
       .catch(err => {
         if (!err.response) {
-          commit('setError',this.app.i18n.t("errors.500"));
+          commit("setError", this.app.i18n.t("errors.500"));
         }
         const status = err.response.status;
         switch (status) {
           case 403:
-            commit('setError',this.app.i18n.t("errors.image403"));
+            commit("setError", this.app.i18n.t("errors.image403"));
             break;
           case 500:
-            commit('setError',this.app.i18n.t("errors.image500"));
+            commit("setError", this.app.i18n.t("errors.image500"));
             break;
           default:
-            commit('setError',this.app.i18n.t("errors.500"));
+            commit("setError", this.app.i18n.t("errors.500"));
         }
       });
-      return uploadImage
+    return uploadImage;
   },
 
-
+  // add doctor /controlPanel/dashboard/doctors/add
 
   async add_doctor({ commit, dispatch }, doctorData) {
-    const token = Cookie.get('token');
+    const token = Cookie.get("token");
     const config = {
-      headers: { 
-        'Authorization': "Bearer "+token, 
-        }
+      headers: {
+        Authorization: "Bearer " + token
       }
+    };
     commit("setError", "");
     commit("setSuccess", "");
-    const imagename = await dispatch("uploadImage", {picture:doctorData.picture,config:config});
-    if (imagename){
-      const doctorDataWithPicture = {...doctorData};
+    const imagename = await dispatch("uploadImage", {
+      picture: doctorData.picture,
+      config: config
+    });
+    if (imagename) {
+      const doctorDataWithPicture = { ...doctorData };
       delete doctorDataWithPicture.picture;
       doctorDataWithPicture.picture = imagename;
       const addDoctor = this.$axios
         .post("/controlPanel/addDoctor", { ...doctorDataWithPicture }, config)
         .then(response => {
           const responseData = response.data.data;
-          commit('setSuccess',this.app.i18n.t("success.add"));
-  
+          commit("setSuccess", this.app.i18n.t("success.add"));
+        this.$router.push("/controlPanel/dashboard/doctors/"+responseData.doctor_id);
+
         })
         .catch(err => {
           if (!err.response) {
-            commit('setError',this.app.i18n.t("errors.500"));
+            commit("setError", this.app.i18n.t("errors.500"));
           }
           const status = err.response.status;
           switch (status) {
             case 403:
-              commit('setError',this.app.i18n.t("errors.403"));
+              commit("setError", this.app.i18n.t("errors.403"));
               break;
             case 400:
-              commit('setError',this.app.i18n.t("errors.400"));
+              commit("setError", this.app.i18n.t("errors.400"));
               break;
             default:
-              commit('setError',this.app.i18n.t("errors.500"));
+              commit("setError", this.app.i18n.t("errors.500"));
           }
         });
     }
   },
 
+  // get specific doctor /controlPanel/dashboard/doctors/PHONE_NUMBER
 
-// get specific doctor /controlPanel/dashboard/doctors/PHONE_NUMBER
+  async get_doctor({ commit }, doctor_id) {
+    // commit("setError", "");
+    // commit("setDoctor", "");
+    const token = Cookie.get("token");
+    const config = {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    };
+    const doctorData = this.$axios
+      .post("/doctors/getDoctor", { doctor_id }, config)
+      .then(response => {
+        commit("setDoctor", response.data.data);
+      })
+      .catch(err => {
+        this.$router.push("/controlPanel/dashboard/doctors/all");
+      });
+  },
 
-  async get_doctor({ commit }, phone_number) {
+  // update data of specific doctor:
+
+  async update_doctor({commit},{doctor_id,Newdata}) {
     commit("setError", "");
     commit("setSuccess", "");
-    commit("setDoctor", "");
-    const token = Cookie.get('token');
+    const token = Cookie.get("token");
     const config = {
-      headers: { 
-        'Authorization': "Bearer "+token, 
-        }
+      headers: {
+        Authorization: "Bearer " + token
       }
-      const doctorData = this.$axios.post("/doctors/getDoctor",{phone_number},config).then(response=>{
-        commit("setDoctor", response.data.data);
-      }).catch(err=>{
-        this.$router.push("/controlPanel/dashboard/doctors/all");
+    };
+      const updatedDoctor = this.$axios.patch("/doctors/updateDoctor",{doctor_id,...Newdata},config).then(response=>{
+        commit("accountStatus");
+        commit("setSuccess", this.app.i18n.t("success.edit"));
+
       })
+      .catch(err => {
+        if (!err.response) {
+          commit("setError", this.app.i18n.t("errors.500"));
+        }
+        const status = err.response.status;
+        switch (status) {
+          case 403:
+            commit("setError", this.app.i18n.t("errors.403"));
+            break;
+          case 400:
+            commit("setError", this.app.i18n.t("errors.400"));
+            break;
+          default:
+            commit("setError", this.app.i18n.t("errors.500"));
+        }
+      });
   }
-
-
-
-
 };
 
 export const getters = {
@@ -126,7 +166,10 @@ export const getters = {
   getSuccess(state) {
     return state.success.message;
   },
-  getDoctor(state){
+  getDoctor(state) {
     return state.doctor;
+  },
+  accountStatus(state) {
+    return state.accountStatus;
   }
 };

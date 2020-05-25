@@ -92,7 +92,8 @@
     "alphaNum":"Password must contain letters and numbers only"
 },
 "success":{
-"add":"Added Succssefully"
+"add":"Added Succssefully",
+"edit":"Edited Successfully"
 },
 "muted":{
   "password": "Password must be 3-30 digit [a-z,A-Z,0-9]",

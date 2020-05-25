@@ -1,8 +1,5 @@
 <template>
   <section class="addNewDoctor-form" :key="componentKey"> 
-    <div class v-if="getSuccess">
-      <notfication class="doctorSuccess" color="green" :label="getSuccess" />
-    </div>
 <div class="sk-cube-grid" v-if="categories == ''">
   <div class="sk-cube sk-cube1"></div>
   <div class="sk-cube sk-cube2"></div>
@@ -136,11 +133,10 @@ import clinicSelect from "~/components/shared/clinicSelect";
 import clinicSubmit from "~/components/shared/clinicSubmit";
 import notfication from "~/components/shared/notfication";
 import uploadImage from "~/components/shared/uploadImage";
-const { required,integer,between,minLength,maxLength,alphaNum } = require("vuelidate/lib/validators");
+const { required,integer,minLength,maxLength,alphaNum } = require("vuelidate/lib/validators");
 export default {
   data() {
     return {
-        componentKey: 0,
       doctorData: {
         phone_number: "",
         password: "",
@@ -194,9 +190,6 @@ export default {
     }
   },
   methods: {
-     forceRerender() {
-      this.componentKey += 1;  
-    },
     setPhone(value) {
       this.doctorData.phone_number = value;
       this.$v.doctorData.phone_number.$touch();
@@ -245,16 +238,6 @@ export default {
       return this.$store.getters["controlPanel/doctors/getError"];
     },
     getSuccess() {
-      this.$v.$reset()
-      this.forceRerender();
-      this.doctorData.phone_number = "";
-      this.doctorData.password = "";
-      this.doctorData.first_name = "";
-      this.doctorData.last_name = "";
-      this.doctorData.country = "";
-      this.doctorData.category_id = "";
-      this.doctorData.price = "";
-      this.doctorData.picture = "";
       return this.$store.getters["controlPanel/doctors/getSuccess"];
     },
       categories() {

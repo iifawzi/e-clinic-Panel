@@ -1,14 +1,14 @@
 <template>
-  <section class="editDoctor-form" :key="componentKey"> 
-    <div class v-if="getSuccess">
-      <notfication class="doctorSuccess" color="green" :label="getSuccess" />
-    </div>
+  <section class="editDoctor-form"> 
   <div class="spinner-1" v-if="getDoctor == ''">
         <div class="double-bounce1"></div>
         <div class="double-bounce2"></div>
       </div>
 
     <div class="editDoctorForm-content" v-if="getDoctor != ''">
+          <div class v-if="getSuccess">
+      <notfication class="doctorSuccess" color="green" :label="getSuccess" />
+    </div>
       <div class="input-div">
         <uploadImage :mutedText="$t('muted.picture')" :imageFromComponent="this.doctorData.picture" @input="setPicture">
           <div v-if="$v.doctorData.picture.$dirty">
@@ -113,21 +113,21 @@
           <clinicSubmit
             color="blue"
             :statement="$t('dashboard.forms.editDoctor.editDoctor')"
-            @click="addDoctor"
+            @click="editDoctor"
           />
         </div>
            <div class="submit-div">
           <clinicSubmit
-          v-if="getDoctor.avaliable == 0"
+          v-if="getDoctor.avaliable === false"
             color="green"
             :statement="$t('dashboard.forms.editDoctor.activeDoctor')"
-            @click="addDoctor"
+            @click="activeDeactiveAccount"
           />
           <clinicSubmit
           v-else
             color="red"
             :statement="$t('dashboard.forms.editDoctor.deactiveDoctor')"
-            @click="addDoctor"
+            @click="activeDeactiveAccount"
           />
         </div>
       </div>
@@ -142,12 +142,13 @@ import clinicSelect from "~/components/shared/clinicSelect";
 import clinicSubmit from "~/components/shared/clinicSubmit";
 import notfication from "~/components/shared/notfication";
 import uploadImage from "~/components/shared/uploadImage";
-const { required,integer,between,minLength,maxLength,alphaNum } = require("vuelidate/lib/validators");
+const { required,integer,minLength,maxLength,alphaNum } = require("vuelidate/lib/validators");
 export default {
   data() {
     return {
         componentKey: 0,
         doctorData: {
+          doctor_id: "",
         phone_number: "",
         password: "",
         first_name: "",
@@ -156,9 +157,10 @@ export default {
         category_id: "",
         picture: "",
         price:"",
-        avaliable: '',
-      }
-    };
+        avaliable: false,
+      },
+      NewDoctorData:{}, 
+         };
   },
   components: {
     clinicInput,
@@ -201,23 +203,24 @@ export default {
     }
   },
   methods: {
-     forceRerender() {
-      this.componentKey += 1;  
-    },
     setPhone(value) {
       this.doctorData.phone_number = value;
+      this.NewDoctorData.phone_number = value; // with this way i will just send only the data the admin changed.
       this.$v.doctorData.phone_number.$touch();
     },
     setPassword(value) {
       this.doctorData.password = value;
+      this.NewDoctorData.password = value;
       this.$v.doctorData.password.$touch();
     },
     setFirstname(value) {
       this.doctorData.first_name = value;
+      this.NewDoctorData.first_name  = value;
       this.$v.doctorData.first_name.$touch();
     },
     setLastname(value) {
       this.doctorData.last_name = value;
+      this.NewDoctorData.last_name  = value;
       this.$v.doctorData.last_name.$touch();
     },
     setCountry(value) {
@@ -226,21 +229,31 @@ export default {
     },
     setCategory(value) {
       this.doctorData.category_id = value;
+      this.NewDoctorData.category_id  = value;
       this.$v.doctorData.category_id.$touch();
     },
     setPicture(value) {
       this.doctorData.picture = value;
+      this.NewDoctorData.picture  = value;
       this.$v.doctorData.picture.$touch();
     },
      setPrice(value) {
       this.doctorData.price = value;
+      this.NewDoctorData.price  = value;
       this.$v.doctorData.price.$touch();
     },
-    addDoctor() {
+    editDoctor() {
       this.$v.$touch();
       if (this.$v.$invalid) {
       } else {
-        this.$store.dispatch("controlPanel/doctors/add_doctor", this.doctorData);
+        this.$store.dispatch("controlPanel/doctors/update_doctor", {Newdata: this.NewDoctorData,doctor_id: this.doctorData.doctor_id});
+      }
+    },
+      activeDeactiveAccount() {
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+      } else {
+        this.$store.dispatch("controlPanel/doctors/update_doctor", {Newdata: {avaliable: !this.doctorData.avaliable}, doctor_id: this.doctorData.doctor_id});
       }
     }
   },
@@ -254,12 +267,17 @@ export default {
     getSuccess() {
       return this.$store.getters["controlPanel/doctors/getSuccess"];
     },
+     getAccountStatus() {
+      return this.$store.getters["controlPanel/doctors/accountStatus"];
+      this.doctorData.avaliable = !this.doctorData.avaliable;
+    },
       categories() {
       return this.$store.getters['controlPanel/categories/get_categories'];
     },
         getDoctor() {
       const doctorData  = this.$store.getters["controlPanel/doctors/getDoctor"];
       this.doctorData.phone_number = doctorData.phone_number;
+      this.doctorData.doctor_id = doctorData.doctor_id;
       this.doctorData.password = doctorData.password;
       this.doctorData.first_name = doctorData.first_name;
       this.doctorData.last_name = doctorData.last_name;
@@ -272,10 +290,9 @@ export default {
     },
   }, 
   mounted(){
-    const number = this.$route.params.phone_number;
+    const id = this.$route.params.doctor_id;
     this.$store.dispatch('controlPanel/categories/getCategories');
-     this.$store.commit("controlPanel/doctors/setSuccess","");
-    this.$store.dispatch("controlPanel/doctors/get_doctor", number);
+    this.$store.dispatch("controlPanel/doctors/get_doctor", id);
   }
 };
 </script>
@@ -296,5 +313,6 @@ export default {
 .doctorSuccess {
   margin-bottom: 15px;
   height: 40px;
+  width: 300px;
 }
 </style>
