@@ -64,6 +64,21 @@
         "price":"السعر",
         "activeDoctor":"تفعيل الحساب",
         "deactiveDoctor":"تجميد الحساب"
+          },
+          "allDoctors":{
+            "title": "جميع الدكاترة المسجلين",
+            "delete":"تم الحذف بنجاح",
+            "firstname":"الاسم الأول",
+            "lastname":"الاسم الأخير",
+            "country":"الدولة",
+            "category": "القسم",
+            "price":"السعر",
+            "phone":"رقم الموبايل",
+            "avaliable":"الحالة",
+            "options":"الاعدادات",
+            "notActive": "غير مفعل",
+        "active": "مفعل"
+
           }
         }
       },

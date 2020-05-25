@@ -67,6 +67,20 @@
         "price":"The Price",
         "activeDoctor":"Active The Account",
         "deactiveDoctor":"Deactivate The Account"
+      },
+      "allDoctors":{
+        "title": "All Registered Doctors",
+        "delete":"Deleted Successfully",
+        "firstname":"First Name",
+        "lastname":"Last Name",
+        "country":"Country",
+        "category": "Category",
+        "price":"The Price",
+        "phone":"Phone Number",
+        "avaliable":"Status",
+        "options":"Options",
+        "notActive": "Not Active",
+        "active": "Active"
       }
     }
   },

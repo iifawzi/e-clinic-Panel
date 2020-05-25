@@ -1,13 +1,16 @@
 import Cookie from "js-cookie";
 export const state = () => ({
   error: {
-    message: ""
+    message: "",
+    deleteDoctor: ""
   },
   success: {
-    message: ""
+    message: "",
+    deleteDoctor: ""
   },
   doctor: "",
-  accountStatus: 1,
+  doctors: "",
+  accountStatus: 1, // i'm using this to update the button of `active user / deactivae user, <RERENDER THE FORM>`
 });
 
 export const mutations = {
@@ -22,13 +25,20 @@ export const mutations = {
   },
   accountStatus(state) {
     state.accountStatus = state.accountStatus+1;
-
-  }
+  },
+  setDoctors(state,doctors){
+    state.doctors =  doctors 
+  },
+  setDeleteDoctorError(state,error){
+    state.error.deleteDoctor =  error 
+  },
+  setDeleteDoctorSuccess(state,error){
+    state.success.deleteDoctor =  error 
+  },
 };
 
 export const actions = {
   // Upload Image:
-
   async uploadImage({ commit }, { picture, config }) {
     const formData = new FormData();
     formData.append("file", picture);
@@ -57,8 +67,9 @@ export const actions = {
     return uploadImage;
   },
 
-  // add doctor /controlPanel/dashboard/doctors/add
 
+
+  // add doctor /controlPanel/dashboard/doctors/add
   async add_doctor({ commit, dispatch }, doctorData) {
     const token = Cookie.get("token");
     const config = {
@@ -103,10 +114,11 @@ export const actions = {
     }
   },
 
-  // get specific doctor /controlPanel/dashboard/doctors/PHONE_NUMBER
 
+
+  // get specific doctor /controlPanel/dashboard/doctors/PHONE_NUMBER
   async get_doctor({ commit }, doctor_id) {
-    // commit("setError", "");
+    commit("setError", "");
     // commit("setDoctor", "");
     const token = Cookie.get("token");
     const config = {
@@ -123,6 +135,8 @@ export const actions = {
         this.$router.push("/controlPanel/dashboard/doctors/all");
       });
   },
+
+
 
   // update data of specific doctor:
   async update_doctor({commit,dispatch},{doctor_id,Newdata}) {
@@ -188,8 +202,48 @@ export const actions = {
         }
       });
     }
-  }
+  },
+
+
+// Get Doctors Data: 
+  async getDoctors({commit}){
+    const token = Cookie.get("token");
+    const config = {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    };
+    const doctors =  this.$axios.get("/controlPanel/getDoctors",config).then(response=>{
+      commit("setDoctors",response.data.data);
+    }).catch(err=>{
+      commit("setError", this.app.i18n.t("errors.500"));
+    })
+  },
+
+// Delete Doctor:  
+
+async deleteDoctor({commit},phone_number){
+  commit("setDeleteDoctorSuccess",this.app.i18n.t(""));
+  const token = Cookie.get("token");
+  const deleteDoctor =  this.$axios.delete("/controlPanel/deleteDoctor",{
+    headers:{
+       Authorization: "Bearer " + token
+      },
+      data:{
+        phone_number: phone_number
+      }
+    }).then(response=>{
+    commit("setDeleteDoctorSuccess",this.app.i18n.t("dashboard.forms.allDoctors.delete"));
+  }).catch(err=>{
+    commit("setDeleteDoctorError", this.app.i18n.t("errors.500"));
+  })
+}
+
 };
+
+
+
+
 
 export const getters = {
   getError(state) {
@@ -201,7 +255,16 @@ export const getters = {
   getDoctor(state) {
     return state.doctor;
   },
+  getDoctors(state) {
+    return state.doctors;
+  },
   accountStatus(state) {
     return state.accountStatus;
+  },
+  getDeleteError(state) {
+    return state.error.deleteDoctor;
+  },
+  getDeleteSuccess(state) {
+    return state.success.deleteDoctor;
   }
 };
