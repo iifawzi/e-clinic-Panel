@@ -23,10 +23,10 @@ import notfication from "~/components/shared/notfication";
 export default {
   layout: "dashboard",
   middleware: "admin-auth",
-  data: {
-    return: {
-shouldUpdate:0,
-    },
+        data() {
+    return {
+     shouldUpdate:0,
+    };
   },
     head() {
     return {
@@ -39,6 +39,10 @@ shouldUpdate:0,
   components:{
     DoctrosTable,
     notfication
+  },
+  mounted(){
+    console.log("called");
+    this.$store.commit("controlPanel/doctors/setDeleteDoctorSuccess","");
   },
   computed: {
     language() {

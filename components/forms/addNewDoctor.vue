@@ -1,5 +1,5 @@
 <template>
-  <section class="addNewDoctor-form" :key="componentKey"> 
+  <section class="addNewDoctor-form"> 
 <div class="sk-cube-grid" v-if="categories == ''">
   <div class="sk-cube sk-cube1"></div>
   <div class="sk-cube sk-cube2"></div>
@@ -76,11 +76,11 @@
             <option value disabled selected>{{$t('dashboard.forms.addDoctor.country')}}</option>
             <option
               class="en-selectInput-content-option"
-              value="Egypt"
+              value="egypt"
             >{{$t('dashboard.forms.addDoctor.egypt')}}</option>
             <option
               class="en-selectInput-content-option"
-              value="Saudiarabia"
+              value="saudiarabia"
             >{{$t('dashboard.forms.addDoctor.saudiarabia')}}</option>
 
             <template v-if="$v.doctorData.country.$dirty" v-slot:errorSlot>
@@ -249,6 +249,7 @@ export default {
   mounted(){
     this.$store.dispatch('controlPanel/categories/getCategories');
      this.$store.commit("controlPanel/doctors/setSuccess","");
+     this.$store.commit("controlPanel/doctors/setError","");
   }
 };
 </script>

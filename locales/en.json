@@ -80,7 +80,10 @@
         "avaliable":"Status",
         "options":"Options",
         "notActive": "Not Active",
-        "active": "Active"
+        "active": "Active",
+        "search": "You can search with The Name, Phone, Country, Category or Price.",
+        "searchHolder": "Search"
+
       }
     }
   },

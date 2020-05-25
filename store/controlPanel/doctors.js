@@ -119,6 +119,11 @@ export const actions = {
   // get specific doctor /controlPanel/dashboard/doctors/PHONE_NUMBER
   async get_doctor({ commit }, doctor_id) {
     commit("setError", "");
+    if (this.getters.getSuccess != ''){
+      setTimeout(() => {
+    commit("setSuccess", "");
+      }, 2000);
+    }
     // commit("setDoctor", "");
     const token = Cookie.get("token");
     const config = {
@@ -207,8 +212,6 @@ export const actions = {
 
 // Get Doctors Data: 
   async getDoctors({commit}){
-    commit("setDeleteDoctorError", "");
-    commit("setDeleteDoctorSuccess", "");
     const token = Cookie.get("token");
     const config = {
       headers: {
