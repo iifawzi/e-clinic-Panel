@@ -207,6 +207,8 @@ export const actions = {
 
 // Get Doctors Data: 
   async getDoctors({commit}){
+    commit("setDeleteDoctorError", "");
+    commit("setDeleteDoctorSuccess", "");
     const token = Cookie.get("token");
     const config = {
       headers: {
