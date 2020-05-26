@@ -92,7 +92,7 @@ export const actions = {
         .then(response => {
           const responseData = response.data.data;
           commit("setSuccess", this.app.i18n.t("success.add"));
-        this.$router.push("/controlPanel/dashboard/doctors/"+responseData.doctor_id);
+        this.$router.push("/controlPanel/dashboard/doctors/all/"+responseData.doctor_id);
 
         })
         .catch(err => {
