@@ -92,7 +92,9 @@
         "blockUser": "Block",
         "unblock": "Unblock",
         "kg": "kg",
-        "cm": "cm"
+        "cm": "cm",
+        "noSearch":"You didn't search for any user yet"
+
       }
     }
   },
@@ -115,7 +117,11 @@
     "price":"Price is required",
     "minLength":"The Password must be at least 3 digits",
     "maxLength":"The Password must be at most 30 digits",
-    "alphaNum":"Password must contain letters and numbers only"
+    "alphaNum":"Password must contain letters and numbers only",
+    "user404":"We didn't find a username with this phone number",
+    "user400":"Please, check the insterted phone number"
+
+
 },
 "success":{
 "add":"Added Succssefully",
