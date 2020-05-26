@@ -36,9 +36,10 @@ export default {
     language() {
       return this.$store.getters.getLocale;
     },
-    // error() {
-    //   return this.$store.getters["controlPanel/user/getUserError"];
-    // },
+  },
+  mounted(){
+    this.$store.commit("controlPanel/users/setGetUserError","");
+    this.$store.commit("controlPanel/users/setUserData","");
   }
 };
 </script>
