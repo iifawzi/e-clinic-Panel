@@ -38,7 +38,7 @@
           <td>
             <div class="allDoctors-content-table-tr-options">
               <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i>
-              <nuxt-link :to="'/controlPanel/dashboard/doctors/'+doctor.doctor_id">
+              <nuxt-link :to="'/controlPanel/dashboard/doctors/all/'+doctor.doctor_id">
                 <i
                   class="fas fa-edit allDoctors-content-table-tr-options-edit"
                   :class="language+'-edit'"
@@ -48,7 +48,7 @@
           </td>
         </tr>
 </tbody>
-       <tbody v-if="this.searchQuery != ''">
+       <tbody v-else>
         <tr v-for="doctor in filteredData" :key="doctor.doctor_id" class="allDoctors-content-table-tr">
           <td>{{doctor.first_name}}</td>
           <td>{{doctor.last_name}}</td>
@@ -62,7 +62,7 @@
           <td>
             <div class="allDoctors-content-table-tr-options">
               <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i>
-              <nuxt-link :to="'/controlPanel/dashboard/doctors/'+doctor.doctor_id">
+              <nuxt-link :to="'/controlPanel/dashboard/doctors/all/'+doctor.doctor_id">
                 <i
                   class="fas fa-edit allDoctors-content-table-tr-options-edit"
                   :class="language+'-edit'"

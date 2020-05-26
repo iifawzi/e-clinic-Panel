@@ -24,6 +24,7 @@
       "home": "Home",
       "manage":"Management",
       "doctors": "Doctors",
+      "main":"Main",
       "regDoctors": "Registered Doctors",
       "addDoctor":"Add new Doctor",
       "editDoctor":"Edit Specific Doctor",

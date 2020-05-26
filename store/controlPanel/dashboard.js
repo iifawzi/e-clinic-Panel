@@ -4,7 +4,9 @@ export const state = () => ({
 
 export const mutations = {
 setSideHover(state,value){
-    state.sideHover = value;
+    if (state.sideHover != value){
+        state.sideHover = value;
+    }
 }
 };
 

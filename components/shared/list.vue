@@ -1,17 +1,16 @@
 <template>
-  <ul class="adminSlidelist-ul">
+  <div class="adminSlidelist-ul">
     <slot />
-  </ul>
+  </div>
 </template>
-
+<script>
+</script>
 <style lang="scss" scoped>
 .adminSlidelist-ul {
   display: flex;
   flex-flow: column;
-  justify-content: space-between;
-  align-items: flex-start;
   width: 100%;
-  padding: 0;
+  padding: 0px;
   list-style-type: none;
 }
 </style>

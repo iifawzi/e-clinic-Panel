@@ -1,91 +1,73 @@
 <template>
-  <adminSidelist>
-    <listElement
+  <list>
+
+    <nuxt-link class="boldCategory" v-if="hover" event="" to="#">{{$t('dashboard.sidenav.main')}}</nuxt-link>
+
+     <dropDownLink
+      class="listItem"
       iconClass="fas fa-home"
       :label="$t('dashboard.sidenav.home')"
-      linkTo="/controlPanel/dashboard"
-      isExact
-    ></listElement>
-    
-
-    <listElement
-      InsideUl="true"
-      class="margin-top-element"
-      iconClass="fas fa-user-nurse"
-      :label="$t('dashboard.sidenav.doctors')"
-      linkTo="/controlPanel/dashboard/doctors"
+      linkTo="/controlPanel/dashboard/"
+      exact
     >
-    
-   <adminSidelist>
-           <listElement
-                isExact
-      :iconClass="language == 'en' ? 'fas fa-caret-right' : 'fas fa-caret-left'"
+    </dropDownLink>
+
+ <nuxt-link class="boldCategory" v-if="hover" to="/controlPanel/dashboard/doctors" event=""> {{$t('dashboard.sidenav.doctors')}}</nuxt-link>
+
+     <dropDownLink
+      class="listItem"
+      iconClass="fas fa-user-nurse"
       :label="$t('dashboard.sidenav.regDoctors')"
       linkTo="/controlPanel/dashboard/doctors/all"
-    ></listElement>
-               <listElement
-                    isExact
-      :iconClass="language == 'en' ? 'fas fa-caret-right' : 'fas fa-caret-left'"
-      :label="$t('dashboard.sidenav.addDoctor')"
-      linkTo="/controlPanel/dashboard/doctors/add"
-    ></listElement>
-
-   </adminSidelist>
-
-
-
-
-    </listElement>
-
-  <listElement
-      InsideUl="true"
-      class="margin-top-element"
-      iconClass="fas fa-user"
-      :label="$t('dashboard.sidenav.users')"
-      linkTo="/controlPanel/dashboard/users"
     >
-    
-   <adminSidelist>
-           <listElement
-            isExact
-      :iconClass="language == 'en' ? 'fas fa-caret-right' : 'fas fa-caret-left'"
+    </dropDownLink>
+
+     <dropDownLink
+      class="listItem"
+      iconClass="fas fa-plus-square"
+      :label="$t('dashboard.sidenav.addDoctor')"
+     linkTo="/controlPanel/dashboard/doctors/add"
+    >
+    </dropDownLink>
+
+ <nuxt-link class="boldCategory" v-if="hover" to="/controlPanel/dashboard/doctors" event=""> {{$t('dashboard.sidenav.users')}}</nuxt-link>
+
+      <dropDownLink
+      class="listItem"
+      iconClass="fas fa-user-nurse"
       :label="$t('dashboard.sidenav.regUsers')"
       linkTo="/controlPanel/dashboard/users/all"
-    ></listElement>
-   </adminSidelist>
-    </listElement>
-    
-  </adminSidelist>
+    >
+    </dropDownLink>
+  </list>
 </template>
 
 
 <script>
-import adminSidelist from "~/components/shared/adminSidelist";
-import listElement from "~/components/shared/listElement";
+import list from "~/components/shared/list";
+import dropDownLink from "~/components/shared/dropDownLink";
 export default {
   components: {
-    adminSidelist,
-    listElement
+    list,
+    dropDownLink
   },
   computed: {
     language() {
       return this.$store.getters.getLocale;
     },
-    hover() {
-      return this.$store.getters["dashboard/getSideHover"];
-    }
+        hover() {
+      return this.$store.getters["controlPanel/dashboard/getSideHover"];
+    },
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.margin-top-element {
-  margin-top: 20px;
+.listItem{
+  margin-bottom: 30px;
 }
-.en-category-padding {
-  padding-left: 35px;
-}
-.ar-category-padding {
-  padding-right: 35px;
+.boldCategory{
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 </style>

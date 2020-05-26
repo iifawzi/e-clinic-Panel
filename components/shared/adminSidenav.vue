@@ -82,8 +82,6 @@ export default {
     }
     .sidenav-bottom {
       padding-top: 30px;
-      align-self: flex-start;
-      width: 100%;
     }
   }
 }

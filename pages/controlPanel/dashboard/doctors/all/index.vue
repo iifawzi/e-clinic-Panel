@@ -10,7 +10,7 @@
       <notfication class="doctorSuccess" color="green" :label="getSuccess" />
     </div>
 
-          <client-only><DoctrosTable :key="shouldUpdate"/></client-only>
+         <client-only> <DoctrosTable :key="shouldUpdate"/></client-only>
         </div>
     </section>
 </template>
@@ -41,7 +41,6 @@ export default {
     notfication
   },
   mounted(){
-    console.log("called");
     this.$store.commit("controlPanel/doctors/setDeleteDoctorSuccess","");
   },
   computed: {

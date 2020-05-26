@@ -18,6 +18,14 @@ import editDoctor from "~/components/forms/editDoctor"
 export default {
   layout: "dashboard",
   middleware: "admin-auth",
+      head() {
+    return {
+      title:
+        this.language == "ar"
+          ? "تعديل دكتور"
+          : "Edit Doctor"
+    };
+  },
   components:{
 editDoctor,
   },
