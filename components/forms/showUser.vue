@@ -23,7 +23,7 @@
     </div>
     <!--  -->
     <div class="showUserForm-content">
-      <div v-if="userData" class="userData">
+      <div v-if="userData" class="userData" :class="userData.blocked  === false ? 'green-shadow' : 'red-shadow'">
         <div class="userImage">
           <img class="userPic" :src="'http://localhost:5000/images/'+ userData.picture" />
         </div>
@@ -52,9 +52,9 @@
           <div class="section">
             <div class="submit-div">
               <clinicSubmit
-                color="red"
-                :statement="$t('dashboard.forms.allUsers.blockUser')"
-                @click="blockUser"
+                :color="userData.blocked === false ? 'red'  : 'green' "
+                :statement="userData.blocked === false ? $t('dashboard.forms.allUsers.blockUser')  : $t('dashboard.forms.allUsers.unblockUser')"
+                @click="toggleBlock(userData.phone_number)"
               />
             </div>
           </div>
@@ -94,7 +94,9 @@ export default {
         this.$store.dispatch("controlPanel/users/getUser", phone_number);
       }
     },
-    blockUser() {}
+    toggleBlock(phone_number) {
+        this.$store.dispatch("controlPanel/users/toggleBlock", phone_number);
+    }
   },
   computed: {
     userData() {
@@ -127,14 +129,13 @@ export default {
   align-items: center;
   width: 100%;
   .userData {
-    box-shadow: 0 5px 25px rgba(6, 150, 54, 0.233);
-    // box-shadow: 10px 15px 20px  rgba(223, 53, 53, 0.103);
     padding: 30px;
     display: flex;
     flex-flow: row;
     justify-content: space-evenly;
     align-items: center;
     width: 50%;
+    border-radius: 15px;
     .userImage {
       .userPic {
         width: 200px;
@@ -188,5 +189,12 @@ export default {
 .error {
   color: $red;
   font-size: 30px;
+}
+.red-shadow {
+    box-shadow: 10px 10px 20px  rgba(233, 51, 51, 0.164);
+
+}
+.green-shadow {
+    box-shadow: 0 5px 25px rgba(6, 150, 54, 0.233);
 }
 </style>

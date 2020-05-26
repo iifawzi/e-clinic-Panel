@@ -50,6 +50,27 @@ export const actions = {
                 commit("setGetUserError", this.app.i18n.t("errors.500"));
             }
           });
+    },
+    toggleBlock({commit},phone_number){
+        this.$axios.patch("/controlPanel/toggleBlock",{phone_number},config).then(response=>{
+            commit("setUserData", response.data.data);
+        })    
+        .catch(err => {
+            if (!err.response) {
+              commit("setGetUserError", this.app.i18n.t("errors.500"));
+            }
+            const status = err.response.status;
+            switch (status) {
+              case 404:
+                commit("setGetUserError", this.app.i18n.t("errors.user404"));
+                break;
+              case 400:
+                commit("setGetUserError", this.app.i18n.t("errors.user400"));
+                break;
+              default:
+                commit("setGetUserError", this.app.i18n.t("errors.500"));
+            }
+          });
     }
 
 }
