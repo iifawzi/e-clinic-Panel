@@ -85,7 +85,11 @@
             "title": "المستخدمين",
             "search": "يمكنك البحث من خلال رقم الموبايل",
         "searchHolder": "رقم الموبايل",
-        "submitSearch": "ابحث"
+        "submitSearch": "ابحث",
+        "blockUser": "حظر",
+        "unblock": "إلغاء الحظر",
+        "kg": "كج",
+        "cm": "سم"
           }
         }
       },

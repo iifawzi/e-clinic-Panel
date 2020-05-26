@@ -88,8 +88,11 @@
         "title": "Registered Users",
         "search": "You can search using the Phone Number",
         "searchHolder": "Phone Number",
-        "submitSearch": "Find"
-
+        "submitSearch": "Find",
+        "blockUser": "Block",
+        "unblock": "Unblock",
+        "kg": "kg",
+        "cm": "cm"
       }
     }
   },
