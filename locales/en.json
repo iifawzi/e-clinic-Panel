@@ -83,6 +83,12 @@
         "active": "Active",
         "search": "You can search with The Name, Phone, Country, Category or Price.",
         "searchHolder": "Search"
+      },
+      "allUsers":{
+        "title": "Registered Users",
+        "search": "You can search using the Phone Number",
+        "searchHolder": "Phone Number",
+        "submitSearch": "Find"
 
       }
     }

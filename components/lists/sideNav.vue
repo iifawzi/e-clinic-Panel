@@ -47,14 +47,10 @@
     
    <adminSidelist>
            <listElement
+            isExact
       :iconClass="language == 'en' ? 'fas fa-caret-right' : 'fas fa-caret-left'"
       :label="$t('dashboard.sidenav.regUsers')"
-      linkTo="/controlPanel/dashboard/users/register"
-    ></listElement>
-               <listElement
-      :iconClass="language == 'en' ? 'fas fa-caret-right' : 'fas fa-caret-left'"
-      :label="$t('dashboard.sidenav.addUser')"
-      linkTo="/controlPanel/dashboard/users/add"
+      linkTo="/controlPanel/dashboard/users/all"
     ></listElement>
    </adminSidelist>
     </listElement>
