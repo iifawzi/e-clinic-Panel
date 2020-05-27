@@ -43,7 +43,9 @@
         "available":"Status",
         "search":"You can search by day",
         "searchHolder": "Search",
-        "options":"Options"
+        "options":"Options",
+        "notActive":"Unavailable",
+        "active":"Available"
       }
         },
     "forms":{
@@ -109,6 +111,15 @@
         "noSearch":"You didn't search for any user yet"
 
       }
+    },
+    "days":{
+      "sun":"Sunday",
+      "mon":"Monday",
+      "tue":"Tuesday",
+      "wed":"Wednesday",
+      "thu":"Thursday",
+      "fri":"Friday",
+      "sat":"Saturday"
     }
   },
   "errors":{

@@ -55,7 +55,8 @@ export default {
 }
 .adminSidenav-component {
   position: fixed;
-  height: 100vh;
+  min-height: 100vh;
+  height: 200vh;
   background-color: white;
   z-index: 1000;
   .adminSidenav-content {

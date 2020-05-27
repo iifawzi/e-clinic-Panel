@@ -22,19 +22,19 @@
           <th class="allSlots-content-table-th">{{$t('dashboard.tables.slots.available')}}</th>
           <th class="allSlots-content-table-th">{{$t('dashboard.tables.slots.options')}}</th>
         </tr>
-        <!-- <tbody v-if="this.searchQuery == ''">
-        <tr v-for="doctor in doctors" :key="doctor.doctor_id" class="allSlots-content-table-tr">
-          <td>{{doctor.first_name}}</td>
-          <td>{{doctor.last_name}}</td>
-          <td>{{doctor.country}}</td>
-          <td>{{doctor[language]}}</td>
+        <tbody v-if="this.searchQuery == ''">
+        <tr v-for="slot in slots" :key="slot.slot_id" class="allSlots-content-table-tr">
+          <td>{{ $t('dashboard.days.'+slot.day)}}</td>
+          <td>{{slot.start_time}}</td>
+          <td>{{slot.end_time}}</td>
+          <td>{{slot.slot_time}}</td>
           <td
-            :class="doctor.avaliable === 1 ? 'green-status' : 'red-status'"
-          >{{doctor.avaliable === 1 ? $t('dashboard.forms.allSlots.active') : $t('dashboard.forms.allSlots.notActive')}}</td>
+            :class="slot.available == 1 ? 'green-status' : 'red-status'"
+          >{{slot.available == 1 ?  $t('dashboard.tables.slots.active') : $t('dashboard.tables.slots.notActive')}}</td>
           <td>
             <div class="allSlots-content-table-tr-options">
-              <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i>
-              <nuxt-link :to="'/controlPanel/dashboard/doctors/all/'+doctor.doctor_id">
+              <!-- <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i> -->
+              <nuxt-link to="">
                 <i
                   class="fas fa-edit allSlots-content-table-tr-options-edit"
                   :class="language+'-edit'"
@@ -44,21 +44,19 @@
           </td>
         </tr>
 </tbody>
-       <tbody v-else>
-        <tr v-for="doctor in filteredData" :key="doctor.doctor_id" class="allSlots-content-table-tr">
-          <td>{{doctor.first_name}}</td>
-          <td>{{doctor.last_name}}</td>
-          <td>{{doctor.country}}</td>
-          <td>{{doctor[language]}}</td>
-          <td>{{doctor.price}}</td>
-          <td>{{doctor.phone_number}}</td>
+       <tbody v-else >
+        <tr v-for="slot in filteredData" :key="slot.slot_id" class="allSlots-content-table-tr">
+          <td>{{ $t('dashboard.days.'+slot.day)}}</td>
+          <td>{{slot.start_time}}</td>
+          <td>{{slot.end_time}}</td>
+          <td>{{slot.slot_time}}</td>
           <td
-            :class="doctor.avaliable === 1 ? 'green-status' : 'red-status'"
-          >{{doctor.avaliable === 1 ? $t('dashboard.forms.allSlots.active') : $t('dashboard.forms.allSlots.notActive')}}</td>
+            :class="slot.available == 1 ? 'green-status' : 'red-status'"
+          >{{slot.available == 1 ?  $t('dashboard.tables.slots.active') : $t('dashboard.tables.slots.notActive')}}</td>
           <td>
             <div class="allSlots-content-table-tr-options">
-              <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i>
-              <nuxt-link :to="'/controlPanel/dashboard/doctors/all/'+doctor.doctor_id">
+              <!-- <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i> -->
+              <nuxt-link to="">
                 <i
                   class="fas fa-edit allSlots-content-table-tr-options-edit"
                   :class="language+'-edit'"
@@ -67,7 +65,7 @@
             </div>
           </td>
         </tr>
-</tbody> -->
+</tbody>
 
 
       </table>
@@ -88,30 +86,45 @@ export default {
         clinicInput,
     },
   methods: {
-    deleteDoctor(phone_number) {
-      this.$store.dispatch("controlPanel/doctors/deleteDoctor", phone_number);
-    },
       setSearch(value){
           this.searchQuery = value;
           const searched = this.searchQuery;
-          this.filteredData = this.doctors.filter(doctor=>{
-              return (doctor.first_name.toLowerCase().includes(searched.toLowerCase()) 
-              || doctor.last_name.toLowerCase().includes(searched.toLowerCase()) 
-              || doctor.country.toLowerCase().includes(searched.toLowerCase()) 
-              || doctor.price.includes(searched) 
-              || doctor.phone_number.includes(searched)
-              || doctor.en.toLowerCase().includes(searched.toLowerCase())
-              || doctor.ar.toLowerCase().includes(searched.toLowerCase())
-              )
+          this.filteredData = this.slots.filter(slot=>{
+              return (slot.day.toLowerCase().includes(this.forArabicSearch(searched).toLowerCase()))
           });
+      },
+      forArabicSearch(word){
+          console.log(word);
+          let searchWord = ""
+          if (word.includes("ثل") || word.includes("tu")){
+            searchWord = "tue"
+          }else if (word.includes("خم")|| word.includes("th")){
+              searchWord = "thu"
+
+          }else if ( word.includes("جم")|| word.includes("fr")){
+              searchWord = "fri"
+
+          }else if (word.includes("سب")|| word.includes("sa")){
+              searchWord = "sat"
+
+          }else if ( word.includes("حد")|| word.includes("su")){
+              searchWord = "sun"
+
+          }else if (word.includes("ني")|| word.includes("mo")){
+              searchWord = "mon"
+          }else if (word.includes("رب")|| word.includes("we")){
+              searchWord = "wed"
+          }
+          return searchWord;
       }
   },
   mounted() {
-    this.$store.dispatch("controlPanel/doctors/getDoctors");
+    const id = this.$route.params.doctor_id;
+    this.$store.dispatch("controlPanel/slots/getDoctorSlots",id);
   },
   computed: {
-    doctors() {
-      return this.$store.getters["controlPanel/doctors/getDoctors"];
+    slots() {
+      return this.$store.getters["controlPanel/slots/getSlots"];
     },
     language() {
       return this.$store.getters.getLocale;

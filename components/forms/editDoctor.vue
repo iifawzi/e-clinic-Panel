@@ -1,11 +1,8 @@
 <template>
   <section class="editDoctor-form"> 
-  <div class="spinner-1" v-if="getDoctor == ''">
-        <div class="double-bounce1"></div>
-        <div class="double-bounce2"></div>
-      </div>
 
-    <div class="editDoctorForm-content" v-if="getDoctor != ''">
+
+    <div class="editDoctorForm-content">
           <div class v-if="getSuccess">
       <notfication class="doctorSuccess" color="green" :label="getSuccess" />
     </div>
