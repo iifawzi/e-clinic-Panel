@@ -32,9 +32,20 @@
       "regUsers": "Registered Users",
       "addUser":"Add new User",
       "editUser":"Edit Specific User"
-
-
     },
+    "tables":{
+      "slots":{
+        "title":"Slots",
+        "day":"Day",
+        "start_time":"Start time",
+        "end_time":"End Time",
+        "slot_time":"Duration - Minutes",
+        "available":"Status",
+        "search":"You can search by day",
+        "searchHolder": "Search",
+        "options":"Options"
+      }
+        },
     "forms":{
       "addDoctor":{
         "phone":"Phone Number",

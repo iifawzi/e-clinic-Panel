@@ -4,8 +4,12 @@
       <div class="edit-title">{{$t("dashboard.forms.editDoctor.title")}}</div>
       <div class="editPage-content">
         <div class="editForm">
-<editDoctor :key="getAccountStatus"/>
-
+          <!-- update cimponent when status changed (active/not active) -->
+<editDoctor :key="getAccountStatus"/> 
+        </div>
+           <div class="slotsTable">
+             <div class="slots-title">{{$t('dashboard.tables.slots.title')}}</div>
+         <client-only> <slotsTable/></client-only>
         </div>
       </div>
 
@@ -15,6 +19,8 @@
 
 <script>
 import editDoctor from "~/components/forms/editDoctor"
+import slotsTable from "~/components/tables/slots"
+
 export default {
   layout: "dashboard",
   middleware: "admin-auth",
@@ -28,6 +34,8 @@ export default {
   },
   components:{
 editDoctor,
+    slotsTable,
+
   },
   computed: {
     language() {
@@ -51,5 +59,16 @@ editDoctor,
 .editPage-content{
   margin-top: 30px;
   padding-bottom: 30px;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between
+}
+.slotsTable {
+  width: 75%;
+}
+.slots-title{
+  font-size: 30px;
+  text-align: center;
+  color: $black;
 }
 </style>

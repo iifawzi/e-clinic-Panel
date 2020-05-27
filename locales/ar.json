@@ -33,6 +33,20 @@
       "addUser":"إضافة عضو جديد",
   "editUser":"تعديل عضو محدد"
         },
+        "tables":{
+      "slots":{
+        "title":"المواعيد",
+        "day":"اليوم",
+        "start_time":"موعد البدأ",
+        "end_time":"موعد الانتهاء",
+        "slot_time":"المدة - دقائق",
+        "available":"الحالة",
+        "search":"يمكنك البحث باليوم",
+        "searchHolder": "البحث",
+        "options":"الخيارات"
+
+      }
+        },
         "forms":{
           "addDoctor":{
             "phone":"رقم الموبايل",
