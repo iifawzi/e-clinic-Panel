@@ -10,6 +10,7 @@
            <div class="slotsTable">
              <div class="slots-title">{{$t('dashboard.tables.slots.title')}}</div>
          <client-only> <slotsTable/></client-only>
+         <addSlot/>
         </div>
       </div>
 
@@ -19,6 +20,7 @@
 
 <script>
 import editDoctor from "~/components/forms/editDoctor"
+import addSlot from "~/components/forms/addSlot"
 import slotsTable from "~/components/tables/slots"
 
 export default {
@@ -35,6 +37,7 @@ export default {
   components:{
 editDoctor,
     slotsTable,
+    addSlot
 
   },
   computed: {

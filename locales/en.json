@@ -109,6 +109,16 @@
         "kg": "kg",
         "cm": "cm",
         "noSearch":"You didn't search for any user yet"
+      },
+      "addSlot":{
+        "title": "Add new slot",
+        "day":"Day",
+    "slot_time":"Duration",
+    "start_time":"Start time",
+    "end_time":"End time",
+    "status":"Status",
+"add": "Add"
+
 
       }
     },
@@ -143,7 +153,14 @@
     "maxLength":"The Password must be at most 30 digits",
     "alphaNum":"Password must contain letters and numbers only",
     "user404":"We didn't find a username with this phone number",
-    "user400":"Please, check the insterted phone number"
+    "user400":"Please, check the insterted phone number",
+    "slot_time":"Duration is required",
+    "start_time":"Can't be null",
+    "end_time":"Can't be null",
+    "day":"You have to choose a day",
+    "status":"You have to choose status"
+
+
 
 
 },
@@ -158,7 +175,11 @@
   "subCategory": "this's not required",
   "phone":"This number will be used for login",
   "picture":"This photo will be shown to users",
-  "price":"The price of one sesstion"
+  "price":"The price of one sesstion",
+  "slot_time":"Duration per minutes",
+  "start_time":"For example: 22:00",
+  "end_time":"For example: 23:30"
+
 
 }
 }
