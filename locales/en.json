@@ -2,103 +2,117 @@
   "home": {
     "title": "Home Page | e-clinic"
   },
-  "panel":{
-    "title":"Login | Control Panel",
-    "loginForm":{
+  "panel": {
+    "title": "Login | Control Panel",
+    "loginForm": {
       "phone_number": "Phone Number",
-      "password":"Password",
-      "submit":"login"
+      "password": "Password",
+      "submit": "login"
     }
   },
-  "dashboard":{
-    "welcome":"Hey, Welcome to Control Panel!",
-    "user":"User",
-    "doctor":"Doctor",
-    "appointment":"Appointment",
-    "navbar":{
-      "title":"Control Panel",
-      "logout":"Logout",
-      "username":"Fawzi Essam"
+  "dashboard": {
+    "welcome": "Hey, Welcome to Control Panel!",
+    "user": "User",
+    "doctor": "Doctor",
+    "appointment": "Appointment",
+    "navbar": {
+      "title": "Control Panel",
+      "logout": "Logout",
+      "username": "Fawzi Essam"
     },
-    "sidenav":{
+    "sidenav": {
       "home": "Home",
-      "manage":"Management",
+      "manage": "Management",
       "doctors": "Doctors",
-      "main":"Main",
+      "main": "Main",
       "regDoctors": "Registered Doctors",
-      "addDoctor":"Add new Doctor",
-      "editDoctor":"Edit Specific Doctor",
+      "addDoctor": "Add new Doctor",
+      "editDoctor": "Edit Specific Doctor",
       "users": "Users",
       "regUsers": "Registered Users",
-      "addUser":"Add new User",
-      "editUser":"Edit Specific User"
+      "addUser": "Add new User",
+      "editUser": "Edit Specific User"
     },
-    "tables":{
-      "slots":{
-        "title":"Slots",
-        "day":"Day",
-        "start_time":"Start time",
-        "end_time":"End Time",
-        "slot_time":"Duration - Minutes",
-        "available":"Status",
-        "search":"You can search by day",
+    "tables": {
+      "slots": {
+        "title": "Slots",
+        "day": "Day",
+        "start_time": "Start time",
+        "end_time": "End Time",
+        "slot_time": "Duration - Minutes",
+        "available": "Status",
+        "search": "You can search by day",
         "searchHolder": "Search",
-        "options":"Options",
-        "notActive":"Unavailable",
-        "active":"Available"
+        "options": "Options",
+        "notActive": "Unavailable",
+        "active": "Available"
+      },
+      "userApps": {
+        "day": "Day",
+        "date": "Date",
+        "doctor":"Doctor",
+        "category":"Category",
+        "start_time": "Start time",
+        "end_time": "End Time",
+        "available": "Status",
+        "search": "You can search by day",
+        "searchHolder": "Search",
+        "options": "Options",
+        "notActive": "Unavailable",
+        "active": "Available"
       }
-        },
-    "forms":{
-      "addDoctor":{
-        "phone":"Phone Number",
+    },
+    "forms": {
+      "addDoctor": {
+        "phone": "Phone Number",
         "password": "Password",
-        "firstname":"First Name",
-        "lastname":"Last Name",
-        "country":"Country",
+        "firstname": "First Name",
+        "lastname": "Last Name",
+        "country": "Country",
         "category": "Category",
         "egypt": "Egypt",
         "saudiarabia": "Saudi arabia",
         "upload": "Add Personal Picture",
         "edit": "Change the photo",
         "editDoctor": "Edit the doctor",
-        "submit":"Add The Doctor",
-        "price":"The Price"
+        "submit": "Add The Doctor",
+        "price": "The Price"
       },
-      "editDoctor":{
-        "title":"Doctor's data",
-        "phone":"Phone Number",
+      "editDoctor": {
+        "title": "Doctor's data",
+        "phone": "Phone Number",
         "password": "Password",
-        "firstname":"First Name",
-        "lastname":"Last Name",
-        "country":"Country",
+        "firstname": "First Name",
+        "lastname": "Last Name",
+        "country": "Country",
         "category": "Category",
         "egypt": "Egypt",
         "saudiarabia": "Saudi arabia",
         "upload": "Add Personal Picture",
         "edit": "Change the photo",
         "editDoctor": "Edit the doctor",
-        "submit":"Add The Doctor",
-        "price":"The Price",
-        "activeDoctor":"Active The Account",
-        "deactiveDoctor":"Deactivate The Account"
+        "submit": "Add The Doctor",
+        "price": "The Price",
+        "activeDoctor": "Active The Account",
+        "deactiveDoctor": "Deactivate The Account"
       },
-      "allDoctors":{
+      "allDoctors": {
         "title": "All Registered Doctors",
-        "delete":"Deleted Successfully",
-        "firstname":"First Name",
-        "lastname":"Last Name",
-        "country":"Country",
+        "delete": "Deleted Successfully",
+        "firstname": "First Name",
+        "lastname": "Last Name",
+        "country": "Country",
         "category": "Category",
-        "price":"The Price",
-        "phone":"Phone Number",
-        "avaliable":"Status",
-        "options":"Options",
+        "price": "The Price",
+        "phone": "Phone Number",
+        "avaliable": "Status",
+        "options": "Options",
         "notActive": "Not Active",
         "active": "Active",
         "search": "You can search with The Name, Phone, Country, Category or Price.",
         "searchHolder": "Search"
       },
-      "allUsers":{
+      "allUsers": {
         "title": "Registered Users",
         "search": "You can search using the Phone Number",
         "searchHolder": "Phone Number",
@@ -108,78 +122,70 @@
         "unblock": "Unblock",
         "kg": "kg",
         "cm": "cm",
-        "noSearch":"You didn't search for any user yet"
+        "noSearch": "You didn't search for any user yet"
       },
-      "addSlot":{
+      "addSlot": {
         "title": "Add new slot",
-        "day":"Day",
-    "slot_time":"Duration",
-    "start_time":"Start time",
-    "end_time":"End time",
-    "status":"Status",
-"add": "Add"
-
-
+        "day": "Day",
+        "slot_time": "Duration",
+        "start_time": "Start time",
+        "end_time": "End time",
+        "status": "Status",
+        "add": "Add"
       }
     },
-    "days":{
-      "sun":"Sunday",
-      "mon":"Monday",
-      "tue":"Tuesday",
-      "wed":"Wednesday",
-      "thu":"Thursday",
-      "fri":"Friday",
-      "sat":"Saturday"
+    "days": {
+      "sun": "Sunday",
+      "mon": "Monday",
+      "tue": "Tuesday",
+      "wed": "Wednesday",
+      "thu": "Thursday",
+      "fri": "Friday",
+      "sat": "Saturday"
     }
   },
-  "errors":{
+  "errors": {
     "password": "Password is required",
     "username": "Username is required",
-    "phone":"Phone Number is required",
+    "phone": "Phone Number is required",
     "firstname": "First name is required",
     "lastname": "Last name is required",
-    "country":"Country is required",
-    "category":"Category is required",
-    "picture":"Personal Photo is required",
-    "401":"Not authorized, please check the inserted fields",
-    "403":"Phone number is already associated with an account",
-    "400":"Please check the inserted data",
-    "404":"Resource not Found",
-    "500":"Sorry,something wrong happened",
+    "country": "Country is required",
+    "category": "Category is required",
+    "picture": "Personal Photo is required",
+    "401": "Not authorized, please check the inserted fields",
+    "403": "Phone number is already associated with an account",
+    "400": "Please check the inserted data",
+    "404": "Resource not Found",
+    "500": "Sorry,something wrong happened",
     "image403": "Sorry, Only (JPEG, PNG, JPG) are allowed",
     "image500": "Sorry, Maximum size is 24 MB",
-    "price":"Price is required",
-    "minLength":"The Password must be at least 3 digits",
-    "maxLength":"The Password must be at most 30 digits",
-    "alphaNum":"Password must contain letters and numbers only",
-    "user404":"We didn't find a username with this phone number",
-    "user400":"Please, check the insterted phone number",
-    "slot_time":"Duration is required",
-    "start_time":"Can't be null",
-    "end_time":"Can't be null",
-    "day":"You have to choose a day",
-    "status":"You have to choose status"
-
-
-
-
-},
-"success":{
-"add":"Added Succssefully",
-"edit":"Edited Successfully"
-},
-"muted":{
-  "password": "Password must be 3-30 digit [a-z,A-Z,0-9]",
-  "firstname":"This name will be shown to users",
-  "lastname":"This name will be shown to users",
-  "subCategory": "this's not required",
-  "phone":"This number will be used for login",
-  "picture":"This photo will be shown to users",
-  "price":"The price of one sesstion",
-  "slot_time":"Duration per minutes",
-  "start_time":"For example: 22:00",
-  "end_time":"For example: 23:30"
-
-
-}
+    "price": "Price is required",
+    "minLength": "The Password must be at least 3 digits",
+    "maxLength": "The Password must be at most 30 digits",
+    "alphaNum": "Password must contain letters and numbers only",
+    "user404": "We didn't find a username with this phone number",
+    "user400": "Please, check the insterted phone number",
+    "slot_time": "Duration is required",
+    "start_time": "Can't be null",
+    "end_time": "Can't be null",
+    "day": "You have to choose a day",
+    "status": "You have to choose status"
+  },
+  "success": {
+    "add": "Added Succssefully",
+    "edit": "Edited Successfully"
+  },
+  "muted": {
+    "password": "Password must be 3-30 digit [a-z,A-Z,0-9]",
+    "firstname": "This name will be shown to users",
+    "lastname": "This name will be shown to users",
+    "subCategory": "this's not required",
+    "phone": "This number will be used for login",
+    "picture": "This photo will be shown to users",
+    "price": "The price of one sesstion",
+    "slot_time": "Duration per minutes",
+    "start_time": "For example: 22:00",
+    "end_time": "For example: 23:30"
+  }
 }

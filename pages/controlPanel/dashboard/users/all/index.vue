@@ -2,14 +2,6 @@
   <section class="allUsers-page">
     <div class="allUsers-content" :class="language+'-controlPanel-padding'">
       <div class="add-title">{{$t("dashboard.forms.allUsers.title")}}</div>
-      <!-- errors -->
-      <!-- <div class="userError" v-if="error">
-        <notfication color="red" :label="error" />
-      </div>
-      <div class v-if="getSuccess">
-        <notfication class="userSuccess" color="green" :label="getSuccess" />
-      </div> -->
- <!-- content -->
    <div class="userProfile">
         <showUser />
       </div>

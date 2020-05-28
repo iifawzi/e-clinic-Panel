@@ -66,6 +66,9 @@ editDoctor,
   flex-flow: row;
   justify-content: space-between
 }
+.editForm{
+  width: 20%;
+}
 .slotsTable {
   width: 75%;
 }

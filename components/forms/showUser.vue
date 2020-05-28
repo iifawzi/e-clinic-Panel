@@ -60,6 +60,9 @@
           </div>
         </div>
       </div>
+      <div class="userApps" v-if="userData">
+          <userApps/>
+      </div>
       <div v-if="!error && !userData">
         <span class="no-search">{{$t('dashboard.forms.allUsers.noSearch')}}</span>
       </div>
@@ -73,6 +76,7 @@
 <script>
 import clinicSubmit from "~/components/shared/clinicSubmit";
 import clinicInput from "~/components/shared/clinicInput";
+import userApps from "~/components/tables/userApps";
 const { required, integer } = require("vuelidate/lib/validators");
 
 export default {
@@ -114,7 +118,8 @@ export default {
   },
   components: {
     clinicSubmit,
-    clinicInput
+    clinicInput,
+    userApps
   }
 };
 </script>
@@ -124,7 +129,7 @@ export default {
   margin-top: 60px;
   padding: 10px;
   display: flex;
-  flex-flow: row;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -163,6 +168,10 @@ export default {
         }
       }
     }
+  }
+  .userApps {
+    margin-top: 50px;
+    width: 100%;
   }
 }
 .submit-div {

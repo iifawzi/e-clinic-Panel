@@ -298,8 +298,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.editDoctor-form{
+  width: 100%;
+  .editDoctorForm-content {
+    width: 100%;
+  }
+}
 .input-div {
-  width: 300px;
+   width: 100%;
 }
 .input-div:not(:first-child) {
   margin-top: 10px;
