@@ -1,44 +1,72 @@
 <template>
-  <div class="allSlots-table">
+  <div class="userApps-table">
 
       <div class="input-div">
         <clinicInput
-          :placeholder="$t('dashboard.tables.slots.searchHolder')"
+          :placeholder="$t('dashboard.tables.userApps.searchHolder')"
           @input="setSearch"
           v-model="searchQuery"
-          :mutedText="$t('dashboard.tables.slots.search')"
+          :mutedText="$t('dashboard.tables.userApps.search')"
         >
         </clinicInput>
       </div>
-    <div class="allSlots-content">
-      <table class="allSlots-content-table">
+    <div class="userApps-content">
+      <table class="userApps-content-table">
 
 
-        <tr class="allSlots-content-table-tr">
-          <th class="allSlots-content-table-th">{{$t('dashboard.tables.userApps.doctor')}}</th>
-          <th class="allSlots-content-table-th">{{$t('dashboard.tables.userApps.category')}}</th>
-          <th class="allSlots-content-table-th">{{$t('dashboard.tables.userApps.date')}}</th>
-          <th class="allSlots-content-table-th">{{$t('dashboard.tables.userApps.day')}}</th>
-          <th class="allSlots-content-table-th">{{$t('dashboard.tables.userApps.start_time')}}</th>
-          <th class="allSlots-content-table-th">{{$t('dashboard.tables.userApps.end_time')}}</th>
-          <th class="allSlots-content-table-th">{{$t('dashboard.tables.userApps.available')}}</th>
-          <th class="allSlots-content-table-th">{{$t('dashboard.tables.userApps.options')}}</th>
+        <tr class="userApps-content-table-tr">
+          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.doctor')}}</th>
+          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.category')}}</th>
+          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.date')}}</th>
+          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.day')}}</th>
+          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.start_time')}}</th>
+          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.end_time')}}</th>
+          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.available')}}</th>
+          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.options')}}</th>
         </tr>
         <tbody v-if="this.searchQuery == ''">
-        <tr v-for="slot in slots" :key="slot.slot_id" class="allSlots-content-table-tr">
-          <td>{{ $t('dashboard.days.'+slot.day)}}</td>
-          <td>{{slot.start_time}}</td>
-          <td>{{slot.end_time}}</td>
-          <td>{{slot.slot_time}}</td>
+        <tr v-for="appointment in appointments" :key="appointment.appointment_id" class="userApps-content-table-tr">
+          <td>{{appointment.first_name}} {{appointment.last_name}}</td>
+          <td>{{appointment[language]}}</td>
+          <td>{{appointment.date}}</td>
+          <td>{{ $t('dashboard.days.'+appointment.day)}}</td>
+          <td>{{appointment.start_time}}</td>
+          <td>{{appointment.end_time}}</td>
           <td
-            :class="slot.available == 1 ? 'green-status' : 'red-status'"
-          >{{slot.available == 1 ?  $t('dashboard.tables.userApps.active') : $t('dashboard.tables.userApps.notActive')}}</td>
+            :class="forStatusClass(appointment.appointment_status)"
+        >{{ $t('dashboard.status.'+appointment.appointment_status)}}</td>
+
           <td>
-            <div class="allSlots-content-table-tr-options">
+            <div class="userApps-content-table-tr-options">
               <!-- <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i> -->
               <nuxt-link to="">
                 <i
-                  class="fas fa-edit allSlots-content-table-tr-options-edit"
+                  class="fas fa-edit userApps-content-table-tr-options-edit"
+                  :class="language+'-edit'"
+                ></i>
+              </nuxt-link>
+            </div>
+          </td>
+        </tr>
+</tbody>
+       <tbody v-else>
+        <tr v-for="appointment in filteredData" :key="appointment.appointment_id" class="userApps-content-table-tr">
+          <td>{{appointment.first_name}} {{appointment.last_name}}</td>
+          <td>{{appointment[language]}}</td>
+          <td>{{appointment.date}}</td>
+          <td>{{ $t('dashboard.days.'+appointment.day)}}</td>
+          <td>{{appointment.start_time}}</td>
+          <td>{{appointment.end_time}}</td>
+          <td
+            :class="forStatusClass(appointment.appointment_status)"
+        >{{ $t('dashboard.status.'+appointment.appointment_status)}}</td>
+
+          <td>
+            <div class="userApps-content-table-tr-options">
+              <!-- <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i> -->
+              <nuxt-link to="">
+                <i
+                  class="fas fa-edit userApps-content-table-tr-options-edit"
                   :class="language+'-edit'"
                 ></i>
               </nuxt-link>
@@ -55,6 +83,12 @@
 <script>
 import clinicInput from "~/components/shared/clinicInput";
 export default {
+    props:{
+        userId:{
+            type:Number,
+            required:true
+        }
+    },
       data() {
     return {
      searchQuery: "",
@@ -68,42 +102,34 @@ export default {
       setSearch(value){
           this.searchQuery = value;
           const searched = this.searchQuery;
-          this.filteredData = this.slots.filter(slot=>{
-              return (slot.day.toLowerCase().includes(this.forArabicSearch(searched).toLowerCase()))
+          this.filteredData = this.appointments.filter(appointment=>{
+              return (appointment.first_name.toLowerCase().includes(searched.toLowerCase()) 
+              || appointment.last_name.toLowerCase().includes(searched.toLowerCase()) 
+                   || (appointment.first_name +" " + appointment.last_name).toLowerCase().includes(searched.toLowerCase()) 
+              || appointment.date.toLowerCase().includes(searched.toLowerCase())
+              )
           });
       },
-      forArabicSearch(word){
-          console.log(word);
-          let searchWord = ""
-          if (word.includes("ثل") || word.includes("tu")){
-            searchWord = "tue"
-          }else if (word.includes("خم")|| word.includes("th")){
-              searchWord = "thu"
-
-          }else if ( word.includes("جم")|| word.includes("fr")){
-              searchWord = "fri"
-
-          }else if (word.includes("سب")|| word.includes("sa")){
-              searchWord = "sat"
-
-          }else if ( word.includes("حد")|| word.includes("su")){
-              searchWord = "sun"
-
-          }else if (word.includes("ني")|| word.includes("mo")){
-              searchWord = "mon"
-          }else if (word.includes("رب")|| word.includes("we")){
-              searchWord = "wed"
+      forStatusClass(status){
+          if (status == 'pending'){
+              return "pending"
+          }else if(status == 'upcoming'){
+              return 'upcoming'
+          }else if (status == 'running'){
+                 return 'running'
+          }else if (status == 'finished'){
+                 return 'finished'
+          }else if (status == 'canceled'){
+                 return 'canceled'
           }
-          return searchWord;
-      }
+      },
   },
   mounted() {
-    const id = this.$route.params.doctor_id;
-    this.$store.dispatch("controlPanel/slots/getDoctorSlots",id);
+    this.$store.dispatch("controlPanel/appointments/getUserAppointmentsData",this.userId);
   },
   computed: {
-    slots() {
-      return this.$store.getters["controlPanel/slots/getSlots"];
+    appointments() {
+      return this.$store.getters["controlPanel/appointments/getUserAppointments"];
     },
     language() {
       return this.$store.getters.getLocale;
@@ -113,10 +139,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.allSlots-content {
+.userApps-content {
   margin-top: 15px;
+  margin-bottom: 40px;
   width: 100%;
-  height: 100vh - 25vh;
+  height: 100%;
+  max-height: 100vh;
   overflow: scroll;
   box-shadow: 0 5px 25px rgba(54, 57, 238, 0.281);
   padding: 20px;
@@ -155,12 +183,22 @@ td {
   font-size: 22px;
   font-weight: 400;
 }
-.green-status {
+.finished {
   color: $green-color;
 }
-.red-status {
+.canceled {
   color: $red;
 }
+.upcoming {
+  color: $main-color;
+}
+.running {
+  color: $purple;
+}
+.pending {
+  color: $yellow;
+}
+
 .input-div {
   width: 400px;
   margin-top: 40px;

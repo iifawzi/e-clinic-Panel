@@ -61,7 +61,8 @@
         </div>
       </div>
       <div class="userApps" v-if="userData">
-          <userApps/>
+              <div class="userApps-title">{{$t('dashboard.tables.userApps.title')}}</div>
+          <userApps :userId="userData.user_id"/>
       </div>
       <div v-if="!error && !userData">
         <span class="no-search">{{$t('dashboard.forms.allUsers.noSearch')}}</span>
@@ -170,8 +171,14 @@ export default {
     }
   }
   .userApps {
-    margin-top: 50px;
+    margin-top: 80px;
     width: 100%;
+    &-title{
+      width: 100%;
+      font-size:40px;
+      text-align: center;
+      color: $main-color;
+    }
   }
 }
 .submit-div {

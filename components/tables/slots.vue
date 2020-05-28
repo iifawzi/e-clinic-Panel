@@ -137,7 +137,8 @@ export default {
 .allSlots-content {
   margin-top: 15px;
   width: 100%;
-  height: 100vh - 25vh;
+  height: 100%;
+  max-height: 100vh;
   overflow: scroll;
   box-shadow: 0 5px 25px rgba(54, 57, 238, 0.281);
   padding: 20px;

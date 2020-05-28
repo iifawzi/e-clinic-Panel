@@ -48,6 +48,7 @@
         "active": "Available"
       },
       "userApps": {
+        "title":"User's Appointments",
         "day": "Day",
         "date": "Date",
         "doctor":"Doctor",
@@ -55,7 +56,7 @@
         "start_time": "Start time",
         "end_time": "End Time",
         "available": "Status",
-        "search": "You can search by day",
+        "search": "You can search by Date or Doctor's name",
         "searchHolder": "Search",
         "options": "Options",
         "notActive": "Unavailable",
@@ -142,6 +143,13 @@
       "thu": "Thursday",
       "fri": "Friday",
       "sat": "Saturday"
+    },
+    "status": {
+      "pending": "Pending",
+      "upcoming": "Upcoming",
+      "finished": "Finished",
+      "canceled": "Canceled",
+      "running": "Running"
     }
   },
   "errors": {
