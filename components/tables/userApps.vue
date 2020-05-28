@@ -23,6 +23,7 @@
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.end_time')}}</th>
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.available')}}</th>
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.cancel')}}</th>
+          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.cancelDate')}}</th>
         </tr>
         <tbody v-if="this.searchQuery == ''">
         <tr v-for="appointment in appointments" :key="appointment.appointment_id" class="userApps-content-table-tr">
@@ -38,9 +39,10 @@
 
           <td>
             <div class="userApps-content-table-tr-options">
-              <i @click="deleteDoctor(doctor.phone_number)" v-if="appointment.appointment_status === 'upcoming'" class="fas fa-times options-delete"></i>
+                <i @click="cancelApp(appointment.appointment_id)" v-if="appointment.appointment_status === 'upcoming'" class="fas fa-times options-delete"></i>
             </div>
           </td>
+                    <td  v-if="appointment.appointment_status == 'canceled'">{{(appointment.updatedAt).substr(0,10)}}</td>
         </tr>
 </tbody>
        <tbody v-else>
@@ -57,7 +59,7 @@
 
           <td>
 <div class="userApps-content-table-tr-options">
-              <i @click="deleteDoctor(doctor.phone_number)" v-if="appointment.appointment_status === 'upcoming'" class="fas fa-times options-delete"></i>
+              <i @click="cancelApp(appointment.appointment_id)" v-if="appointment.appointment_status === 'upcoming'" class="fas fa-times options-delete"></i>
             </div>
           </td>
         </tr>
@@ -111,6 +113,9 @@ export default {
                  return 'canceled'
           }
       },
+      cancelApp(appointment_id){
+          this.$store.dispatch("controlPanel/appointments/cancelAppointment",{appointment_id,user_id: this.userId});
+      }
   },
   mounted() {
     if (this.userId){

@@ -59,6 +59,7 @@
         "search": "You can search by Date or Doctor's name",
         "searchHolder": "Search",
         "cancel": "cancel",
+        "cancelDate":"Cancel Date",
         "notActive": "Unavailable",
         "active": "Available"
       },

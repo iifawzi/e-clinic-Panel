@@ -37,9 +37,10 @@ getUserAppointmentsData({commit},user_id){
     commit("setUserAppointmentsError", "");
 const userAppsData = this.$axios.post("/appointments/getUserApps",{user_id},config).then(response=>{
     commit("setUserAppointments",response.data.data);
+    console.log(response.data.data);
 }).catch(err => {
     if (!err.response) {
-      commit("setError", this.app.i18n.t("errors.500"));
+      commit("setUserAppointmentsError", this.app.i18n.t("errors.500"));
     }
     const status = err.response.status;
     switch (status) {
@@ -53,12 +54,12 @@ const userAppsData = this.$axios.post("/appointments/getUserApps",{user_id},conf
 },
 
 getDocAppointmentsData({commit},doctor_id){
-  commit("setUserAppointmentsError", "");
+  commit("setDocAppointmentsError", "");
 const userAppsData = this.$axios.post("/appointments/getDocApps",{doctor_id},config).then(response=>{
   commit("setDocAppointments",response.data.data);
 }).catch(err => {
   if (!err.response) {
-    commit("setError", this.app.i18n.t("errors.500"));
+    commit("setDocAppointmentsError", this.app.i18n.t("errors.500"));
   }
   const status = err.response.status;
   switch (status) {
@@ -67,6 +68,24 @@ const userAppsData = this.$axios.post("/appointments/getDocApps",{doctor_id},con
       break;
     default:
       commit("setDocAppointmentsError", this.app.i18n.t("errors.500"));
+  }
+});
+},
+
+cancelAppointment({dispatch,commit},{appointment_id,user_id}){
+const canceled = this.$axios.patch("/appointments/cancelAppointment",{appointment_id},config).then(response=>{
+  dispatch("getUserAppointmentsData",user_id);
+}).catch(err => {
+  if (!err.response) {
+    commit("setUserAppointmentsError", this.app.i18n.t("errors.500"));
+  }
+  const status = err.response.status;
+  switch (status) {
+    case 400:
+      commit("setUserAppointmentsError", this.app.i18n.t("errors.400"));
+      break;
+    default:
+      commit("setUserAppointmentsError", this.app.i18n.t("errors.500"));
   }
 });
 }
