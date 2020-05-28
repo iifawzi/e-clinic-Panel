@@ -58,6 +58,21 @@
         "available": "الحالة",
         "search": "يمكنك البحث بالتاريخ او باسم الدكتور",
         "searchHolder": "البحث",
+        "cancel": "إلغاء",
+        "notActive": "غير متاح",
+        "active": "متاح"
+      },
+      "docApps": {
+        "title":"حجوزات الدكتور",
+        "day": "اليوم",
+        "date": "التاريخ",
+        "user": "المستخدم",
+        "category": "التخصص",
+        "start_time": "موعد البدأ",
+        "end_time": "موعد الانتهاء",
+        "available": "الحالة",
+        "search": "يمكنك البحث بالتاريخ او باسم الدكتور",
+        "searchHolder": "البحث",
         "options": "الخيارات",
         "notActive": "غير متاح",
         "active": "متاح"

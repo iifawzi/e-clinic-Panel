@@ -1,33 +1,31 @@
 <template>
-  <div class="userApps-table">
+  <div class="docApps-table">
 
       <div class="input-div">
         <clinicInput
-          :placeholder="$t('dashboard.tables.userApps.searchHolder')"
+          :placeholder="$t('dashboard.tables.docApps.searchHolder')"
           @input="setSearch"
           v-model="searchQuery"
-          :mutedText="$t('dashboard.tables.userApps.search')"
+          :mutedText="$t('dashboard.tables.docApps.search')"
         >
         </clinicInput>
       </div>
-    <div class="userApps-content">
-      <table class="userApps-content-table">
+    <div class="docApps-content">
+      <table class="docApps-content-table">
 
 
-        <tr class="userApps-content-table-tr">
-          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.doctor')}}</th>
-          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.category')}}</th>
-          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.date')}}</th>
-          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.day')}}</th>
-          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.start_time')}}</th>
-          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.end_time')}}</th>
-          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.available')}}</th>
-          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.cancel')}}</th>
+        <tr class="docApps-content-table-tr">
+          <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.user')}}</th>
+          <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.date')}}</th>
+          <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.day')}}</th>
+          <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.start_time')}}</th>
+          <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.end_time')}}</th>
+          <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.available')}}</th>
+          <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.options')}}</th>
         </tr>
         <tbody v-if="this.searchQuery == ''">
-        <tr v-for="appointment in appointments" :key="appointment.appointment_id" class="userApps-content-table-tr">
+        <tr v-for="appointment in appointments" :key="appointment.appointment_id" class="docApps-content-table-tr">
           <td>{{appointment.first_name}} {{appointment.last_name}}</td>
-          <td>{{appointment[language]}}</td>
           <td>{{appointment.date}}</td>
           <td>{{ $t('dashboard.days.'+appointment.day)}}</td>
           <td>{{appointment.start_time}}</td>
@@ -37,16 +35,21 @@
         >{{ $t('dashboard.status.'+appointment.appointment_status)}}</td>
 
           <td>
-            <div class="userApps-content-table-tr-options">
-              <i @click="deleteDoctor(doctor.phone_number)" v-if="appointment.appointment_status === 'upcoming'" class="fas fa-times options-delete"></i>
+            <div class="docApps-content-table-tr-options">
+              <!-- <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i> -->
+              <nuxt-link to="">
+                <i
+                  class="fas fa-edit docApps-content-table-tr-options-edit"
+                  :class="language+'-edit'"
+                ></i>
+              </nuxt-link>
             </div>
           </td>
         </tr>
 </tbody>
        <tbody v-else>
-        <tr v-for="appointment in filteredData" :key="appointment.appointment_id" class="userApps-content-table-tr">
+        <tr v-for="appointment in filteredData" :key="appointment.appointment_id" class="docApps-content-table-tr">
           <td>{{appointment.first_name}} {{appointment.last_name}}</td>
-          <td>{{appointment[language]}}</td>
           <td>{{appointment.date}}</td>
           <td>{{ $t('dashboard.days.'+appointment.day)}}</td>
           <td>{{appointment.start_time}}</td>
@@ -56,8 +59,14 @@
         >{{ $t('dashboard.status.'+appointment.appointment_status)}}</td>
 
           <td>
-<div class="userApps-content-table-tr-options">
-              <i @click="deleteDoctor(doctor.phone_number)" v-if="appointment.appointment_status === 'upcoming'" class="fas fa-times options-delete"></i>
+            <div class="docApps-content-table-tr-options">
+              <!-- <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i> -->
+              <nuxt-link to="">
+                <i
+                  class="fas fa-edit docApps-content-table-tr-options-edit"
+                  :class="language+'-edit'"
+                ></i>
+              </nuxt-link>
             </div>
           </td>
         </tr>
@@ -71,12 +80,6 @@
 <script>
 import clinicInput from "~/components/shared/clinicInput";
 export default {
-    props:{
-        userId:{
-            type:Number,
-            required:true
-        }
-    },
       data() {
     return {
      searchQuery: "",
@@ -113,13 +116,14 @@ export default {
       },
   },
   mounted() {
-    if (this.userId){
-    this.$store.dispatch("controlPanel/appointments/getUserAppointmentsData",this.userId);
-    }
+      const id = this.$route.params.doctor_id;
+      if (id){
+    this.$store.dispatch("controlPanel/appointments/getDocAppointmentsData",id);
+      }
   },
   computed: {
     appointments() {
-      return this.$store.getters["controlPanel/appointments/getUserAppointments"];
+      return this.$store.getters["controlPanel/appointments/getDocAppointments"];
     },
     language() {
       return this.$store.getters.getLocale;
@@ -129,7 +133,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.userApps-content {
+.docApps-content {
   margin-top: 15px;
   margin-bottom: 40px;
   width: 100%;

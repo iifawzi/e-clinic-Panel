@@ -10,7 +10,9 @@
            <div class="slotsTable">
              <div class="slots-title">{{$t('dashboard.tables.slots.title')}}</div>
          <client-only> <slotsTable/></client-only>
-         <addSlot/>
+                  <addSlot/>
+             <div class="apps-title">{{$t('dashboard.tables.docApps.title')}}</div>
+               <client-only> <docsApps/></client-only>
         </div>
       </div>
 
@@ -22,6 +24,7 @@
 import editDoctor from "~/components/forms/editDoctor"
 import addSlot from "~/components/forms/addSlot"
 import slotsTable from "~/components/tables/slots"
+import docsApps from "~/components/tables/docsApps"
 
 export default {
   layout: "dashboard",
@@ -37,7 +40,8 @@ export default {
   components:{
 editDoctor,
     slotsTable,
-    addSlot
+    addSlot,
+    docsApps
 
   },
   computed: {
@@ -77,4 +81,11 @@ editDoctor,
   text-align: center;
   color: $main-color;
 }
+.apps-title {
+  font-size: 40px;
+  text-align: center;
+  color: $main-color;
+  margin-top: 50px;
+}
+
 </style>

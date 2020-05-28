@@ -58,6 +58,21 @@
         "available": "Status",
         "search": "You can search by Date or Doctor's name",
         "searchHolder": "Search",
+        "cancel": "cancel",
+        "notActive": "Unavailable",
+        "active": "Available"
+      },
+      "docApps": {
+        "title":"Doctor's Appointments",
+        "day": "Day",
+        "date": "Date",
+        "user": "User",
+        "category":"Category",
+        "start_time": "Start time",
+        "end_time": "End Time",
+        "available": "Status",
+        "search": "You can search by Date or Doctor's name",
+        "searchHolder": "Search",
         "options": "Options",
         "notActive": "Unavailable",
         "active": "Available"
