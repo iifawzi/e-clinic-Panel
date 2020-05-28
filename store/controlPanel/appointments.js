@@ -24,12 +24,10 @@ setUserAppointmentsError(state,message){
 
 export const actions = {
 getUserAppointmentsData({commit},user_id){
-    console.log(user_id);
     commit("setUserAppointmentsError", "");
 const userAppsData = this.$axios.post("/appointments/getUserApps",{user_id},config).then(response=>{
     commit("setUserAppointments",response.data.data);
 }).catch(err => {
-    console.log(err.response);
     if (!err.response) {
       commit("setError", this.app.i18n.t("errors.500"));
     }

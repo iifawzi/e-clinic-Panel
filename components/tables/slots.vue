@@ -94,7 +94,6 @@ export default {
           });
       },
       forArabicSearch(word){
-          console.log(word);
           let searchWord = ""
           if (word.includes("ثل") || word.includes("tu")){
             searchWord = "tue"

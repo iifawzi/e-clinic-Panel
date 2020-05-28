@@ -20,7 +20,6 @@ setDocSlotsError(state,message){
     state.DocSlotsError = message;
 },
 setNewSlotError(state,message){
-  console.log("???");
   state.newSlotError = message;
 }
 }
@@ -32,7 +31,6 @@ getDoctorSlots({commit},doctor_id){
         commit("setSlots", response.data.data);
     })    
     .catch(err => {
-        console.log(err);
         if (!err.response) {
           commit("setDocSlotsError", this.app.i18n.t("errors.500"));
         }
@@ -67,7 +65,6 @@ getSlots(state){
     return state.doctorSlots;
 },
 getNewSlotError(state){
-  console.log("calllled");
   return state.newSlotError;
 }
 }

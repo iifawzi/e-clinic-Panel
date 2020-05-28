@@ -23,7 +23,6 @@ export const actions = {
         .then(response=>{
             commit("set_categories",response.data.data);
         }).catch(err=>{
-            console.log(err);
         })
     }
 };

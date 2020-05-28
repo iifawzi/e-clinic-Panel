@@ -242,8 +242,6 @@ export default {
     },
       categories() {
       return this.$store.getters['controlPanel/categories/get_categories'];
-      console.log(this.$store.getters['controlPanel/categories/get_categories'])
-      console.log("?");
     },
   }, 
   mounted(){
