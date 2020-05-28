@@ -8,7 +8,8 @@ const config = {
 
 export const state = ()=>({
 doctorSlots: "",
-getDocSlotsError: ""
+DocSlotsError: "",
+newSlotError: "",
 });
 
 export const mutations = {
@@ -16,7 +17,11 @@ setSlots(state,slots){
     state.doctorSlots = slots;
 },
 setDocSlotsError(state,message){
-    state.getDocSlotsError = message;
+    state.DocSlotsError = message;
+},
+setNewSlotError(state,message){
+  console.log("???");
+  state.newSlotError = message;
 }
 }
 
@@ -31,16 +36,38 @@ getDoctorSlots({commit},doctor_id){
         if (!err.response) {
           commit("setDocSlotsError", this.app.i18n.t("errors.500"));
         }
-        switch (status) {
-          default:
             commit("setDocSlotsError", this.app.i18n.t("errors.500"));
-        }
       });
+},
+
+
+addNewSlot({commit,dispatch},data){
+  commit("setNewSlotError", "");
+  this.$axios.post("/slots/addSlot",{...data},config).then(response=>{
+    dispatch("getDoctorSlots",data.doctor_id);
+  })    
+  .catch(err => {
+    if (!err.response) {
+      commit("setNewSlotError", this.app.i18n.t("errors.500"));
+    }
+    const status = err.response.status;
+    switch (status) {
+      case 400:
+        commit("setNewSlotError", this.app.i18n.t("errors.400"));
+        break;
+      default:
+        commit("setNewSlotError", this.app.i18n.t("errors.500"));
+    }
+  });
 }
 }
 
 export const getters = {
 getSlots(state){
     return state.doctorSlots;
+},
+getNewSlotError(state){
+  console.log("calllled");
+  return state.newSlotError;
 }
 }
