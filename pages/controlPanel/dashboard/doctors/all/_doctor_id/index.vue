@@ -73,8 +73,8 @@ editDoctor,
   width: 75%;
 }
 .slots-title{
-  font-size: 30px;
+  font-size: 40px;
   text-align: center;
-  color: $black;
+  color: $main-color;
 }
 </style>

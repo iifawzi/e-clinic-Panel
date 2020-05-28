@@ -247,6 +247,7 @@ export default {
       this.$v.$touch();
       if (this.$v.$invalid) {
       } else {
+        if (Object.keys(this.NewDoctorData).length !=0)
         this.$store.dispatch("controlPanel/doctors/update_doctor", {Newdata: this.NewDoctorData,doctor_id: this.doctorData.doctor_id});
       }
     },
