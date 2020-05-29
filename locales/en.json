@@ -72,9 +72,10 @@
         "start_time": "Start time",
         "end_time": "End Time",
         "available": "Status",
-        "search": "You can search by Date or Doctor's name",
+        "search": "You can search by Date or User's name",
         "searchHolder": "Search",
-        "options": "Options",
+        "cancel": "cancel",
+        "cancelDate":"Cancel Date",
         "notActive": "Unavailable",
         "active": "Available"
       }
@@ -209,7 +210,7 @@
     "picture": "This photo will be shown to users",
     "price": "The price of one sesstion",
     "slot_time": "Duration per minutes",
-    "start_time": "For example: 22:00",
-    "end_time": "For example: 23:30"
+    "start_time": "For example: 22:00, 05:30,13:40",
+    "end_time": "For example: 23:30, 06:30,14:40"
   }
 }

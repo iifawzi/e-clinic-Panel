@@ -37,7 +37,7 @@
           >{{doctor.avaliable === 1 ? $t('dashboard.forms.allDoctors.active') : $t('dashboard.forms.allDoctors.notActive')}}</td>
           <td>
             <div class="allDoctors-content-table-tr-options">
-              <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i>
+              <!-- <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i> -->
               <nuxt-link :to="'/controlPanel/dashboard/doctors/all/'+doctor.doctor_id">
                 <i
                   class="fas fa-edit allDoctors-content-table-tr-options-edit"
@@ -61,7 +61,7 @@
           >{{doctor.avaliable === 1 ? $t('dashboard.forms.allDoctors.active') : $t('dashboard.forms.allDoctors.notActive')}}</td>
           <td>
             <div class="allDoctors-content-table-tr-options">
-              <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i>
+              <!-- <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i> -->
               <nuxt-link :to="'/controlPanel/dashboard/doctors/all/'+doctor.doctor_id">
                 <i
                   class="fas fa-edit allDoctors-content-table-tr-options-edit"
@@ -146,10 +146,9 @@ export default {
         color: $red;
         display: flex;
         flex-flow: row;
-        justify-content: space-evenly;
+        justify-content: center;
         &-edit {
           color: $green-color;
-          margin-left: 20px;
           cursor: pointer;
         }
       }

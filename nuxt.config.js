@@ -50,8 +50,14 @@ styleResources: {
   /*
   ** Nuxt.js dev-modules
   */
-  buildModules: [
-  ],
+ buildModules: [
+  // Simple usage
+  '@nuxtjs/moment',
+],
+moment: {
+  defaultLocale: 'ar',
+  locales: ['ar']
+},
   /*
   ** Nuxt.js modules
   */

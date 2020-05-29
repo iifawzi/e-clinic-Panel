@@ -15,9 +15,11 @@
     "js-cookie": "^2.2.1",
     "nuxt": "^2.0.0",
     "vue-i18n": "^8.17.6",
+    "vue2-timepicker": "^1.1.1",
     "vuelidate": "^0.7.5"
   },
   "devDependencies": {
+    "@nuxtjs/moment": "^1.6.1",
     "@nuxtjs/style-resources": "^1.0.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2"

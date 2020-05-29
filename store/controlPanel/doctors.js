@@ -1,4 +1,11 @@
 import Cookie from "js-cookie";
+const token = Cookie.get("token");
+const config = {
+  headers: {
+    Authorization: "Bearer " + token
+  }
+};
+
 export const state = () => ({
   error: {
     message: "",
@@ -39,7 +46,7 @@ export const mutations = {
 
 export const actions = {
   // Upload Image:
-  async uploadImage({ commit }, { picture, config }) {
+  async uploadImage({ commit }, { picture}) {
     const formData = new FormData();
     formData.append("file", picture);
     let uploadImage = await this.$axios
@@ -71,12 +78,6 @@ export const actions = {
 
   // add doctor /controlPanel/dashboard/doctors/add
   async add_doctor({ commit, dispatch }, doctorData) {
-    const token = Cookie.get("token");
-    const config = {
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    };
     commit("setError", "");
     commit("setSuccess", "");
     const imagename = await dispatch("uploadImage", {
@@ -88,7 +89,7 @@ export const actions = {
       delete doctorDataWithPicture.picture;
       doctorDataWithPicture.picture = imagename;
       const addDoctor = this.$axios
-        .post("/controlPanel/addDoctor", { ...doctorDataWithPicture }, config)
+        .post("/controlPanel/addDoctor", { ...doctorDataWithPicture })
         .then(response => {
           const responseData = response.data.data;
           commit("setSuccess", this.app.i18n.t("success.add"));
@@ -122,15 +123,9 @@ export const actions = {
     if (this.getters.getSuccess != ''){
       setTimeout(() => {
     commit("setSuccess", "");
-      }, 2000);
+      }, 4000);
     }
     // commit("setDoctor", "");
-    const token = Cookie.get("token");
-    const config = {
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    };
     const doctorData = this.$axios
       .post("/doctors/getDoctor", { doctor_id }, config)
       .then(response => {
@@ -147,12 +142,6 @@ export const actions = {
   async update_doctor({commit,dispatch},{doctor_id,Newdata}) {
     commit("setError", "");
     commit("setSuccess", "");
-    const token = Cookie.get("token");
-    const config = {
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    };
     if (Newdata.picture != undefined){
       // if we will upload a picture: 
       const imagename = await dispatch("uploadImage", {
@@ -212,12 +201,6 @@ export const actions = {
 
 // Get Doctors Data: 
   async getDoctors({commit}){
-    const token = Cookie.get("token");
-    const config = {
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    };
     const doctors =  this.$axios.get("/controlPanel/getDoctors",config).then(response=>{
       commit("setDoctors",response.data.data);
     }).catch(err=>{

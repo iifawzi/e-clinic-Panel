@@ -42,7 +42,7 @@
                 <i @click="cancelApp(appointment.appointment_id)" v-if="appointment.appointment_status === 'upcoming'" class="fas fa-times options-delete"></i>
             </div>
           </td>
-                    <td  v-if="appointment.appointment_status == 'canceled'">{{(appointment.updatedAt).substr(0,10)}}</td>
+                    <td  v-if="appointment.appointment_status == 'canceled'">{{$moment(appointment.updatedAt).locale(language).format('llll')}}</td>
         </tr>
 </tbody>
        <tbody v-else>
@@ -114,7 +114,7 @@ export default {
           }
       },
       cancelApp(appointment_id){
-          this.$store.dispatch("controlPanel/appointments/cancelAppointment",{appointment_id,user_id: this.userId});
+          this.$store.dispatch("controlPanel/appointments/cancelAppointment",{appointment_id,id:this.userId,updateWhat: "user"});
       }
   },
   mounted() {
@@ -157,10 +157,9 @@ export default {
         color: $red;
         display: flex;
         flex-flow: row;
-        justify-content: space-evenly;
+        justify-content: center;
         &-edit {
           color: $green-color;
-          margin-left: 20px;
           cursor: pointer;
         }
       }

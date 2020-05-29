@@ -21,7 +21,8 @@
           <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.start_time')}}</th>
           <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.end_time')}}</th>
           <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.available')}}</th>
-          <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.options')}}</th>
+                  <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.cancel')}}</th>
+          <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.cancelDate')}}</th>
         </tr>
         <tbody v-if="this.searchQuery == ''">
         <tr v-for="appointment in appointments" :key="appointment.appointment_id" class="docApps-content-table-tr">
@@ -36,15 +37,12 @@
 
           <td>
             <div class="docApps-content-table-tr-options">
-              <!-- <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i> -->
-              <nuxt-link to="">
-                <i
-                  class="fas fa-edit docApps-content-table-tr-options-edit"
-                  :class="language+'-edit'"
-                ></i>
-              </nuxt-link>
+                         <i @click="cancelApp(appointment.appointment_id)" v-if="appointment.appointment_status === 'upcoming'" class="fas fa-times options-delete"></i>
+
             </div>
           </td>
+                    <td  v-if="appointment.appointment_status == 'canceled'">{{$moment(appointment.updatedAt).locale(language).format('llll')}}</td>
+
         </tr>
 </tbody>
        <tbody v-else>
@@ -60,13 +58,8 @@
 
           <td>
             <div class="docApps-content-table-tr-options">
-              <!-- <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i> -->
-              <nuxt-link to="">
-                <i
-                  class="fas fa-edit docApps-content-table-tr-options-edit"
-                  :class="language+'-edit'"
-                ></i>
-              </nuxt-link>
+                       <i @click="cancelApp(appointment.appointment_id)" v-if="appointment.appointment_status === 'upcoming'" class="fas fa-times options-delete"></i>
+
             </div>
           </td>
         </tr>
@@ -114,6 +107,10 @@ export default {
                  return 'canceled'
           }
       },
+            cancelApp(appointment_id){
+               const id = this.$route.params.doctor_id;
+          this.$store.dispatch("controlPanel/appointments/cancelAppointment",{appointment_id,id,updateWhat: "doctor"});
+      }
   },
   mounted() {
       const id = this.$route.params.doctor_id;

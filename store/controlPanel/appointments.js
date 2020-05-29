@@ -72,9 +72,14 @@ const userAppsData = this.$axios.post("/appointments/getDocApps",{doctor_id},con
 });
 },
 
-cancelAppointment({dispatch,commit},{appointment_id,user_id}){
+cancelAppointment({dispatch,commit},{appointment_id,id,updateWhat}){
 const canceled = this.$axios.patch("/appointments/cancelAppointment",{appointment_id},config).then(response=>{
-  dispatch("getUserAppointmentsData",user_id);
+  if (updateWhat == 'user'){  // to reload the users apps (from users panel)
+    dispatch("getUserAppointmentsData",id);
+  }else if (updateWhat == 'doctor'){ // to reload the doc apps (from docs panel)
+    dispatch("getDocAppointmentsData",id);
+  }
+
 }).catch(err => {
   if (!err.response) {
     commit("setUserAppointmentsError", this.app.i18n.t("errors.500"));
