@@ -15,6 +15,7 @@ export const state = () => ({
       apps:"",
       error:"",
   },
+  newAppError:"",
 });
 
 export const mutations = {
@@ -29,7 +30,10 @@ setDocAppointments(state,appointments){
   },
   setDocAppointmentsError(state,message){
       state.docAppointments.error = message;
-      }
+},
+seNewAppError(state,message){
+  state.newAppError = message;
+}
 };
 
 export const actions = {
@@ -93,7 +97,33 @@ const canceled = this.$axios.patch("/appointments/cancelAppointment",{appointmen
       commit("setUserAppointmentsError", this.app.i18n.t("errors.500"));
   }
 });
-}
+},
+
+
+
+addAppointment({commit,dispatch},{data,doctor_id}){
+  commit("seNewAppError","");
+
+    const added = this.$axios.post("/appointments/addAppointment",data,config).then(response=>{
+      dispatch("getDocAppointmentsData",doctor_id);
+    }).catch(err => {
+      if (!err.response) {
+        commit("seNewAppError", this.app.i18n.t("errors.500"));
+      }
+      const status = err.response.status;
+      switch (status) {
+        case 404:
+          commit("seNewAppError", this.app.i18n.t("errors.user404"));
+          break;
+        case 400:
+          commit("seNewAppError", this.app.i18n.t("errors.user400"));
+          break;
+        default:
+          commit("seNewAppError", this.app.i18n.t("errors.500"));
+      }
+    });
+},
+
 
 };
 
@@ -109,5 +139,8 @@ getDocAppointments(state){
 },
 getDocAppointmentsError(state){
   return state.docAppointments.error; 
+},
+getNewAppError(state){
+  return state.newAppError;
 }
 };

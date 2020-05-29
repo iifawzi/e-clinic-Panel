@@ -27,7 +27,7 @@
         <tbody v-if="this.searchQuery == ''">
         <tr v-for="appointment in appointments" :key="appointment.appointment_id" class="docApps-content-table-tr">
           <td>{{appointment.first_name}} {{appointment.last_name}}</td>
-          <td>{{appointment.date}}</td>
+                   <td>{{(appointment.date).substr(0,10)}}</td>
           <td>{{ $t('dashboard.days.'+appointment.day)}}</td>
           <td>{{appointment.start_time}}</td>
           <td>{{appointment.end_time}}</td>
@@ -48,7 +48,7 @@
        <tbody v-else>
         <tr v-for="appointment in filteredData" :key="appointment.appointment_id" class="docApps-content-table-tr">
           <td>{{appointment.first_name}} {{appointment.last_name}}</td>
-          <td>{{appointment.date}}</td>
+          <td>{{(appointment.date).substr(0,10)}}</td>
           <td>{{ $t('dashboard.days.'+appointment.day)}}</td>
           <td>{{appointment.start_time}}</td>
           <td>{{appointment.end_time}}</td>
@@ -132,7 +132,7 @@ export default {
 <style lang="scss" scoped>
 .docApps-content {
   margin-top: 15px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   width: 100%;
   height: 100%;
   max-height: 100vh;

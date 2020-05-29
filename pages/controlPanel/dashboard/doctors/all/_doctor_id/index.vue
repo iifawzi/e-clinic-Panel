@@ -13,6 +13,7 @@
                   <addSlot/>
              <div class="apps-title">{{$t('dashboard.tables.docApps.title')}}</div>
                <client-only> <docsApps/></client-only>
+                 <addApp/>
         </div>
       </div>
 
@@ -23,6 +24,7 @@
 <script>
 import editDoctor from "~/components/forms/editDoctor"
 import addSlot from "~/components/forms/addSlot"
+import addApp from "~/components/forms/addApp"
 import slotsTable from "~/components/tables/slots"
 import docsApps from "~/components/tables/docsApps"
 
@@ -41,7 +43,8 @@ export default {
 editDoctor,
     slotsTable,
     addSlot,
-    docsApps
+    docsApps,
+    addApp
 
   },
   computed: {

@@ -45,7 +45,8 @@ styleResources: {
 },
  plugins: [
    '~/plugins/i18n.js',
-   '~/plugins/vuelidate'
+   '~/plugins/vuelidate',
+   { src: '~/plugins/vue-datepicker', ssr: false },
   ],
   /*
   ** Nuxt.js dev-modules

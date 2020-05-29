@@ -151,6 +151,17 @@
         "status": "Status",
         "add": "Add"
       },
+      "addApp": {
+        "title": "Add new appointment",
+        "searchHolder":"User's Phone Number",
+        "submitSearch":"Find the user",
+        "apps": "Appointments",
+        "appDate":"Appointment Date",
+        "addApp":"Add The Appointment",
+        "status": "Status",
+        "add": "Add",
+        "to":" To "
+      },
       "editSlot": {
         "warning":"Warning: Any edit to this slot, will cancel all booked appointments associated with. ",
         "day": "Day",
@@ -204,7 +215,9 @@
     "start_time": "Can't be null",
     "end_time": "Can't be null",
     "day": "You have to choose a day",
-    "status": "You have to choose status"
+    "status": "You have to choose status",
+    "date": "You must choose a date"
+
   },
   "success": {
     "add": "Added Succssefully",

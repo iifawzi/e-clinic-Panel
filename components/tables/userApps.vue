@@ -29,7 +29,8 @@
         <tr v-for="appointment in appointments" :key="appointment.appointment_id" class="userApps-content-table-tr">
           <td>{{appointment.first_name}} {{appointment.last_name}}</td>
           <td>{{appointment[language]}}</td>
-          <td>{{appointment.date}}</td>
+                          <td>{{(appointment.date).substr(0,10)}}</td>
+
           <td>{{ $t('dashboard.days.'+appointment.day)}}</td>
           <td>{{appointment.start_time}}</td>
           <td>{{appointment.end_time}}</td>
@@ -49,7 +50,8 @@
         <tr v-for="appointment in filteredData" :key="appointment.appointment_id" class="userApps-content-table-tr">
           <td>{{appointment.first_name}} {{appointment.last_name}}</td>
           <td>{{appointment[language]}}</td>
-          <td>{{appointment.date}}</td>
+                      <td>{{(appointment.date).substr(0,10)}}</td>
+
           <td>{{ $t('dashboard.days.'+appointment.day)}}</td>
           <td>{{appointment.start_time}}</td>
           <td>{{appointment.end_time}}</td>
