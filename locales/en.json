@@ -150,6 +150,15 @@
         "end_time": "End time",
         "status": "Status",
         "add": "Add"
+      },
+      "editSlot": {
+        "warning":"Warning: Any edit to this slot, will cancel all booked appointments associated with. ",
+        "day": "Day",
+        "slot_time": "Duration",
+        "start_time": "Start time",
+        "end_time": "End time",
+        "status": "Status",
+        "update": "Update"
       }
     },
     "days": {

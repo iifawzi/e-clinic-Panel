@@ -1,6 +1,9 @@
 <template>
   <div class="allSlots-table">
-
+    <div class="editDiv" v-if="showEdit"> 
+         <client-only> <editSlot :key="this.slotToEdit" :slotToEdit="this.slotToEdit" /></client-only>
+    </div>
+            
       <div class="input-div">
         <clinicInput
           :placeholder="$t('dashboard.tables.slots.searchHolder')"
@@ -33,13 +36,8 @@
           >{{slot.available == 1 ?  $t('dashboard.tables.slots.active') : $t('dashboard.tables.slots.notActive')}}</td>
           <td>
             <div class="allSlots-content-table-tr-options">
-              <!-- <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i> -->
-              <nuxt-link to="">
-                <i
-                  class="fas fa-edit allSlots-content-table-tr-options-edit"
-                  :class="language+'-edit'"
-                ></i>
-              </nuxt-link>
+                         <i @click="openEdit(slot)" class="fas fa-edit allSlots-content-table-tr-options-edit"></i>
+
             </div>
           </td>
         </tr>
@@ -55,13 +53,7 @@
           >{{slot.available == 1 ?  $t('dashboard.tables.slots.active') : $t('dashboard.tables.slots.notActive')}}</td>
           <td>
             <div class="allSlots-content-table-tr-options">
-              <!-- <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i> -->
-              <nuxt-link to="">
-                <i
-                  class="fas fa-edit allSlots-content-table-tr-options-edit"
-                  :class="language+'-edit'"
-                ></i>
-              </nuxt-link>
+                                  <i @click="openEdit(slot)" class="fas fa-edit allSlots-content-table-tr-options-edit"></i>
             </div>
           </td>
         </tr>
@@ -75,15 +67,20 @@
 
 <script>
 import clinicInput from "~/components/shared/clinicInput";
+import editSlot from "~/components/forms/editSlot"
+
 export default {
       data() {
     return {
      searchQuery: "",
      filteredData: "",
+     slotToEdit:"",
+     showEdit:false
     };
   },
     components: {
         clinicInput,
+        editSlot
     },
   methods: {
       setSearch(value){
@@ -115,6 +112,17 @@ export default {
               searchWord = "wed"
           }
           return searchWord;
+      },
+      openEdit(object){
+                  if (object.slot_id == this.slotToEdit.slot_id){
+     this.showEdit = false;
+            this.slotToEdit = ""
+          }else {
+          this.showEdit = true;
+          this.slotToEdit = object;
+          }
+
+
       }
   },
   mounted() {
@@ -155,10 +163,9 @@ export default {
         color: $red;
         display: flex;
         flex-flow: row;
-        justify-content: space-evenly;
+        justify-content: center;
         &-edit {
           color: $green-color;
-          margin-left: 20px;
           cursor: pointer;
         }
       }
