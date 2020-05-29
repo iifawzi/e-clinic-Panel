@@ -3,6 +3,12 @@
     <div class="warninng" v-if="this.slotData.available === true">
       <notfication color="red" :label="$t('dashboard.forms.editSlot.warning')" />
     </div>
+       <div class="slotError" v-if="error">
+      <notfication color="red" :label="error" />
+    </div>
+      <div class="slotSuccess" v-if="success">
+      <notfication color="green" :label="success" />
+    </div>
     <div class="editSlot-content">
       <div class="addForm">
         <div class="addForm-content">
@@ -107,7 +113,7 @@
                 <clinicSubmit
                   color="red"
                   :statement="$t('dashboard.forms.editSlot.update')"
-                  @click="addNewSlot"
+                  @click="editSlot"
                 />
               </div>
             </div>
@@ -146,7 +152,7 @@ export default {
         start_time: "",
         end_time: "",
         day: "",
-        available: ""
+        available: "",
       },
       showForm: false
     };
@@ -191,13 +197,13 @@ export default {
       this.slotData.available = value;
       this.$v.slotData.available.$touch();
     },
-    addNewSlot() {
+    editSlot() {
       this.$v.$touch();
       if (this.$v.$invalid) {
       } else {
         const doctor_id = this.$route.params.doctor_id;
-        const withId = { ...this.slotData, doctor_id };
-        this.$store.dispatch("controlPanel/slots/addNewSlot", withId);
+        const withId = { newData: this.slotData,doctor_id: doctor_id };
+        this.$store.dispatch("controlPanel/slots/updateSlot", withId);
       }
     }
   },
@@ -206,11 +212,14 @@ export default {
       return this.$store.getters.getLocale;
     },
     error() {
-      return this.$store.getters["controlPanel/slots/getNewSlotError"];
+      return this.$store.getters["controlPanel/slots/getEditSlotError"];
+    },
+      success() {
+      return this.$store.getters["controlPanel/slots/getEditSlotSuccess"];
     }
   },
   mounted(){
-      console.log(this.slotToEdit);
+      delete this.slotToEdit.doctor_id;
       for (let key in this.slotToEdit){
          this.slotData[key] = this.slotToEdit[key];
       }

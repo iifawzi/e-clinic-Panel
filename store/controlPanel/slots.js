@@ -10,6 +10,8 @@ export const state = ()=>({
 doctorSlots: "",
 DocSlotsError: "",
 newSlotError: "",
+editSlotError: "",
+editSlotSuccess: "",
 });
 
 export const mutations = {
@@ -21,6 +23,12 @@ setDocSlotsError(state,message){
 },
 setNewSlotError(state,message){
   state.newSlotError = message;
+},
+setEditSlotError(state,message){
+  state.editSlotError = message;
+},
+setEditSlotSuccess(state,message){
+  state.editSlotSuccess = message;
 }
 }
 
@@ -57,6 +65,31 @@ addNewSlot({commit,dispatch},data){
         commit("setNewSlotError", this.app.i18n.t("errors.500"));
     }
   });
+},
+
+
+updateSlot({commit,dispatch},{newData,doctor_id}){
+  commit("setEditSlotError", "");
+  this.$axios.patch("/slots/updateSlot",{...newData},config).then(response=>{
+    dispatch("getDoctorSlots",doctor_id);
+    commit("setEditSlotSuccess", this.app.i18n.t("success.edit"));
+    setTimeout(() => {
+    commit("setEditSlotSuccess", "");
+    }, 3000);
+  })    
+  .catch(err => {
+    if (!err.response) {
+      commit("setEditSlotError", this.app.i18n.t("errors.500"));
+    }
+    const status = err.response.status;
+    switch (status) {
+      case 400:
+        commit("setEditSlotError", this.app.i18n.t("errors.400"));
+        break;
+      default:
+        commit("setEditSlotError", this.app.i18n.t("errors.500"));
+    }
+  });
 }
 }
 
@@ -66,5 +99,11 @@ getSlots(state){
 },
 getNewSlotError(state){
   return state.newSlotError;
+},
+getEditSlotError(state){
+  return state.editSlotError;
+},
+getEditSlotSuccess(state){
+  return state.editSlotSuccess;
 }
 }
