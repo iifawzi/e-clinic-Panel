@@ -62,6 +62,8 @@
 
             </div>
           </td>
+                    <td  v-if="appointment.appointment_status == 'canceled'">{{$moment(appointment.updatedAt).locale(language).format('llll')}}</td>
+
         </tr>
 </tbody>
 
