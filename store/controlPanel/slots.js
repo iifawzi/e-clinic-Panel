@@ -12,8 +12,6 @@ DocSlotsError: "",
 newSlotError: "",
 editSlotError: "",
 editSlotSuccess: "",
-doctorDays:"",
-doctorDaysError:"",
 openSlots: "",
 });
 
@@ -32,12 +30,6 @@ setEditSlotError(state,message){
 },
 setEditSlotSuccess(state,message){
   state.editSlotSuccess = message;
-},
-setDoctorDaysError(state,message){
-  state.doctorDaysError = message;
-},
-setDays(state,days){
-  state.doctorDays = days;
 },
 setOpenSlots(state,slots){
   state.openSlots = slots;
@@ -104,29 +96,6 @@ updateSlot({commit,dispatch},{newData,doctor_id}){
   });
 },
 
-
-
-getDoctorDays({commit},{doctor_id}){
-  commit("setDoctorDaysError", "");
-  this.$axios.post("/slots/getDoctorDays",{doctor_id},config).then(response=>{
-    commit("setDays", response.data.data);
-  })
-  .catch(err => {
-    if (!err.response) {
-      commit("setDoctorDaysError", this.app.i18n.t("errors.500"));
-    }
-    const status = err.response.status;
-    switch (status) {
-      case 400:
-        commit("setDoctorDaysError", this.app.i18n.t("errors.400"));
-        break;
-      default:
-        commit("setDoctorDaysError", this.app.i18n.t("errors.500"));
-    }
-  });
-},
-
-
 getOpenSlots({commit},data){
   this.$axios.post("/slots/getOpenSlots",data,config).then(response=>{
     commit("setOpenSlots", response.data.data);
@@ -143,17 +112,11 @@ export const getters = {
 getSlots(state){
     return state.doctorSlots;
 },
-getDays(state){
-  return state.doctorDays;
-},
 getNewSlotError(state){
   return state.newSlotError;
 },
 getEditSlotError(state){
   return state.editSlotError;
-},
-getDoctorDaysError(state){
-  return state.doctorDaysError;
 },
 getEditSlotSuccess(state){
   return state.editSlotSuccess;

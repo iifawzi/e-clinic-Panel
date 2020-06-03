@@ -26,7 +26,7 @@
         <tbody v-if="this.searchQuery == ''">
         <tr v-for="appointment in appointments" :key="appointment.appointment_id" class="docApps-content-table-tr">
           <td>{{appointment.first_name}} {{appointment.last_name}}</td>
-          <td>{{($moment(appointment.date+"T"+appointment.start_time, "YYYY-MM-DD HH:mm").parseZone().utcOffset(120).locale("en").format("YYYY-MM-DD"))}}</td>
+          <td>{{($moment(appointment.date+" "+appointment.start_time, "YYYY-MM-DD HH:mm").parseZone().utcOffset(120).locale("en").format("YYYY-MM-DD"))}}</td>
           <td>{{ $t('dashboard.days.'+$moment(appointment.day+ " "+appointment.start_time, "ddd HH:mm").parseZone().utcOffset(120).locale("en").format("ddd").toLowerCase())}}</td>
           <td>{{$moment(appointment.start_time,"HH:mm").parseZone().utcOffset(120).format("HH:mm")}}</td>
           <td
@@ -46,7 +46,7 @@
        <tbody v-else>
         <tr v-for="appointment in filteredData" :key="appointment.appointment_id" class="docApps-content-table-tr">
           <td>{{appointment.first_name}} {{appointment.last_name}}</td>
-             <td>{{($moment(appointment.date+"T"+appointment.start_time, "YYYY-MM-DD HH:mm").parseZone().utcOffset(120).locale("en").format("YYYY-MM-DD"))}}</td>
+             <td>{{($moment(appointment.date+" "+appointment.start_time, "YYYY-MM-DD HH:mm").parseZone().utcOffset(120).locale("en").format("YYYY-MM-DD"))}}</td>
 <td>{{ $t('dashboard.days.'+$moment(appointment.day+ " "+appointment.start_time, "ddd HH:mm").parseZone().utcOffset(120).locale("en").format("ddd").toLowerCase())}}</td>
           <td>{{$moment(appointment.start_time,"HH:mm").parseZone().utcOffset(120).format("HH:mm")}}</td>
           <td

@@ -1,6 +1,6 @@
 <template>
   <div class="addApp-Component">
-        <div class="slotError" v-if="error">
+    <div class="slotError" v-if="error">
       <notfication color="red" :label="error" />
     </div>
     <div class="addApp-content">
@@ -42,7 +42,7 @@
           </div>
           <div class="addRow-2" v-if="userData">
             <span class="appDate">{{$t('dashboard.forms.addApp.appDate')}}</span>
-            <no-ssr>
+            <client-only>
               <datePicker
                 @input="getOpenSlots"
                 is-inline
@@ -52,23 +52,23 @@
                 is-dark
                 :available-dates="{ weekdays: allowed(getDays) }"
               />
-            </no-ssr>
-              <div class="errorDate" v-if="$v.appData.date.$dirty">
-                  <div v-if="!$v.appData.date.required">{{$t('errors.date')}}</div>
-                </div>
+            </client-only>
+            <div class="errorDate" v-if="$v.appData.date.$dirty">
+              <div v-if="!$v.appData.date.required">{{$t('errors.date')}}</div>
+            </div>
           </div>
         </div>
-        <div class="addRow-2" v-if="userData">
+        <div class="addRow-2" v-if="slotsAfterDate != ''">
           <div class="inputWrapper">
             <div class="slot-div">
               <clinicSelect @change="setSlot" v-model="appData.slot_id">
                 <option value disabled selected>{{$t('dashboard.forms.addApp.apps')}}</option>
                 <option
-                  v-for="slot in getSlots"
-                  :key="slot.slot_id"
+                  v-for="(slot,idx) in slotsAfterDate"
+                  :key="idx"
                   class="en-selectInput-content-option"
-                  :value="slot.slot_id"
-                >{{slot.start_time + $t('dashboard.forms.addApp.for') + slot.slot_time + $t('dashboard.forms.addApp.minute') }}</option>
+                  :value="slot.slot_id+' '+slot.start_time"
+                >{{$moment(slot.start_time).utc().parseZone().utcOffset(120).format("HH:mm") + $t('dashboard.forms.addApp.for') + slot.slot_time + $t('dashboard.forms.addApp.minute') }}</option>
 
                 <template v-if="$v.appData.slot_id.$dirty" v-slot:errorSlot>
                   <div v-if="!$v.appData.slot_id.required">{{$t('errors.day')}}</div>
@@ -78,15 +78,15 @@
           </div>
         </div>
         <div class="addRow-2" v-if="userData">
-              <div class="inputWrapper">
-                 <div class="slot-div">
-                <clinicSubmit
-                  color="green"
-                  :statement="$t('dashboard.forms.addApp.addApp')"
-                  @click="addApp"
-                />
-                </div>
-              </div>
+          <div class="inputWrapper">
+            <div class="slot-div">
+              <clinicSubmit
+                color="green"
+                :statement="$t('dashboard.forms.addApp.addApp')"
+                @click="addApp"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -110,6 +110,7 @@ export default {
   },
   data() {
     return {
+      slotsAfterDate: "",
       phone_number: "",
       appData: {
         user_id: "",
@@ -124,12 +125,12 @@ export default {
       required,
       integer
     },
-    appData:{
-      slot_id:{
-        required,
+    appData: {
+      slot_id: {
+        required
       },
-      date:{
-        required,
+      date: {
+        required
       }
     }
   },
@@ -158,20 +159,26 @@ export default {
     toggleForm() {
       this.showForm = !this.showForm;
     },
-    addApp(){
+    addApp() {
       const doctor_id = this.$route.params.doctor_id;
-       this.$v.appData.$touch();
+      this.$v.appData.$touch();
       if (this.$v.appData.$invalid) {
       } else {
         const data = this.appData;
-        this.$store.dispatch("controlPanel/appointments/addAppointment", {data,doctor_id} );
+        const [id, start_time] = data.slot_id.split(" ");
+        data.date = start_time;
+        data.slot_id = id;
+        this.$store.dispatch("controlPanel/appointments/addAppointment", {
+          data,
+          doctor_id
+        });
       }
     },
     setSearch(value) {
       this.phone_number = value;
       this.$v.phone_number.$touch();
     },
-    setSlot(value){
+    setSlot(value) {
       this.appData.slot_id = value;
       this.$v.appData.slot_id.$touch();
     },
@@ -182,28 +189,30 @@ export default {
       }
     },
     getOpenSlots(value) {
-           this.appData.date = value;
+      this.appData.date = value;
       this.$v.appData.date.$touch();
-      const doctor_id = this.$route.params.doctor_id;
-      const date = this.$moment(value).locale('en')
-        .format()
-        .substr(0, 10);
-      const day = this.$moment(value).locale('en')
-        .format("ddd")
-        .toLowerCase();
-      if (this.getDays.some(d => d == day)) {
-        const data = {
-          doctor_id,
-          day,
-          date
-        };
-        this.$store.dispatch("controlPanel/slots/getOpenSlots", data);
-      }
+      let dateInMoment = this.$moment(value, "ddd MMM DD YYYY HH:mm:ss").format(
+        "YYYY-MM-DD"
+      );
+      let filteredDates = this.getSlots.filter(
+        slot =>
+          this.$moment(slot.start_time)
+            .utc()
+            .parseZone()
+            .utcOffset(120)
+            .format("YYYY-MM-DD") === dateInMoment
+      );
+      this.slotsAfterDate = filteredDates;
     }
   },
   mounted() {
     const doctor_id = this.$route.params.doctor_id;
-    this.$store.dispatch("controlPanel/slots/getDoctorDays", { doctor_id });
+    this.$store.dispatch("controlPanel/slots/getDoctorSlots", doctor_id);
+    const data = {
+      doctor_id,
+      searchIn: 30
+    };
+    this.$store.dispatch("controlPanel/slots/getOpenSlots", data);
   },
   computed: {
     userData() {
@@ -212,8 +221,27 @@ export default {
       return userData;
     },
     getDays() {
-      const days = this.$store.getters["controlPanel/slots/getDays"];
-      return days;
+      const workingSlots = this.$store.getters["controlPanel/slots/getSlots"];
+      const workingDays = [];
+      for (let slot of workingSlots) {
+        const dayOfSlot = this.$moment(
+          slot.day + " " + slot.start_time,
+          "ddd HH:mm"
+        )
+          .parseZone()
+          .utcOffset(120)
+          .locale("en")
+          .format("ddd")
+          .toLowerCase();
+        if (!workingDays.includes(dayOfSlot)) {
+          workingDays.push(dayOfSlot);
+        }
+      }
+      return workingDays;
+    },
+    FilteredSlots() {
+      const slots = this.slotsAfterDate;
+      return slots;
     },
     getSlots() {
       const slots = this.$store.getters["controlPanel/slots/getOpenSlots"];
@@ -223,7 +251,9 @@ export default {
       return this.$store.getters.getLocale;
     },
     error() {
-       const newError = this.$store.getters["controlPanel/appointments/getNewAppError"]
+      const newError = this.$store.getters[
+        "controlPanel/appointments/getNewAppError"
+      ];
       return newError;
     }
   }
