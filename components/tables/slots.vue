@@ -43,16 +43,19 @@
         </tr>
 </tbody>
        <tbody v-else >
-        <tr v-for="slot in filteredData" :key="slot.slot_id" class="allSlots-content-table-tr">
-          <td>{{ $t('dashboard.days.'+slot.day)}}</td>
-          <td>{{slot.start_time}}</td>
+           <tr v-for="slot in filteredData" :key="slot.slot_id" class="allSlots-content-table-tr">
+          <td>{{ $t('dashboard.days.'+$moment(slot.day+ " "+slot.start_time, "ddd HH:mm").parseZone().utcOffset(120).locale("en").format("ddd").toLowerCase())}}</td>
+
+
+          <td>{{$moment(slot.start_time, "HH:mm").parseZone().utcOffset(120).locale("en").format("HH:mm")}}</td>
           <td>{{slot.slot_time}}</td>
           <td
             :class="slot.available == 1 ? 'green-status' : 'red-status'"
           >{{slot.available == 1 ?  $t('dashboard.tables.slots.active') : $t('dashboard.tables.slots.notActive')}}</td>
           <td>
             <div class="allSlots-content-table-tr-options">
-                                  <i @click="openEdit(slot)" class="fas fa-edit allSlots-content-table-tr-options-edit"></i>
+                         <i @click="openEdit(slot)" class="fas fa-edit allSlots-content-table-tr-options-edit"></i>
+
             </div>
           </td>
         </tr>
@@ -87,7 +90,7 @@ export default {
           this.searchQuery = value;
           const searched = this.searchQuery;
           this.filteredData = this.slots.filter(slot=>{
-              return (slot.day.toLowerCase().includes(this.forArabicSearch(searched).toLowerCase()))
+              return (this.$moment(slot.day+ " "+slot.start_time, "ddd HH:mm").parseZone().utcOffset(120).locale("en").format("ddd").toLowerCase().includes(this.forArabicSearch(searched).toLowerCase()))
           });
       },
       forArabicSearch(word){
