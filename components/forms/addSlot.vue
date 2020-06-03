@@ -78,19 +78,6 @@
             </div>
 
             <div class="input-div">
-              <clinicInput
-                :placeholder="$t('dashboard.forms.addSlot.end_time')"
-                @input="setEnd"
-                v-model="slotData.end_time"
-                :mutedText="$t('muted.end_time')"
-              >
-                <div v-if="$v.slotData.end_time.$dirty">
-                  <div v-if="!$v.slotData.end_time.required">{{$t('errors.end_time')}}</div>
-                </div>
-              </clinicInput>
-            </div>
-
-            <div class="input-div">
               <clinicSelect @change="setAvailable" v-model="slotData.available">
                 <option value disabled selected>{{$t('dashboard.forms.addSlot.status')}}</option>
                 <option
@@ -145,7 +132,6 @@ export default {
       slotData: {
         slot_time: "",
         start_time: "",
-        end_time: "",
         day: "",
         available: ""
       },
@@ -158,9 +144,6 @@ export default {
         required
       },
       start_time: {
-        required
-      },
-      end_time: {
         required
       },
       day: {
@@ -182,10 +165,6 @@ export default {
     setStart(value) {
       this.slotData.start_time = value;
       this.$v.slotData.start_time.$touch();
-    },
-    setEnd(value) {
-      this.slotData.end_time = value;
-      this.$v.slotData.end_time.$touch();
     },
     setDay(value) {
       this.slotData.day = value;

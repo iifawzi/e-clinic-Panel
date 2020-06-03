@@ -68,7 +68,7 @@
                   :key="slot.slot_id"
                   class="en-selectInput-content-option"
                   :value="slot.slot_id"
-                >{{slot.start_time + $t('dashboard.forms.addApp.to') + slot.end_time }}</option>
+                >{{slot.start_time + $t('dashboard.forms.addApp.for') + slot.slot_time + $t('dashboard.forms.addApp.minute') }}</option>
 
                 <template v-if="$v.appData.slot_id.$dirty" v-slot:errorSlot>
                   <div v-if="!$v.appData.slot_id.required">{{$t('errors.day')}}</div>

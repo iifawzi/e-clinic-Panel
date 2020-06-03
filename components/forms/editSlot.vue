@@ -1,7 +1,7 @@
 <template>
   <div class="editSlot-Component">
     <div class="warninng" v-if="this.slotData.available === true">
-      <notfication color="red" :label="$t('dashboard.forms.editSlot.warning')" />
+      <notfication color="red" style="margin-bottom:10px" :label="$t('dashboard.forms.editSlot.warning')" />
     </div>
        <div class="slotError" v-if="error">
       <notfication color="red" :label="error" />
@@ -76,18 +76,6 @@
               </clinicInput>
             </div>
 
-            <div class="input-div">
-              <clinicInput
-                :placeholder="$t('dashboard.forms.editSlot.end_time')"
-                @input="setEnd"
-                v-model="slotData.end_time"
-                :mutedText="$t('muted.end_time')"
-              >
-                <div v-if="$v.slotData.end_time.$dirty">
-                  <div v-if="!$v.slotData.end_time.required">{{$t('errors.end_time')}}</div>
-                </div>
-              </clinicInput>
-            </div>
 
             <div class="input-div">
               <clinicSelect @change="setAvailable" v-model="slotData.available">
@@ -150,7 +138,6 @@ export default {
       slotData: {
         slot_time: "",
         start_time: "",
-        end_time: "",
         day: "",
         available: "",
       },
@@ -163,9 +150,6 @@ export default {
         required
       },
       start_time: {
-        required
-      },
-      end_time: {
         required
       },
       day: {
@@ -184,10 +168,6 @@ export default {
     setStart(value) {
       this.slotData.start_time = value;
       this.$v.slotData.start_time.$touch();
-    },
-    setEnd(value) {
-      this.slotData.end_time = value;
-      this.$v.slotData.end_time.$touch();
     },
     setDay(value) {
       this.slotData.day = value;
@@ -223,6 +203,8 @@ export default {
       for (let key in this.slotToEdit){
          this.slotData[key] = this.slotToEdit[key];
       }
+       this.slotData.day = this.$moment(this.slotData.day+ " "+this.slotData.start_time, "ddd HH:mm").parseZone().utcOffset(120).locale("en").format("ddd").toLowerCase()
+      this.slotData.start_time = this.$moment(this.slotData.start_time, "HH:mm").parseZone().utcOffset(120).locale("en").format("HH:mm");
   }
 };
 </script>

@@ -38,7 +38,6 @@
         "title": "Slots",
         "day": "Day",
         "start_time": "Start time",
-        "end_time": "End Time",
         "slot_time": "Duration - Minutes",
         "available": "Status",
         "search": "You can search by day",
@@ -54,7 +53,6 @@
         "doctor":"Doctor",
         "category":"Category",
         "start_time": "Start time",
-        "end_time": "End Time",
         "available": "Status",
         "search": "You can search by Date or Doctor's name",
         "searchHolder": "Search",
@@ -70,7 +68,6 @@
         "user": "User",
         "category":"Category",
         "start_time": "Start time",
-        "end_time": "End Time",
         "available": "Status",
         "search": "You can search by Date or User's name",
         "searchHolder": "Search",
@@ -147,7 +144,6 @@
         "day": "Day",
         "slot_time": "Duration",
         "start_time": "Start time",
-        "end_time": "End time",
         "status": "Status",
         "add": "Add"
       },
@@ -160,14 +156,15 @@
         "addApp":"Add The Appointment",
         "status": "Status",
         "add": "Add",
-        "to":" To "
+        "for":" For",
+        "minute":" Minute "
+
       },
       "editSlot": {
         "warning":"Warning: Any edit to this slot, will cancel all booked appointments associated with. ",
         "day": "Day",
         "slot_time": "Duration",
         "start_time": "Start time",
-        "end_time": "End time",
         "status": "Status",
         "update": "Update"
       }
@@ -213,7 +210,6 @@
     "user400": "Please, check the insterted phone number",
     "slot_time": "Duration is required",
     "start_time": "Can't be null",
-    "end_time": "Can't be null",
     "day": "You have to choose a day",
     "status": "You have to choose status",
     "date": "You must choose a date"
@@ -232,7 +228,6 @@
     "picture": "This photo will be shown to users",
     "price": "The price of one sesstion",
     "slot_time": "Duration per minutes",
-    "start_time": "For example: 22:00, 05:30,13:40",
-    "end_time": "For example: 23:30, 06:30,14:40"
+    "start_time": "Start time: For example: 22:00, 05:30,13:40"
   }
 }

@@ -20,7 +20,6 @@
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.date')}}</th>
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.day')}}</th>
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.start_time')}}</th>
-          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.end_time')}}</th>
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.available')}}</th>
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.cancel')}}</th>
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.cancelDate')}}</th>
@@ -33,7 +32,6 @@
 
           <td>{{ $t('dashboard.days.'+appointment.day)}}</td>
           <td>{{appointment.start_time}}</td>
-          <td>{{appointment.end_time}}</td>
           <td
             :class="forStatusClass(appointment.appointment_status)"
         >{{ $t('dashboard.status.'+appointment.appointment_status)}}</td>
@@ -54,7 +52,6 @@
 
           <td>{{ $t('dashboard.days.'+appointment.day)}}</td>
           <td>{{appointment.start_time}}</td>
-          <td>{{appointment.end_time}}</td>
           <td
             :class="forStatusClass(appointment.appointment_status)"
         >{{ $t('dashboard.status.'+appointment.appointment_status)}}</td>

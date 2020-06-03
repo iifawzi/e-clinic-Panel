@@ -1,7 +1,7 @@
 <template>
   <div class="allSlots-table">
     <div class="editDiv" v-if="showEdit"> 
-         <client-only> <editSlot :key="this.slotToEdit" :slotToEdit="this.slotToEdit" /></client-only>
+         <client-only> <editSlot :key="this.updateEditSlot" :slotToEdit="this.slotToEdit" /></client-only>
     </div>
             
       <div class="input-div">
@@ -20,16 +20,16 @@
         <tr class="allSlots-content-table-tr">
           <th class="allSlots-content-table-th">{{$t('dashboard.tables.slots.day')}}</th>
           <th class="allSlots-content-table-th">{{$t('dashboard.tables.slots.start_time')}}</th>
-          <th class="allSlots-content-table-th">{{$t('dashboard.tables.slots.end_time')}}</th>
           <th class="allSlots-content-table-th">{{$t('dashboard.tables.slots.slot_time')}}</th>
           <th class="allSlots-content-table-th">{{$t('dashboard.tables.slots.available')}}</th>
           <th class="allSlots-content-table-th">{{$t('dashboard.tables.slots.options')}}</th>
         </tr>
         <tbody v-if="this.searchQuery == ''">
         <tr v-for="slot in slots" :key="slot.slot_id" class="allSlots-content-table-tr">
-          <td>{{ $t('dashboard.days.'+slot.day)}}</td>
-          <td>{{slot.start_time}}</td>
-          <td>{{slot.end_time}}</td>
+          <td>{{ $t('dashboard.days.'+$moment(slot.day+ " "+slot.start_time, "ddd HH:mm").parseZone().utcOffset(120).locale("en").format("ddd").toLowerCase())}}</td>
+
+
+          <td>{{$moment(slot.start_time, "HH:mm").parseZone().utcOffset(120).locale("en").format("HH:mm")}}</td>
           <td>{{slot.slot_time}}</td>
           <td
             :class="slot.available == 1 ? 'green-status' : 'red-status'"
@@ -46,7 +46,6 @@
         <tr v-for="slot in filteredData" :key="slot.slot_id" class="allSlots-content-table-tr">
           <td>{{ $t('dashboard.days.'+slot.day)}}</td>
           <td>{{slot.start_time}}</td>
-          <td>{{slot.end_time}}</td>
           <td>{{slot.slot_time}}</td>
           <td
             :class="slot.available == 1 ? 'green-status' : 'red-status'"
@@ -75,6 +74,7 @@ export default {
      searchQuery: "",
      filteredData: "",
      slotToEdit:"",
+     updateEditSlot:0,
      showEdit:false
     };
   },
@@ -113,13 +113,14 @@ export default {
           }
           return searchWord;
       },
-      openEdit(object){
-                  if (object.slot_id == this.slotToEdit.slot_id){
+      openEdit(theSlot){
+                  if (theSlot.slot_id == this.slotToEdit.slot_id){
      this.showEdit = false;
             this.slotToEdit = ""
           }else {
           this.showEdit = true;
-          this.slotToEdit = object;
+          this.slotToEdit = theSlot;
+          this.updateEditSlot +=1;
           }
 
 

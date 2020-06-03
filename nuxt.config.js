@@ -46,6 +46,7 @@ styleResources: {
  plugins: [
    '~/plugins/i18n.js',
    '~/plugins/vuelidate',
+   '~/plugins/moment.js',
    { src: '~/plugins/vue-datepicker', ssr: false },
   ],
   /*
@@ -53,12 +54,9 @@ styleResources: {
   */
  buildModules: [
   // Simple usage
-  '@nuxtjs/moment',
+
 ],
-moment: {
-  defaultLocale: 'ar',
-  locales: ['ar']
-},
+
   /*
   ** Nuxt.js modules
   */
