@@ -12,7 +12,7 @@
          <client-only> <slotsTable/></client-only>
                   <addSlot/>
              <div class="apps-title">{{$t('dashboard.tables.docApps.title')}}</div>
-               <client-only> <docsApps/></client-only>
+               <client-only> <docsApps :key="slots"/></client-only>
                  <addApp/>
         </div>
       </div>
@@ -39,6 +39,11 @@ export default {
           : "Edit Doctor"
     };
   },
+  data(){
+    return {
+      updateApps: 0,
+    }
+  },
   components:{
 editDoctor,
     slotsTable,
@@ -54,6 +59,10 @@ editDoctor,
          getAccountStatus() {
       return this.$store.getters["controlPanel/doctors/accountStatus"];
       this.doctorData.avaliable = !this.doctorData.avaliable;
+    },
+    slots() {
+      const slotts = this.$store.getters["controlPanel/slots/getSlots"];
+      return this.updateApps +=1;
     },
   },
 };

@@ -82,11 +82,11 @@
                 <option value disabled selected>{{$t('dashboard.forms.editSlot.status')}}</option>
                 <option
                   class="en-selectInput-content-option"
-                  value="false"
+                  :value="!trueBoolean"
                 >{{$t('dashboard.tables.slots.notActive')}}</option>
                 <option
                   class="en-selectInput-content-option"
-                  value="true"
+                  :value="trueBoolean"
                 >{{$t('dashboard.tables.slots.active')}}</option>
                 <template v-if="$v.slotData.available.$dirty" v-slot:errorSlot>
                   <div v-if="!$v.slotData.available.required">{{$t('errors.status')}}</div>
@@ -135,6 +135,7 @@ export default {
   },
   data() {
     return {
+      trueBoolean: true,
       slotData: {
         slot_time: "",
         start_time: "",

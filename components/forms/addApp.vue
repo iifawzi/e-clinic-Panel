@@ -158,6 +158,14 @@ export default {
     },
     toggleForm() {
       this.showForm = !this.showForm;
+      if (this.getSlots.length == 0){
+     const doctor_id = this.$route.params.doctor_id;
+    const data = {
+      doctor_id,
+      searchIn: 30
+    };
+    this.$store.dispatch("controlPanel/slots/getOpenSlots", data);
+      }
     },
     addApp() {
       const doctor_id = this.$route.params.doctor_id;
@@ -204,15 +212,6 @@ export default {
       );
       this.slotsAfterDate = filteredDates;
     }
-  },
-  mounted() {
-    const doctor_id = this.$route.params.doctor_id;
-    this.$store.dispatch("controlPanel/slots/getDoctorSlots", doctor_id);
-    const data = {
-      doctor_id,
-      searchIn: 30
-    };
-    this.$store.dispatch("controlPanel/slots/getOpenSlots", data);
   },
   computed: {
     userData() {
