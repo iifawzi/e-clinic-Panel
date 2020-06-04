@@ -11,7 +11,7 @@
           @click="toggleForm"
         />
       </div>
-      <div class="addForm" v-if="showForm">
+      <div class="addForm" v-if="showForm == true">
         <div class="addForm-content">
           <div class="addRow">
             <div class="search-bar">
@@ -158,14 +158,12 @@ export default {
     },
     toggleForm() {
       this.showForm = !this.showForm;
-      if (this.getSlots.length == 0){
      const doctor_id = this.$route.params.doctor_id;
     const data = {
       doctor_id,
       searchIn: 30
     };
     this.$store.dispatch("controlPanel/slots/getOpenSlots", data);
-      }
     },
     addApp() {
       const doctor_id = this.$route.params.doctor_id;
@@ -220,20 +218,18 @@ export default {
       return userData;
     },
     getDays() {
-      const workingSlots = this.$store.getters["controlPanel/slots/getSlots"];
+      const workingSlots = this.getSlots.map(
+        slot =>
+          this.$moment(slot.start_time)
+            .utc()
+            .parseZone()
+            .utcOffset(120)
+            .format("ddd").toLowerCase()
+      );
       const workingDays = [];
-      for (let slot of workingSlots) {
-        const dayOfSlot = this.$moment(
-          slot.day + " " + slot.start_time,
-          "ddd HH:mm"
-        )
-          .parseZone()
-          .utcOffset(120)
-          .locale("en")
-          .format("ddd")
-          .toLowerCase();
-        if (!workingDays.includes(dayOfSlot)) {
-          workingDays.push(dayOfSlot);
+      for (let day of workingSlots) {
+        if (!workingDays.includes(day)) {
+          workingDays.push(day);
         }
       }
       return workingDays;

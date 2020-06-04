@@ -13,7 +13,7 @@
                   <addSlot/>
              <div class="apps-title">{{$t('dashboard.tables.docApps.title')}}</div>
                <client-only> <docsApps :key="slots"/></client-only>
-                 <addApp/>
+                 <addApp :key="apps"/>
         </div>
       </div>
 
@@ -42,6 +42,7 @@ export default {
   data(){
     return {
       updateApps: 0,
+      updateAdd: 45,
     }
   },
   components:{
@@ -63,6 +64,10 @@ editDoctor,
     slots() {
       const slotts = this.$store.getters["controlPanel/slots/getSlots"];
       return this.updateApps +=1;
+    },
+        apps() {
+      const apps = this.$store.getters["controlPanel/appointments/getDocAppointments"];
+      return this.updateAdd +=1;
     },
   },
 };

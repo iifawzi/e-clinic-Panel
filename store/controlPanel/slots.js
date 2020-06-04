@@ -39,6 +39,7 @@ setOpenSlots(state,slots){
 export const actions = {
 getDoctorSlots({commit},doctor_id){
     commit("setDocSlotsError", "");
+    commit("setSlots", "");
     this.$axios.post("/controlPanel/getDoctorSlots",{doctor_id},config).then(response=>{
         commit("setSlots", response.data.data);
     })    

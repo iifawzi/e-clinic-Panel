@@ -103,9 +103,9 @@ const canceled = this.$axios.patch("/appointments/cancelAppointment",{appointmen
 
 addAppointment({commit,dispatch},{data,doctor_id}){
   commit("seNewAppError","");
-
     const added = this.$axios.post("/appointments/addConfirmedAppointment",data,config).then(response=>{
       dispatch("getDocAppointmentsData",doctor_id);
+      commit("controlPanel/users/setUserData","",{root:true});
     }).catch(err => {
       if (!err.response) {
         commit("seNewAppError", this.app.i18n.t("errors.500"));
