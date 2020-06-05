@@ -1,11 +1,4 @@
 import Cookie from "js-cookie";
-const token = Cookie.get("token");
-const config = {
-    headers: {
-      Authorization: "Bearer " + token
-    }
-  };
-
 export const state = () => ({
     userAppointments: {
         apps:"",
@@ -38,6 +31,12 @@ seNewAppError(state,message){
 
 export const actions = {
 getUserAppointmentsData({commit},user_id){
+  const token = Cookie.get("token");
+  const config = {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    };
     commit("setUserAppointmentsError", "");
 const userAppsData = this.$axios.post("/appointments/getUserApps",{user_id},config).then(response=>{
     commit("setUserAppointments",response.data.data);
@@ -58,6 +57,12 @@ const userAppsData = this.$axios.post("/appointments/getUserApps",{user_id},conf
 },
 
 getDocAppointmentsData({commit},doctor_id){
+  const token = Cookie.get("token");
+const config = {
+    headers: {
+      Authorization: "Bearer " + token
+    }
+  };
   commit("setDocAppointmentsError", "");
 const userAppsData = this.$axios.post("/appointments/getDocApps",{doctor_id},config).then(response=>{
   commit("setDocAppointments",response.data.data);
@@ -77,6 +82,12 @@ const userAppsData = this.$axios.post("/appointments/getDocApps",{doctor_id},con
 },
 
 cancelAppointment({dispatch,commit},{appointment_id,id,updateWhat}){
+  const token = Cookie.get("token");
+const config = {
+    headers: {
+      Authorization: "Bearer " + token
+    }
+  };
 const canceled = this.$axios.patch("/appointments/cancelAppointment",{appointment_id},config).then(response=>{
   if (updateWhat == 'user'){  // to reload the users apps (from users panel)
     dispatch("getUserAppointmentsData",id);
@@ -102,6 +113,12 @@ const canceled = this.$axios.patch("/appointments/cancelAppointment",{appointmen
 
 
 addAppointment({commit,dispatch},{data,doctor_id}){
+  const token = Cookie.get("token");
+const config = {
+    headers: {
+      Authorization: "Bearer " + token
+    }
+  };
   commit("seNewAppError","");
     const added = this.$axios.post("/appointments/addConfirmedAppointment",data,config).then(response=>{
       dispatch("getDocAppointmentsData",doctor_id);
