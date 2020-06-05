@@ -8,10 +8,8 @@
 <editDoctor :key="getAccountStatus"/> 
         </div>
            <div class="slotsTable">
-             <div class="slots-title">{{$t('dashboard.tables.slots.title')}}</div>
          <client-only> <slotsTable/></client-only>
                   <addSlot/>
-             <div class="apps-title">{{$t('dashboard.tables.docApps.title')}}</div>
                <client-only> <docsApps :key="slots"/></client-only>
                  <addApp :key="apps"/>
         </div>
@@ -93,16 +91,6 @@ editDoctor,
 .slotsTable {
   width: 75%;
 }
-.slots-title{
-  font-size: 40px;
-  text-align: center;
-  color: $main-color;
-}
-.apps-title {
-  font-size: 40px;
-  text-align: center;
-  color: $main-color;
-  margin-top: 50px;
-}
+
 
 </style>

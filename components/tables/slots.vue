@@ -5,7 +5,8 @@
     </div>
             
       <div class="input-div">
-        <clinicInput
+             <div class="slots-title">{{$t('dashboard.tables.slots.title')}}</div>
+        <clinicInput class="clinicInput"
           :placeholder="$t('dashboard.tables.slots.searchHolder')"
           @input="setSearch"
           v-model="searchQuery"
@@ -194,7 +195,17 @@ td {
   color: $red;
 }
 .input-div {
-  width: 400px;
+    display: flex;
+  flex-flow: row;
+  justify-content: space-between;
   margin-top: 40px;
+}
+.clinicInput {
+  width: 300px;
+}
+.slots-title{
+  font-size: 40px;
+  text-align: center;
+  color: $main-color;
 }
 </style>

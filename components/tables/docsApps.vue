@@ -2,7 +2,8 @@
   <div class="docApps-table">
 
       <div class="input-div">
-        <clinicInput
+                     <div class="apps-title">{{$t('dashboard.tables.docApps.title')}}</div>
+        <clinicInput class="clinicInput"
           :placeholder="$t('dashboard.tables.docApps.searchHolder')"
           @input="setSearch"
           v-model="searchQuery"
@@ -189,7 +190,18 @@ td {
 }
 
 .input-div {
-  width: 400px;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
   margin-top: 40px;
 }
+.clinicInput {
+  width: 300px;
+}
+.apps-title {
+  font-size: 40px;
+  text-align: center;
+  color: $main-color;
+}
+
 </style>
