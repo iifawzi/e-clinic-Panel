@@ -7,7 +7,7 @@
           <img
             v-if="imageFromComponent != ''"
             class="profile-Image"
-            :src="'http://localhost:5000/images/'+imageFromComponent"
+            :src="'http://clinice.herokuapp.com/images/'+imageFromComponent"
           />
         </div>
         <img v-if="imageToShow != ''" class="profile-Image" :src="imageToShow" />
