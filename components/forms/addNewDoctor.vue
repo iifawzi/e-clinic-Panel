@@ -1,6 +1,6 @@
 <template>
   <section class="addNewDoctor-form"> 
-<div class="sk-cube-grid" v-if="categories == ''">
+<div class="sk-cube-grid" v-if="showSpinner || categories == ''">
   <div class="sk-cube sk-cube1"></div>
   <div class="sk-cube sk-cube2"></div>
   <div class="sk-cube sk-cube3"></div>
@@ -12,7 +12,7 @@
   <div class="sk-cube sk-cube9"></div>
 </div>
 
-    <div class="addNewDoctorForm-content" v-if="categories != ''">
+    <div class="addNewDoctorForm-content" v-if="categories != '' && showSpinner === false">
       <div class="input-div">
         <uploadImage :mutedText="$t('muted.picture')" @input="setPicture">
           <div v-if="$v.doctorData.picture.$dirty">
@@ -137,6 +137,7 @@ const { required,integer,minLength,maxLength,alphaNum } = require("vuelidate/lib
 export default {
   data() {
     return {
+      showSpinner:false,
       doctorData: {
         phone_number: "",
         password: "",
@@ -226,6 +227,7 @@ export default {
       this.$v.$touch();
       if (this.$v.$invalid) {
       } else {
+        this.showSpinner = true;
         this.$store.dispatch("controlPanel/doctors/add_doctor", this.doctorData);
       }
     }
@@ -235,6 +237,7 @@ export default {
       return this.$store.getters.getLocale;
     },
     error() {
+        this.showSpinner = false;
       return this.$store.getters["controlPanel/doctors/getError"];
     },
     getSuccess() {
