@@ -94,7 +94,7 @@ export const actions = {
       delete doctorDataWithPicture.picture;
       doctorDataWithPicture.picture = imagename;
       const addDoctor = this.$axios
-        .post("/controlPanel/addDoctor", { ...doctorDataWithPicture })
+        .post("/controlPanel/addDoctor", { ...doctorDataWithPicture },config)
         .then(response => {
           const responseData = response.data.data;
           commit("setSuccess", this.app.i18n.t("success.add"));
