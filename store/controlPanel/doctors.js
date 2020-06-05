@@ -77,6 +77,7 @@ export const actions = {
   // add doctor /controlPanel/dashboard/doctors/add
   async add_doctor({ commit, dispatch }, doctorData) {
     const token = Cookie.get("token");
+    console.log(token);
     const config = {
       headers: {
         Authorization: "Bearer " + token
@@ -192,6 +193,12 @@ export const actions = {
       }
     } else {
       // if we will not upload a picture:
+      const token = Cookie.get("token");
+      const config = {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      };
       const updatedDoctor = this.$axios
         .patch("/doctors/updateDoctor", { doctor_id, ...Newdata }, config)
         .then(response => {
