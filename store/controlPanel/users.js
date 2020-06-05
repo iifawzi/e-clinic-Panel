@@ -51,7 +51,7 @@ export const actions = {
         }
       });
   },
-  toggleBlock({ commit }, phone_number) {
+  toggleBlock({ commit,dispatch }, phone_number) {
     const token = Cookie.get("token");
     const config = {
       headers: {
@@ -62,6 +62,8 @@ export const actions = {
       .patch("/controlPanel/toggleBlock", { phone_number }, config)
       .then(response => {
         commit("setUserData", response.data.data);
+        dispatch("controlPanel/appointments/getUserAppointmentsData",response.data.data.user_id, {root: true});
+
       })
       .catch(err => {
         if (!err.response) {
