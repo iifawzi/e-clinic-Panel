@@ -183,7 +183,10 @@
       "upcoming": "Upcoming",
       "finished": "Finished",
       "canceled": "Canceled",
-      "running": "Running"
+      "running": "Running",
+      "missed": "Missed",
+      "doctor missed": "Missed by doctor",
+      "user missed": "Missed by user"
     }
   },
   "errors": {

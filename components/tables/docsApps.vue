@@ -104,6 +104,12 @@ export default {
                  return 'finished'
           }else if (status == 'canceled'){
                  return 'canceled'
+          }else if (status == 'missed'){
+                 return 'missed'
+          }else if (status == 'doctor missed'){
+                 return 'missed_doctor'
+          }else if (status == 'user missed'){
+                 return 'missed_user'
           }
       },
             cancelApp(appointment_id){
@@ -187,6 +193,15 @@ td {
 }
 .pending {
   color: $yellow;
+}
+.missed {
+  color: $orange;
+}
+.missed_doctor {
+  color: $brown;
+}
+.missed_user {
+  color: $sky;
 }
 
 .input-div {

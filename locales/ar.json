@@ -181,7 +181,11 @@
       "upcoming": "قادمة",
       "finished": "انتهت",
       "canceled": "ملغية",
-      "running": "تعمل الأن"
+      "running": "تعمل الأن",
+      "missed": "لم يتم حضورها",
+      "doctor missed": "لم يحضر الدكتور",
+      "user missed": "لم يحضر المستخدم"
+
     }
   },
   "errors": {
