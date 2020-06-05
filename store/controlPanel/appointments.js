@@ -57,6 +57,7 @@ const userAppsData = this.$axios.post("/appointments/getUserApps",{user_id},conf
 },
 
 getDocAppointmentsData({commit},doctor_id){
+  console.log(doctor_id);
   const token = Cookie.get("token");
 const config = {
     headers: {

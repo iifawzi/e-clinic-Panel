@@ -4,13 +4,13 @@
       <div class="edit-title">{{$t("dashboard.forms.editDoctor.title")}}</div>
       <div class="editPage-content">
         <div class="editForm">
-          <!-- update cimponent when status changed (active/not active) -->
+          <!-- update component when status changed (active/not active) -->
 <editDoctor :key="getAccountStatus"/> 
         </div>
            <div class="slotsTable">
          <client-only> <slotsTable/></client-only>
                   <addSlot/>
-               <client-only> <docsApps :key="slots"/></client-only>
+               <client-only> <docsApps :key="slots" /></client-only>
                  <addApp :key="apps"/>
         </div>
       </div>
@@ -41,6 +41,7 @@ export default {
     return {
       updateApps: 0,
       updateAdd: 45,
+      updateEdit: 100,
     }
   },
   components:{
@@ -57,7 +58,7 @@ editDoctor,
     },
          getAccountStatus() {
       return this.$store.getters["controlPanel/doctors/accountStatus"];
-      this.doctorData.avaliable = !this.doctorData.avaliable;
+      this.doctorData.available = !this.doctorData.available;
     },
     slots() {
       const slotts = this.$store.getters["controlPanel/slots/getSlots"];

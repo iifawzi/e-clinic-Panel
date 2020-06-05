@@ -119,7 +119,7 @@
         </div>
            <div class="submit-div">
           <clinicSubmit
-          v-if="getDoctor.avaliable === false"
+          v-if="getDoctor.available === false"
             color="green"
             :statement="$t('dashboard.forms.editDoctor.activeDoctor')"
             @click="activeDeactiveAccount"
@@ -158,7 +158,7 @@ export default {
         category_id: "",
         picture: "",
         price:"",
-        avaliable: false,
+        available: false,
       },
       NewDoctorData:{}, 
          };
@@ -255,7 +255,7 @@ export default {
       this.$v.$touch();
       if (this.$v.$invalid) {
       } else {
-        this.$store.dispatch("controlPanel/doctors/update_doctor", {Newdata: {avaliable: !this.doctorData.avaliable}, doctor_id: this.doctorData.doctor_id});
+        this.$store.dispatch("controlPanel/doctors/update_doctor", {Newdata: {available: !this.doctorData.available}, doctor_id: this.doctorData.doctor_id});
       }
     }
   },
@@ -271,7 +271,7 @@ export default {
     },
      getAccountStatus() {
       return this.$store.getters["controlPanel/doctors/accountStatus"];
-      this.doctorData.avaliable = !this.doctorData.avaliable;
+      this.doctorData.available = !this.doctorData.available;
     },
       categories() {
       return this.$store.getters['controlPanel/categories/get_categories'];
@@ -287,7 +287,7 @@ export default {
       this.doctorData.category_id = doctorData.category_id;
       this.doctorData.price = doctorData.price;
       this.doctorData.picture = doctorData.picture;
-      this.doctorData.avaliable = doctorData.avaliable;
+      this.doctorData.available = doctorData.available;
       return doctorData;
     },
   }, 

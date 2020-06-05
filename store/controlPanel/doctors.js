@@ -204,6 +204,7 @@ export const actions = {
         .then(response => {
           commit("accountStatus");
           commit("setSuccess", this.app.i18n.t("success.edit"));
+          dispatch("controlPanel/appointments/getDocAppointmentsData",doctor_id,{root: true});
         })
         .catch(err => {
           if (!err.response) {

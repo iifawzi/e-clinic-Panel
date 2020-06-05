@@ -120,7 +120,7 @@
         "category": "Category",
         "price": "The Price",
         "phone": "Phone Number",
-        "avaliable": "Status",
+        "available": "Status",
         "options": "Options",
         "notActive": "Not Active",
         "active": "Active",

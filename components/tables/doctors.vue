@@ -21,7 +21,7 @@
           <th class="allDoctors-content-table-th">{{$t('dashboard.forms.allDoctors.category')}}</th>
           <th class="allDoctors-content-table-th">{{$t('dashboard.forms.allDoctors.price')}}</th>
           <th class="allDoctors-content-table-th">{{$t('dashboard.forms.allDoctors.phone')}}</th>
-          <th class="allDoctors-content-table-th">{{$t('dashboard.forms.allDoctors.avaliable')}}</th>
+          <th class="allDoctors-content-table-th">{{$t('dashboard.forms.allDoctors.available')}}</th>
           <th class="allDoctors-content-table-th">{{$t('dashboard.forms.allDoctors.options')}}</th>
         </tr>
         <tbody v-if="this.searchQuery == ''">
@@ -33,8 +33,8 @@
           <td>{{doctor.price}}</td>
           <td>{{doctor.phone_number}}</td>
           <td
-            :class="doctor.avaliable === 1 ? 'green-status' : 'red-status'"
-          >{{doctor.avaliable === 1 ? $t('dashboard.forms.allDoctors.active') : $t('dashboard.forms.allDoctors.notActive')}}</td>
+            :class="doctor.available === 1 ? 'green-status' : 'red-status'"
+          >{{doctor.available === 1 ? $t('dashboard.forms.allDoctors.active') : $t('dashboard.forms.allDoctors.notActive')}}</td>
           <td>
             <div class="allDoctors-content-table-tr-options">
               <!-- <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i> -->
@@ -57,8 +57,8 @@
           <td>{{doctor.price}}</td>
           <td>{{doctor.phone_number}}</td>
           <td
-            :class="doctor.avaliable === 1 ? 'green-status' : 'red-status'"
-          >{{doctor.avaliable === 1 ? $t('dashboard.forms.allDoctors.active') : $t('dashboard.forms.allDoctors.notActive')}}</td>
+            :class="doctor.available === 1 ? 'green-status' : 'red-status'"
+          >{{doctor.available === 1 ? $t('dashboard.forms.allDoctors.active') : $t('dashboard.forms.allDoctors.notActive')}}</td>
           <td>
             <div class="allDoctors-content-table-tr-options">
               <!-- <i @click="deleteDoctor(doctor.phone_number)" class="fas fa-times options-delete"></i> -->
