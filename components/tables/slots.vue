@@ -14,7 +14,13 @@
         >
         </clinicInput>
       </div>
-    <div class="allSlots-content">
+
+<div class="spinner-1" v-if="!slots">
+<div class="double-bounce1"></div>
+<div class="double-bounce2"></div>
+ </div>
+
+    <div class="allSlots-content" v-if="slots">
       <table class="allSlots-content-table">
 
 

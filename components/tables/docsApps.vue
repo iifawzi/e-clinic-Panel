@@ -11,7 +11,7 @@
         >
         </clinicInput>
       </div>
-        <div class="spinner-3" v-if="showSpinner">
+        <div class="spinner-3" v-if="!appointments">
   <div class="bounce1"></div>
   <div class="bounce2"></div>
   <div class="bounce3"></div>
@@ -81,7 +81,6 @@ export default {
     return {
      searchQuery: "",
      filteredData: "",
-      showSpinner:true,
     };
   },
     components: {
@@ -131,7 +130,6 @@ export default {
   },
   computed: {
     appointments() {
-      this.showSpinner = false;
       return this.$store.getters["controlPanel/appointments/getDocAppointments"];
     },
     language() {
