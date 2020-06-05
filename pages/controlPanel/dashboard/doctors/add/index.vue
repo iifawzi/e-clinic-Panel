@@ -1,7 +1,7 @@
 <template>
     <div class="addDoctor-page">
         <div class="addDoctor-content" :class="language+'-controlPanel-padding'">
-<span class="controlPanel-PageTitle">{{$t('dashboard.sidenav.addDoctor')}}</span>
+
 
     <div class="doctorError" v-if="error">
       <notfication color="red" :label="error" />
