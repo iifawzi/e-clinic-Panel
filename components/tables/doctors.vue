@@ -10,7 +10,14 @@
         >
         </clinicInput>
       </div>
-    <div class="allDoctors-content">
+
+  
+
+  <div class="spinner-4" v-if="!doctors">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>
+    <div class="allDoctors-content" v-if="doctors">
       <table class="allDoctors-content-table">
 
 
