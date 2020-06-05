@@ -11,10 +11,14 @@
         >
         </clinicInput>
       </div>
-    <div class="docApps-content">
-      <table class="docApps-content-table">
+        <div class="spinner-3" v-if="showSpinner">
+  <div class="bounce1"></div>
+  <div class="bounce2"></div>
+  <div class="bounce3"></div>
+</div>
+    <div class="docApps-content"  v-if="appointments">
 
-
+      <table class="docApps-content-table" >
         <tr class="docApps-content-table-tr">
           <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.user')}}</th>
           <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.date')}}</th>
@@ -24,6 +28,7 @@
                   <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.cancel')}}</th>
           <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.cancelDate')}}</th>
         </tr>
+
         <tbody v-if="this.searchQuery == ''">
         <tr v-for="appointment in appointments" :key="appointment.appointment_id" class="docApps-content-table-tr">
           <td>{{appointment.first_name}} {{appointment.last_name}}</td>
@@ -76,6 +81,7 @@ export default {
     return {
      searchQuery: "",
      filteredData: "",
+      showSpinner:true,
     };
   },
     components: {
@@ -125,6 +131,7 @@ export default {
   },
   computed: {
     appointments() {
+      this.showSpinner = false;
       return this.$store.getters["controlPanel/appointments/getDocAppointments"];
     },
     language() {
