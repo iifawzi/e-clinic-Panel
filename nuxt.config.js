@@ -66,7 +66,7 @@ styleResources: {
   ],
   // * Axios
   axios: {
-    baseURL: 'http://localhost:5000/api/'
+    baseURL: 'http://clinice.herokuapp.com/api/'
   },
   // *
   /*
