@@ -114,7 +114,6 @@ export default {
   validations: {
     phone_number: {
       required,
-      integer
     }
   },
   components: {
