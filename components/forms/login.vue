@@ -13,7 +13,7 @@
         </clinicInput>
       </div>
       <div class="input-div">
-        <clinicInput :placeholder="$t('panel.loginForm.password')" @input="setPassword" v-model="loginData.password">
+        <clinicInput :placeholder="$t('panel.loginForm.password')" @input="setPassword" type="password" v-model="loginData.password">
                <div v-if="$v.loginData.password.$dirty">
               <div v-if="!$v.loginData.password.required">{{$t('errors.password')}}</div>
             </div>
