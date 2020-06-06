@@ -9,7 +9,7 @@
           v-model="phone_number" 
         >
          <div v-if="$v.phone_number.$dirty">
-            <div v-if="!$v.phone_number.required || !$v.phone_number.integer">{{$t('errors.user400')}}</div>
+            <div v-if="!$v.phone_number.required">{{$t('errors.user400')}}</div>
           </div>
         </clinicInput>
       </div>
