@@ -3,6 +3,9 @@
     <div class="slotError" v-if="error">
       <notfication color="red" :label="error" />
     </div>
+        <div class="slotError" v-if="userError">
+      <notfication color="red" :label="userError" />
+    </div>
     <div class="addApp-content">
       <div class="addBtn">
         <clinicSubmit
@@ -23,7 +26,7 @@
                 >
                   <div v-if="$v.phone_number.$dirty">
                     <div
-                      v-if="!$v.phone_number.required || !$v.phone_number.integer"
+                      v-if="!$v.phone_number.required"
                     >{{$t('errors.user400')}}</div>
                   </div>
                 </clinicInput>
@@ -99,7 +102,7 @@ import clinicSubmit from "~/components/shared/clinicSubmit";
 import clinicInput from "~/components/shared/clinicInput";
 import notfication from "~/components/shared/notfication";
 import clinicSelect from "~/components/shared/clinicSelect";
-const { required, integer } = require("vuelidate/lib/validators");
+const { required } = require("vuelidate/lib/validators");
 
 export default {
   components: {
@@ -122,8 +125,7 @@ export default {
   },
   validations: {
     phone_number: {
-      required,
-      integer
+      required
     },
     appData: {
       slot_id: {
@@ -250,6 +252,10 @@ export default {
         "controlPanel/appointments/getNewAppError"
       ];
       return newError;
+    }, 
+    userError(){
+      const userError = this.$store.getters["controlPanel/users/getUserError"];
+      return userError;
     }
   }
 };
