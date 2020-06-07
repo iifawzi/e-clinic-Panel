@@ -191,7 +191,7 @@ export default {
       this.$v.appData.slot_id.$touch();
     },
     getUser() {
-      if (this.$v.phone_number.required && this.$v.phone_number.integer) {
+      if (this.$v.phone_number.required) {
         const phone_number = this.phone_number;
         this.$store.dispatch("controlPanel/users/getUser", phone_number);
       }
