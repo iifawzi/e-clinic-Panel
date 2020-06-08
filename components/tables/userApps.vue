@@ -34,6 +34,7 @@
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.day')}}</th>
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.start_time')}}</th>
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.available')}}</th>
+          <th class="docApps-content-table-th">{{$t('dashboard.tables.userApps.details')}}</th>
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.cancel')}}</th>
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.cancelDate')}}</th>
         </tr>
@@ -47,7 +48,16 @@
           <td
             :class="forStatusClass(appointment.appointment_status)"
         >{{ $t('dashboard.status.'+appointment.appointment_status)}}</td>
-
+            <td>
+              <nuxt-link :to="'/controlPanel/dashboard/info/'+appointment.room_id">
+                <div class="docApps-content-table-tr-options info">
+                  <i
+                    v-if="appointment.appointment_status === 'finished'"
+                    class="fas fa-info-circle"
+                  ></i>
+                </div>
+              </nuxt-link>
+            </td>
           <td>
             <div class="userApps-content-table-tr-options">
                 <i @click="cancelApp(appointment.appointment_id)" v-if="appointment.appointment_status === 'upcoming'" class="fas fa-times options-delete"></i>
@@ -66,7 +76,16 @@
           <td
             :class="forStatusClass(appointment.appointment_status)"
         >{{ $t('dashboard.status.'+appointment.appointment_status)}}</td>
-
+            <td>
+              <nuxt-link :to="'/controlPanel/dashboard/info/'+appointment.room_id">
+                <div class="docApps-content-table-tr-options info">
+                  <i
+                    v-if="appointment.appointment_status === 'finished'"
+                    class="fas fa-info-circle"
+                  ></i>
+                </div>
+              </nuxt-link>
+            </td>
           <td>
 <div class="userApps-content-table-tr-options">
               <i @click="cancelApp(appointment.appointment_id)" v-if="appointment.appointment_status === 'upcoming'" class="fas fa-times options-delete"></i>
@@ -202,7 +221,9 @@ td {
 .pending {
   color: $yellow;
 }
-
+.info {
+  color: $pink;
+}
 .input-div {
   width: 400px;
   margin-top: 40px;

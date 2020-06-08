@@ -59,7 +59,8 @@
         "cancel": "إلغاء",
         "cancelDate": "تاريخ الالغاء",
         "notActive": "غير متاح",
-        "active": "متاح"
+        "active": "متاح",
+        "details": "التفاصيل"
       },
       "docApps": {
         "title":"حجوزات الدكتور",

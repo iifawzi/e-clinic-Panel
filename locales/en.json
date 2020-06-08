@@ -59,7 +59,8 @@
         "cancel": "cancel",
         "cancelDate":"Cancel Date",
         "notActive": "Unavailable",
-        "active": "Available"
+        "active": "Available",
+        "details": "Details"
       },
       "docApps": {
         "title":"Doctor's Appointments",
