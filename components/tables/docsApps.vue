@@ -42,7 +42,7 @@
               :class="forStatusClass(appointment.appointment_status)"
             >{{ $t('dashboard.status.'+appointment.appointment_status)}}</td>
             <td>
-              <nuxt-link :to="'/controlPanel/dashboard/prescriptions/'+appointment.room_id">
+              <nuxt-link :to="'/controlPanel/dashboard/info/'+appointment.room_id">
                 <div class="docApps-content-table-tr-options info">
                   <i
                     v-if="appointment.appointment_status === 'finished'"
@@ -80,7 +80,7 @@
             >{{ $t('dashboard.status.'+appointment.appointment_status)}}</td>
 
             <td>
-              <nuxt-link to="www.google.com">
+              <nuxt-link :to="'/controlPanel/dashboard/info/'+appointment.room_id">
                 <div class="docApps-content-table-tr-options info">
                   <i
                     v-if="appointment.appointment_status === 'finished'"

@@ -170,6 +170,10 @@
         "update": "Update"
       }
     },
+    "info":{
+      "title":"Info", 
+      "chat": "Chat"
+    },
     "days": {
       "sun": "Sunday",
       "mon": "Monday",
