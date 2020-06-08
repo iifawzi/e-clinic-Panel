@@ -117,12 +117,6 @@ export default {
     }
   }
 }
-.input-div {
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-  margin-top: 40px;
-}
 .info-title {
   width: 100%;
   font-size: 30px;

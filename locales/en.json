@@ -172,7 +172,9 @@
     },
     "info":{
       "title":"Info", 
-      "chat": "Chat"
+      "chat": "Chat",
+      "diagnose": "Diagnose",
+      "prescription": "Prescription"
     },
     "days": {
       "sun": "Sunday",

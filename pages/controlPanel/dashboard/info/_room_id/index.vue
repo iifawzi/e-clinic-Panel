@@ -4,7 +4,7 @@
     <div class="info-content">
   <div class="mainRow">
           <div class="chat"><chat/></div>
-      <div class="info">info here</div>
+      <div class="info"><prescription/></div>
   </div>
     </div>
   </section>
@@ -13,6 +13,7 @@
 
 <script>
 import chat from "~/components/blocks/chat"
+import prescription from "~/components/blocks/prescription"
 export default {
   middleware: "admin-auth",
   layout: "dashboard",
@@ -26,6 +27,7 @@ export default {
   },
   components:{
       chat,
+      prescription
   },
   computed: {
     language() {
