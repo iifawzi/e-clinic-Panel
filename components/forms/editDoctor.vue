@@ -69,24 +69,6 @@
           </div>
         </clinicInput>
         <div class="input-div">
-          <clinicSelect @change="setCountry" v-model="doctorData.country">
-            <option value disabled selected>{{$t('dashboard.forms.editDoctor.country')}}</option>
-            <option
-              class="en-selectInput-content-option"
-              value="egypt"
-            >{{$t('dashboard.forms.editDoctor.egypt')}}</option>
-            <option
-              class="en-selectInput-content-option"
-              value="saudiarabia"
-            >{{$t('dashboard.forms.editDoctor.saudiarabia')}}</option>
-
-            <template v-if="$v.doctorData.country.$dirty" v-slot:errorSlot>
-              <div v-if="!$v.doctorData.country.required">{{$t('errors.country')}}</div>
-            </template>
-          </clinicSelect>
-        </div>
-
-        <div class="input-div">
           <clinicSelect @change="setCategory" v-model="doctorData.category_id">
             <option disabled selected>{{$t('dashboard.forms.editDoctor.category')}}</option>
             <option v-for="category in categories" :key="category.category_id" :selected="category.category_id === doctorData.category_id"
@@ -154,7 +136,6 @@ export default {
         password: "",
         first_name: "",
         last_name: "",
-        country: "",
         category_id: "",
         picture: "",
         price:"",
@@ -185,9 +166,6 @@ export default {
         required
       },
       last_name: {
-        required
-      },
-      country: {
         required
       },
       category_id: {
@@ -223,10 +201,6 @@ export default {
       this.doctorData.last_name = value;
       this.NewDoctorData.last_name  = value;
       this.$v.doctorData.last_name.$touch();
-    },
-    setCountry(value) {
-      this.doctorData.country = value;
-      this.$v.doctorData.country.$touch();
     },
     setCategory(value) {
       this.doctorData.category_id = value;
@@ -283,7 +257,6 @@ export default {
       this.doctorData.password = doctorData.password;
       this.doctorData.first_name = doctorData.first_name;
       this.doctorData.last_name = doctorData.last_name;
-      this.doctorData.country = doctorData.country;
       this.doctorData.category_id = doctorData.category_id;
       this.doctorData.price = doctorData.price;
       this.doctorData.picture = doctorData.picture;

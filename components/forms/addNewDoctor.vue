@@ -71,23 +71,6 @@
             <div v-if="!$v.doctorData.last_name.required">{{$t('errors.lastname')}}</div>
           </div>
         </clinicInput>
-       <div class="input-div">
-          <clinicSelect @change="setCountry" v-model="doctorData.country">
-            <option value disabled selected>{{$t('dashboard.forms.addDoctor.country')}}</option>
-            <option
-              class="en-selectInput-content-option"
-              value="egypt"
-            >{{$t('dashboard.forms.addDoctor.egypt')}}</option>
-            <option
-              class="en-selectInput-content-option"
-              value="saudiarabia"
-            >{{$t('dashboard.forms.addDoctor.saudiarabia')}}</option>
-
-            <template v-if="$v.doctorData.country.$dirty" v-slot:errorSlot>
-              <div v-if="!$v.doctorData.country.required">{{$t('errors.country')}}</div>
-            </template>
-          </clinicSelect>
-        </div>
 
         <div class="input-div">
           <clinicSelect @change="setCategory" v-model="doctorData.category_id">
@@ -143,7 +126,6 @@ export default {
         password: "",
         first_name: "",
         last_name: "",
-        country: "",
         category_id: "",
         picture: "",
         price:"",
@@ -172,9 +154,6 @@ export default {
         required
       },
       last_name: {
-        required
-      },
-      country: {
         required
       },
       category_id: {
@@ -206,10 +185,6 @@ export default {
     setLastname(value) {
       this.doctorData.last_name = value;
       this.$v.doctorData.last_name.$touch();
-    },
-    setCountry(value) {
-      this.doctorData.country = value;
-      this.$v.doctorData.country.$touch();
     },
     setCategory(value) {
       this.doctorData.category_id = value;
