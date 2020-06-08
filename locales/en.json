@@ -74,7 +74,8 @@
         "cancel": "cancel",
         "cancelDate":"Cancel Date",
         "notActive": "Unavailable",
-        "active": "Available"
+        "active": "Available", 
+        "details": "Details"
       }
     },
     "forms": {
