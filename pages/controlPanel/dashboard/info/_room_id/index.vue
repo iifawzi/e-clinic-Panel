@@ -3,8 +3,8 @@
       <div class="info-title">{{$t("dashboard.info.title")}}</div>
     <div class="info-content">
   <div class="mainRow">
+          <div class="chat"><chat/></div>
       <div class="info">info here</div>
-      <div class="chat"><chat/></div>
   </div>
     </div>
   </section>
@@ -48,7 +48,7 @@ export default {
         width: 30%;
     }
     .chat {
-        width: 50%;
+        width: 30%;
     }
 }
 .info-title{
