@@ -14,7 +14,20 @@
           @click="toggleForm"
         />
       </div>
-      <div class="addForm" v-if="showForm == true">
+
+  <div class="sk-cube-grid" v-if="showProgress">
+  <div class="sk-cube sk-cube1"></div>
+  <div class="sk-cube sk-cube2"></div>
+  <div class="sk-cube sk-cube3"></div>
+  <div class="sk-cube sk-cube4"></div>
+  <div class="sk-cube sk-cube5"></div>
+  <div class="sk-cube sk-cube6"></div>
+  <div class="sk-cube sk-cube7"></div>
+  <div class="sk-cube sk-cube8"></div>
+  <div class="sk-cube sk-cube9"></div>
+</div>
+
+      <div class="addForm" v-if="showForm == true && showProgress === false">
         <div class="addForm-content">
           <div class="addRow">
             <div class="search-bar">
@@ -113,6 +126,7 @@ export default {
   },
   data() {
     return {
+      showProgress: false,
       slotsAfterDate: "",
       phone_number: "",
       appData: {
@@ -176,6 +190,7 @@ export default {
         const [id, start_time] = data.slot_id.split(" ");
         data.date = start_time;
         data.slot_id = id;
+        this.showProgress = true;
         this.$store.dispatch("controlPanel/appointments/addAppointment", {
           data,
           doctor_id
@@ -248,11 +263,19 @@ export default {
       return this.$store.getters.getLocale;
     },
     error() {
+      this.showProgress = false;
       const newError = this.$store.getters[
         "controlPanel/appointments/getNewAppError"
       ];
       return newError;
     }, 
+    getApps(){
+this.showProgress = false;
+      const appointments = this.$store.getters[
+        "controlPanel/appointments/getDocAppointments"
+      ];
+      return appointments;
+    },
     userError(){
       const userError = this.$store.getters["controlPanel/users/getUserError"];
       return userError;

@@ -11,7 +11,13 @@
           @click="toggleForm"
         />
       </div>
-      <div class="addForm" v-if="showForm">
+
+<div class="spinner-4" v-if="showProgress">
+<div class="dot1"></div>
+<div class="dot2"></div>
+</div>
+
+      <div class="addForm" v-if="showForm && getSlots === false">
         <div class="addForm-content">
           <div class="addRow">
             <div class="input-div">
@@ -129,6 +135,7 @@ export default {
   },
   data() {
     return {
+      showProgress: false,
       slotData: {
         slot_time: "",
         start_time: "",
@@ -180,6 +187,7 @@ export default {
       } else {
         const doctor_id = this.$route.params.doctor_id;
         const withId = { ...this.slotData, doctor_id };
+        this.showProgress = true,
         this.$store.dispatch("controlPanel/slots/addNewSlot", withId);
       }
     }
@@ -189,7 +197,13 @@ export default {
       return this.$store.getters.getLocale;
     },
     error() {
+         this.showProgress = false;
       return this.$store.getters["controlPanel/slots/getNewSlotError"];
+    }, 
+    getSlots(){
+       const progress = this.showProgress = false;
+      const slots = this.$store.getters["controlPanel/slots/getSlots"];
+      return progress;
     }
   }
 };
