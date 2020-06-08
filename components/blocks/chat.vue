@@ -10,7 +10,7 @@
     <div class="double-bounce2"></div>
     </div>
 
-    <div class="chat-content" v-if="chatMessages">
+    <div class="chat-content" v-if="chatMessages.length != 0">
       <div class="messages">
         <div v-for="(msg,idx) in chatMessages" :key="msg.message_id" :class="['msg', msg.sender === 'doctor' ? 'msg-right' : 'msg-left']">
           <div class="msg-content">
@@ -20,6 +20,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="noMessages" v-if="chatMessages && chatMessages.length == 0">
+   {{$t('dashboard.info.noMessages')}}
     </div>
   </div>
 </template>
@@ -131,5 +134,11 @@ export default {
 }
 .en-LeftMsgMargin {
   margin-left: 15px;
+}
+.noMessages {
+  font-size: 30px;
+  text-align: center;
+  margin-top: 30px;
+  color: $main-color;
 }
 </style>

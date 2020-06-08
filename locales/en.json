@@ -172,7 +172,9 @@
       "title":"Info", 
       "chat": "Chat",
       "diagnose": "Diagnose",
-      "prescription": "Prescription"
+      "prescription": "Prescription",
+      "noMessages": "There's no messages"
+
     },
     "days": {
       "sun": "Sunday",

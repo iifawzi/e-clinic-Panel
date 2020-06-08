@@ -170,7 +170,8 @@
       "title":"التفاصيل",
       "chat": "المحادثة",
       "diagnose": "التشخيص",
-      "prescription": "الروشته"
+      "prescription": "الروشته",
+      "noMessages": "لا توجد محادثات"
     },
     "days": {
       "sun": "الأحد",
