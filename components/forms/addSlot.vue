@@ -213,7 +213,7 @@ export default {
 .addSlot-content {
   display: flex;
   flex-flow: column;
-  margin-top: 10px;
+  margin-top: 15px;
   margin-bottom: 50px;
   .addBtn {
     width: 25%;
