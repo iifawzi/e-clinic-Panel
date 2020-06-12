@@ -24,7 +24,7 @@
           <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.start_time')}}</th>
           <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.available')}}</th>
           <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.details')}}</th>
-          <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.cancel')}}</th>
+          <th  v-if="admin.role === 'superadmin'" class="docApps-content-table-th">{{$t('dashboard.tables.docApps.cancel')}}</th>
           <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.cancelDate')}}</th>
         </tr>
 
@@ -51,7 +51,7 @@
                 </div>
               </nuxt-link>
             </td>
-            <td>
+            <td  v-if="admin.role === 'superadmin'">
               <div class="docApps-content-table-tr-options">
                 <i
                   @click="cancelApp(appointment.appointment_id)"
@@ -89,7 +89,7 @@
                 </div>
               </nuxt-link>
             </td>
-            <td>
+            <td  v-if="admin.role === 'superadmin'">
               <div class="docApps-content-table-tr-options">
                 <i
                   @click="cancelApp(appointment.appointment_id)"
@@ -99,7 +99,7 @@
               </div>
             </td>
             <td
-              v-if="appointment.appointment_status == 'canceled'"
+              v-if="(appointment.appointment_status == 'canceled')"
             >{{$moment(appointment.updatedAt).parseZone().utcOffset(120).locale(language).format('llll')}}</td>
           </tr>
         </tbody>
@@ -113,6 +113,7 @@ import clinicInput from "~/components/shared/clinicInput";
 export default {
   data() {
     return {
+      admin: '',
       searchQuery: "",
       filteredData: ""
     };
@@ -175,6 +176,7 @@ export default {
         id
       );
     }
+    this.admin = this.$store.getters["controlPanel/auth/getAdmin"];
   },
   computed: {
     appointments() {

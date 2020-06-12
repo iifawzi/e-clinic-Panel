@@ -9,9 +9,9 @@
         </div>
            <div class="slotsTable">
          <client-only> <slotsTable/></client-only>
-                  <addSlot/>
+                  <addSlot  v-if="admin.role === 'superadmin'"/>
                <client-only> <docsApps :key="slots" /></client-only>
-                 <addApp :key="apps"/>
+                 <addApp  v-if="admin.role === 'superadmin'" :key="apps"/>
         </div>
       </div>
 
@@ -29,6 +29,9 @@ import docsApps from "~/components/tables/docsApps"
 export default {
   layout: "dashboard",
   middleware: "admin-auth",
+  mounted(){
+    this.admin = this.$store.getters["controlPanel/auth/getAdmin"];
+  },
       head() {
     return {
       title:
@@ -39,6 +42,7 @@ export default {
   },
   data(){
     return {
+      admin: '',
       updateApps: 0,
       updateAdd: 45,
       updateEdit: 100,
