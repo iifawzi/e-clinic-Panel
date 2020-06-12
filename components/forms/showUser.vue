@@ -33,7 +33,7 @@
   <div class="sk-cube sk-cube8"></div>
   <div class="sk-cube sk-cube9"></div>
 </div>
-    <div class="showUserForm-content" v-if="userData">
+    <div class="showUserForm-content">
       <div v-if="userData" class="userData" :class="userData.blocked  === false ? 'green-shadow' : 'red-shadow'">
         <div class="userImage">
           <img class="userPic" :src="'http://clinice.herokuapp.com/images/'+ userData.picture" />
@@ -75,13 +75,15 @@
               <div class="userApps-title">{{$t('dashboard.tables.userApps.title')}}</div>
           <userApps :userId="userData.user_id"/>
       </div>
-      <div v-if="!error && !userData">
+
+            <div v-if="!error && !userData">
         <span class="no-search">{{$t('dashboard.forms.allUsers.noSearch')}}</span>
       </div>
       <div v-if="error && !userData">
         <span class="error">{{error}}</span>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -108,6 +110,7 @@ export default {
       this.$v.phone_number.$touch();
     },
     getUser() {
+           this.showProgress = true;
       this.$v.$touch();
       if (this.$v.$invalid) {
       } else {
