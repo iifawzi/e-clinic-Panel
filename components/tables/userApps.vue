@@ -35,7 +35,7 @@
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.start_time')}}</th>
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.available')}}</th>
           <th class="docApps-content-table-th">{{$t('dashboard.tables.userApps.details')}}</th>
-          <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.cancel')}}</th>
+          <th  v-if="admin.role === 'superadmin'" class="userApps-content-table-th">{{$t('dashboard.tables.userApps.cancel')}}</th>
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.cancelDate')}}</th>
         </tr>
         <tbody v-if="this.searchQuery == ''">
@@ -58,7 +58,7 @@
                 </div>
               </nuxt-link>
             </td>
-          <td>
+          <td  v-if="admin.role === 'superadmin'">
             <div class="userApps-content-table-tr-options">
                 <i @click="cancelApp(appointment.appointment_id)" v-if="appointment.appointment_status === 'upcoming'" class="fas fa-times options-delete"></i>
             </div>
@@ -86,11 +86,12 @@
                 </div>
               </nuxt-link>
             </td>
-          <td>
+          <td  v-if="admin.role === 'superadmin'">
 <div class="userApps-content-table-tr-options">
               <i @click="cancelApp(appointment.appointment_id)" v-if="appointment.appointment_status === 'upcoming'" class="fas fa-times options-delete"></i>
             </div>
           </td>
+               <td  v-if="appointment.appointment_status == 'canceled'">{{$moment(appointment.updatedAt).locale(language).format('llll')}}</td>
         </tr>
 </tbody>
 
@@ -102,6 +103,9 @@
 <script>
 import clinicInput from "~/components/shared/clinicInput";
 export default {
+    mounted(){
+    this.admin = this.$store.getters["controlPanel/auth/getAdmin"];
+  },
     props:{
         userId:{
             type:Number,
@@ -110,6 +114,7 @@ export default {
     },
       data() {
     return {
+     admin:"",
      searchQuery: "",
      filteredData: "",
     };
