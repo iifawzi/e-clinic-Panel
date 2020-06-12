@@ -61,7 +61,7 @@
             </span>
           </div>
           <div class="section">
-            <div class="submit-div">
+            <div v-if="admin.role === 'superadmin'" class="submit-div">
               <clinicSubmit
                 :color="userData.blocked === false ? 'red'  : 'green' "
                 :statement="userData.blocked === false ? $t('dashboard.forms.allUsers.blockUser')  : $t('dashboard.forms.allUsers.unblockUser')"
@@ -92,6 +92,9 @@ import userApps from "~/components/tables/userApps";
 const { required, integer } = require("vuelidate/lib/validators");
 
 export default {
+  mounted(){
+    this.admin = this.$store.getters["controlPanel/auth/getAdmin"];
+  },
   data() {
     return {
       showProgress: false,
