@@ -97,6 +97,7 @@ export default {
   },
   data() {
     return {
+      admin:'',
       showProgress: false,
       phone_number: ""
     };
