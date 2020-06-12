@@ -92,14 +92,14 @@
           </div>
         </clinicInput>
       </div>
-        <div class="submit-div">
+        <div v-if="admin.role === 'superadmin'" class="submit-div">
           <clinicSubmit
             color="blue"
             :statement="$t('dashboard.forms.editDoctor.editDoctor')"
             @click="editDoctor"
           />
         </div>
-           <div class="submit-div">
+           <div v-if="admin.role === 'superadmin'" class="submit-div">
           <clinicSubmit
           v-if="getDoctor.available === false"
             color="green"
@@ -129,6 +129,7 @@ const { required,integer,minLength,maxLength,alphaNum } = require("vuelidate/lib
 export default {
   data() {
     return {
+      admin :'',
         componentKey: 0,
         doctorData: {
           doctor_id: "",
@@ -268,6 +269,7 @@ export default {
     const id = this.$route.params.doctor_id;
     this.$store.dispatch('controlPanel/categories/getCategories');
     this.$store.dispatch("controlPanel/doctors/get_doctor", id);
+    this.admin = this.$store.getters["controlPanel/auth/getAdmin"];
   }
 };
 </script>

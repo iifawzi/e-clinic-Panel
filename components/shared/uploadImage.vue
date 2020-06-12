@@ -21,7 +21,7 @@
             <input type="file" @change="handleFileChange" />
           </label>
         </div>
-        <div v-if="imageToShow || imageFromComponent" class="buttons-image">
+        <div v-if="(imageToShow || imageFromComponent) && admin.role === 'superadmin'" class="buttons-image">
           <label class="file-select">
             <div v-if="imageToShow != '' || imageFromComponent" class="select-button">
               <span>{{$t('dashboard.forms.addDoctor.edit')}}</span>
@@ -39,8 +39,12 @@
 </template>
 <script>
 export default {
+  mounted(){
+    this.admin = this.$store.getters["controlPanel/auth/getAdmin"];
+  },
   data() {
     return {
+      admin :'',
       imageToShow: ""
     };
   },
