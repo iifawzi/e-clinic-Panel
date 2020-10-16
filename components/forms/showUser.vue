@@ -36,7 +36,7 @@
     <div class="showUserForm-content">
       <div v-if="userData" class="userData" :class="userData.blocked  === false ? 'green-shadow' : 'red-shadow'">
         <div class="userImage">
-          <img class="userPic" :src="'http://localhost:5000/images/'+ userData.picture" />
+          <img class="userPic" :src="'https://clinice.herokuapp.com/images/'+ userData.picture" />
         </div>
         <div class="userInfo">
           <span class="user_name">{{userData.first_name +" "+ userData.last_name}}</span>
