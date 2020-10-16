@@ -35,7 +35,7 @@
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.start_time')}}</th>
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.available')}}</th>
           <th class="docApps-content-table-th">{{$t('dashboard.tables.userApps.details')}}</th>
-          <th  v-if="admin.role === 'superadmin'" class="userApps-content-table-th">{{$t('dashboard.tables.userApps.cancel')}}</th>
+          <th  v-if="admin.role === 'admin'" class="userApps-content-table-th">{{$t('dashboard.tables.userApps.cancel')}}</th>
           <th class="userApps-content-table-th">{{$t('dashboard.tables.userApps.cancelDate')}}</th>
         </tr>
         <tbody v-if="this.searchQuery == ''">
@@ -58,7 +58,7 @@
                 </div>
               </nuxt-link>
             </td>
-          <td  v-if="admin.role === 'superadmin'">
+          <td  v-if="admin.role === 'admin'">
             <div class="userApps-content-table-tr-options">
                 <i @click="cancelApp(appointment.appointment_id)" v-if="appointment.appointment_status === 'upcoming'" class="fas fa-times options-delete"></i>
             </div>
@@ -86,7 +86,7 @@
                 </div>
               </nuxt-link>
             </td>
-          <td  v-if="admin.role === 'superadmin'">
+          <td  v-if="admin.role === 'admin'">
 <div class="userApps-content-table-tr-options">
               <i @click="cancelApp(appointment.appointment_id)" v-if="appointment.appointment_status === 'upcoming'" class="fas fa-times options-delete"></i>
             </div>

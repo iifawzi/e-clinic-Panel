@@ -9,9 +9,9 @@
         </div>
            <div class="slotsTable">
          <client-only> <slotsTable/></client-only>
-                  <addSlot  v-if="admin.role === 'superadmin'"/>
+                  <addSlot  v-if="admin.role === 'admin'"/>
                <client-only> <docsApps :key="slots" /></client-only>
-                 <addApp  v-if="admin.role === 'superadmin'" :key="apps"/>
+                 <addApp  v-if="admin.role === 'admin'" :key="apps"/>
         </div>
       </div>
 

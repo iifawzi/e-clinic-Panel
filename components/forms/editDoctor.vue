@@ -96,14 +96,14 @@
           </div>
         </clinicInput>
       </div>
-        <div v-if="admin.role === 'superadmin'" class="submit-div">
+        <div v-if="admin.role === 'admin'" class="submit-div">
           <clinicSubmit
             color="blue"
             :statement="$t('dashboard.forms.editDoctor.editDoctor')"
             @click="editDoctor"
           />
         </div>
-           <div v-if="admin.role === 'superadmin'" class="submit-div">
+           <div v-if="admin.role === 'admin'" class="submit-div">
           <clinicSubmit
           v-if="getDoctor.available === false"
             color="green"

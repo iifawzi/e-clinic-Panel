@@ -16,7 +16,7 @@
           <div class="msg-content">
             <div v-if="chatMessages[idx].sender != chatMessages[idx-1]" :class="language+ msg.sender === 'doctor' ? '-msgMargin' : '-LeftMsgMargin' +''" class="sender">{{msg.sender_name}}</div>
             <div v-if="msg.type === 'message'" class="TheMessage">{{msg.message}}</div>
-            <div v-if="msg.type === 'image'" ><a target="_blank" :href="'https://clinice.herokuapp.com/images/chats/'+msg.message"><img class="TheImage" :src="'https://clinice.herokuapp.com/images/chats/'+msg.message"></a></div>
+            <div v-if="msg.type === 'image'" ><a target="_blank" :href="'https://localhost:5000/images/chats/'+msg.message"><img class="TheImage" :src="'https://localhost:5000/images/chats/'+msg.message"></a></div>
           </div>
         </div>
       </div>

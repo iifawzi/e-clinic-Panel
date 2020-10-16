@@ -6,7 +6,6 @@
     <div class="login-container">
       <div class="login-statment">
         <h1>{{$t('panel.title')}}</h1>
-        <img src="~/assets/images/logo.png" class="logo-img" />
       </div>
       <div class="login-form">
         <loginForm />

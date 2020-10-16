@@ -29,7 +29,7 @@
           <th class="allSlots-content-table-th">{{$t('dashboard.tables.slots.start_time')}}</th>
           <th class="allSlots-content-table-th">{{$t('dashboard.tables.slots.slot_time')}}</th>
           <th class="allSlots-content-table-th">{{$t('dashboard.tables.slots.available')}}</th>
-          <th v-if="admin.role === 'superadmin'" class="allSlots-content-table-th">{{$t('dashboard.tables.slots.options')}}</th>
+          <th v-if="admin.role === 'admin'" class="allSlots-content-table-th">{{$t('dashboard.tables.slots.options')}}</th>
         </tr>
         <tbody v-if="this.searchQuery == ''">
         <tr v-for="slot in slots" :key="slot.slot_id" class="allSlots-content-table-tr">
@@ -41,7 +41,7 @@
           <td
             :class="slot.available == 1 ? 'green-status' : 'red-status'"
           >{{slot.available == 1 ?  $t('dashboard.tables.slots.active') : $t('dashboard.tables.slots.notActive')}}</td>
-          <td v-if="admin.role === 'superadmin'">
+          <td v-if="admin.role === 'admin'">
             <div class="allSlots-content-table-tr-options">
                          <i @click="openEdit(slot)" class="fas fa-edit allSlots-content-table-tr-options-edit"></i>
 
@@ -59,7 +59,7 @@
           <td
             :class="slot.available == 1 ? 'green-status' : 'red-status'"
           >{{slot.available == 1 ?  $t('dashboard.tables.slots.active') : $t('dashboard.tables.slots.notActive')}}</td>
-          <td v-if="admin.role === 'superadmin'">
+          <td v-if="admin.role === 'admin'">
             <div class="allSlots-content-table-tr-options">
                          <i @click="openEdit(slot)" class="fas fa-edit allSlots-content-table-tr-options-edit"></i>
 

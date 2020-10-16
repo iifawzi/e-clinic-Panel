@@ -7,7 +7,7 @@
           <img
             v-if="imageFromComponent != ''"
             class="profile-Image"
-            :src="'http://clinice.herokuapp.com/images/'+imageFromComponent"
+            :src="'http://localhost:5000/images/'+imageFromComponent"
           />
         </div>
         <img v-if="imageToShow != ''" class="profile-Image" :src="imageToShow" />
@@ -21,7 +21,7 @@
             <input type="file" @change="handleFileChange" />
           </label>
         </div>
-        <div v-if="(imageToShow || imageFromComponent) && admin.role === 'superadmin'" class="buttons-image">
+        <div v-if="(imageToShow || imageFromComponent) && admin.role === 'admin'" class="buttons-image">
           <label class="file-select">
             <div v-if="imageToShow != '' || imageFromComponent" class="select-button">
               <span>{{$t('dashboard.forms.addDoctor.edit')}}</span>

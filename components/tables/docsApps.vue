@@ -24,7 +24,7 @@
           <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.start_time')}}</th>
           <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.available')}}</th>
           <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.details')}}</th>
-          <th  v-if="admin.role === 'superadmin'" class="docApps-content-table-th">{{$t('dashboard.tables.docApps.cancel')}}</th>
+          <th  v-if="admin.role === 'admin'" class="docApps-content-table-th">{{$t('dashboard.tables.docApps.cancel')}}</th>
           <th class="docApps-content-table-th">{{$t('dashboard.tables.docApps.cancelDate')}}</th>
         </tr>
 
@@ -51,7 +51,7 @@
                 </div>
               </nuxt-link>
             </td>
-            <td  v-if="admin.role === 'superadmin'">
+            <td  v-if="admin.role === 'admin'">
               <div class="docApps-content-table-tr-options">
                 <i
                   @click="cancelApp(appointment.appointment_id)"
@@ -89,7 +89,7 @@
                 </div>
               </nuxt-link>
             </td>
-            <td  v-if="admin.role === 'superadmin'">
+            <td  v-if="admin.role === 'admin'">
               <div class="docApps-content-table-tr-options">
                 <i
                   @click="cancelApp(appointment.appointment_id)"

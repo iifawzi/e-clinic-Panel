@@ -36,7 +36,7 @@
     <div class="showUserForm-content">
       <div v-if="userData" class="userData" :class="userData.blocked  === false ? 'green-shadow' : 'red-shadow'">
         <div class="userImage">
-          <img class="userPic" :src="'http://clinice.herokuapp.com/images/'+ userData.picture" />
+          <img class="userPic" :src="'http://localhost:5000/images/'+ userData.picture" />
         </div>
         <div class="userInfo">
           <span class="user_name">{{userData.first_name +" "+ userData.last_name}}</span>
@@ -61,7 +61,7 @@
             </span>
           </div>
           <div class="section">
-            <div v-if="admin.role === 'superadmin'" class="submit-div">
+            <div v-if="admin.role === 'admin'" class="submit-div">
               <clinicSubmit
                 :color="userData.blocked === false ? 'red'  : 'green' "
                 :statement="userData.blocked === false ? $t('dashboard.forms.allUsers.blockUser')  : $t('dashboard.forms.allUsers.unblockUser')"
